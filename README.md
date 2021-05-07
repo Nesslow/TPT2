@@ -1,7 +1,7 @@
 # TPT2 BP's by Nesslow
 
-## Module notes
+## Module notes (inf+)
 | Module | Note |
 | --- | --- |
-| git status | List all new or modified files |
-| git diff | Show file differences that haven't been staged |
+| Infinity Splash | Only way to convert pre-inf damage to inf damage |
+| Splas | All other splash effects count as a hit thus helping Infinity Splash proc |
