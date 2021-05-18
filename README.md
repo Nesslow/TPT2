@@ -10,9 +10,12 @@
 | Phoenix Bounce | Can only proc on fire type enemy and chain on fire enemies. When it hits a non fire the chain will break |
 | Gaia's | Can only proc on Nature enemies but will always bounce 3 times |
 | Pre-inf Attacks | All pre-inf attacks should be considered Neutral dmg and can only be used in combination with Infinity Splash |
+| Sandstorm | Always damages for the amount armor specified. Even when using pre-inf attacks |
 
-## To do
+## Changes
 - [ ] Add (public) readme
 - [ ] Add BP's & AI's
 - [ ] Do a final complete run test
-- [ ] Test new inf BP in high inf
+- [x] Test new inf BP in high inf
+- [x] Add inf stone calc
+- [ ] Add optimal upgrading path to inf stone calc
