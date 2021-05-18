@@ -1,4 +1,13 @@
-# TPT2 BP's by Nesslow
+# TPT2 Overview
+
+## Changes
+- [ ] Add BP's & AI's
+- [ ] Do a final complete run test
+- [x] Test new inf BP in high inf
+- [ ] Add inf calc
+- [x] Add inf stone calc
+- [ ] Add optimal upgrading path to inf stone calc
+- [ ] Clean up inf stone calc code...
 
 ## Module notes (inf+)
 | Module | Note |
@@ -11,12 +20,3 @@
 | Gaia's | Can only proc on Nature enemies but will always bounce 3 times |
 | Pre-inf Attacks | All pre-inf attacks should be considered Neutral dmg and can only be used in combination with Infinity Splash |
 | Sandstorm | Always damages for the amount armor specified. Even when using pre-inf attacks |
-
-## Changes
-- [ ] Add (public) readme
-- [ ] Add BP's & AI's
-- [ ] Do a final complete run test
-- [x] Test new inf BP in high inf
-- [x] Add inf stone calc
-- [ ] Add optimal upgrading path to inf stone calc
-- [ ] Clean up inf stone calc code...
