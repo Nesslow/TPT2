@@ -19,3 +19,4 @@
 - [x] Test new inf BP in high inf
 - [x] Add inf stone calc
 - [ ] Add optimal upgrading path to inf stone calc
+- [ ] Clean up inf stone calc code...
