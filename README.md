@@ -1,13 +1,20 @@
 # TPT2 Overview
 
-## Changes
+# Infinity stone calc (WIP)  
+To do:
+- [ ] Add optimal upgrading path to inf stone calc
+- [ ] Clean up code...
+  
+# [Infinity calc (WIP)](https://infcalc.netlify.app/infcalc.html "Infinity calc (WIP)")  
+To do:
+- [ ] FPS / Region included in calc
+- [ ] Additional data shown
+- [ ] Settings to set run preference
+    
+## BP & AI - To Do
 - [ ] Add BP's & AI's
 - [ ] Do a final complete run test
 - [x] Test new inf BP in high inf
-- [ ] Add inf calc
-- [x] Add inf stone calc
-- [ ] Add optimal upgrading path to inf stone calc
-- [ ] Clean up inf stone calc code...
 
 ## Module notes (inf+)
 | Module | Note |
