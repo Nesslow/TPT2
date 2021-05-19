@@ -1,6 +1,6 @@
 # TPT2 Overview
 
-# Infinity stone calc (WIP)  
+# [Infinity stone calc](https://tpt2-nesslow.netlify.app/  "Infinity stone calc")
 To do:
 - [ ] Add optimal upgrading path to inf stone calc
 - [x] Clean up code...
