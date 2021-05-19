@@ -1,84 +1,85 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TPT2 Nesslow - Infinity Stone Calculator</title>
-    <link href="style.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta content="IE=edge" http-equiv="X-UA-Compatible">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<title>TPT2 Nesslow - Infinity Stone Calculator</title>
+	<link href="style.css" rel="stylesheet">
 </head>
 <body>
-    <div class="toggle_container">
-        Toggle scientific <input type="checkbox" id="sci_no_toggle" onclick="sci_toggle()">
-    </div>
-    <div class="container">
-        <div class="item1 item">
-            <h1>Infinity Stone Calculator</h1>
-            <div class="input_container"><label for="inf_ext">Extraction</label><input id="inf_ext" type="number" class="inf_bar" value="6" onchange="update_data()"></div>
-            <div class="input_container"><label for="inf_spe">Speed</label><input id="inf_spe" type="number" class="inf_bar" value="6" onchange="update_data()"></div>
-            <div class="input_container"><label for="inf_amo">Amount</label><input id="inf_amo" type="number" class="inf_bar" value="6" onchange="update_data()"></div>
-        </div>
-        <div class="item2 item">
-            <h2>Data</h2>
-            <ul class="list">
-                <li class="list_item item_name">Charge Required</li>
-                <li id="data_1" class="list_item data">1000000000000</li>
-                <li class="list_item item_name">Charge Countdown</li>
-                <li id="data_2" class="list_item data">5256000.0000</li>
-                <li class="list_item item_name">Speed Tick Duration</li>
-                <li id="data_3" class="list_item data">5256000.0000</li>
-                <li class="list_item item_name">Speed Bonus / Tick</li>
-                <li id="data_4" class="list_item data">0.02</li>
-                <li class="list_item item_name">Production Tick Duration</li>
-                <li id="data_5" class="list_item data">5256000.0000</li>
-                <li class="list_item item_name">Production Bonus / Tick</li>
-                <li id="data_6" class="list_item data">0.050</li>
-            </ul>
-        </div>
-        <div class="item3 item">
-            <label for="lvl_charge_req">Charge Required</label><br>
-            <input id="lvl_charge_req" type="number" class="stat input" value="0" min="0" max="100" onchange="update_data()"><br>
-            <label for="lvl_speed_bonus">Speed Bonus / Tick</label><br>
-            <input id="lvl_speed_bonus" type="number" class="stat input" value="0" min="0" max="100" onchange="update_data()"><br>
-            <label for="lvl_production_bonus">Production Bonus / Tick</label><br>
-            <input id="lvl_production_bonus" type="number" class="stat input" value="0" min="0" max="100" onchange="update_data()"><br>
-            <label for="lvl_charge_dura">Charge Duration</label><br>
-            <input id="lvl_charge_dura" type="number" class="stat input" value="0" min="0" max="100" onchange="update_data()"><br>
-            <label for="lvl_speed_dura">Speed Tick Duration</label><br>
-            <input id="lvl_speed_dura" type="number" class="stat input" value="0" min="0" max="100" onchange="update_data()"><br>
-            <label for="lvl_production_dura">Production Tick Duration</label><br>
-            <input id="lvl_production_dura" type="number" class="stat input" value="0" min="0" max="100" onchange="update_data()">
-        </div>
-        <div class="item4 item">
-            <h2>Upgrades</h2>
-            <ul class="list">
-                <li class="list_item item_name">Charge Required -5% (mul.)</li>
-                <li id="cost_1" class="list_item cost">25</span></li>
-                <li class="list_item item_name">Speed Bonus / Tick +1% (add.)</li>
-                <li id="cost_2" class="list_item cost">10</span></li>
-                <li class="list_item item_name">Production Bonus / Tick +2.5% (add.)</li>
-                <li id="cost_3" class="list_item cost">8</span></li>
-                <li class="list_item item_name">Charge Duration -10% (mul.)</li>
-                <li id="cost_4" class="list_item cost">15</span></li>
-                <li class="list_item item_name">Speed Tick Duration -10% (mul.)</li>
-                <li id="cost_5" class="list_item cost">30</span></li>
-                <li class="list_item item_name">Production Tick Duration -10% (mul.)</li>
-                <li id="cost_6" class="list_item cost">10</span></li>
-            </ul>
-        </div>
-        <div class="item5 item">
-            <h1>Charge time</h1>
-            <div id="result" class="stat input"></div>
-            <input class="submit" type="button" value="Simulate" onclick="calc()">
-            <div class="util_btn">
-                <input class="set_btn" type="button" value="min" onclick="set_min()">
-                <input class="set_btn" type="button" value="max" onclick="set_max()">
-            </div>
-        </div>
-    </div>
-
-    <script src="main.js"></script>
+	<div class="toggle_container">
+		Toggle scientific <input id="sci_no_toggle" onclick="sci_toggle()" type="checkbox">
+	</div>
+	<div class="container">
+		<div class="item1 item">
+			<h1>Infinity Stone Calculator</h1>
+			<div class="input_container">
+				<label for="inf_ext">Extraction</label><input class="inf_bar" id="inf_ext" onchange="update_data()" type="number" value="6">
+			</div>
+			<div class="input_container">
+				<label for="inf_spe">Speed</label><input class="inf_bar" id="inf_spe" onchange="update_data()" type="number" value="6">
+			</div>
+			<div class="input_container">
+				<label for="inf_amo">Amount</label><input class="inf_bar" id="inf_amo" onchange="update_data()" type="number" value="6">
+			</div>
+		</div>
+		<div class="item2 item">
+			<h2>Data</h2>
+			<ul class="list">
+				<li class="list_item item_name">Charge Required</li>
+				<li class="list_item data" id="data_1">1000000000000</li>
+				<li class="list_item item_name">Charge Countdown</li>
+				<li class="list_item data" id="data_2">5256000.0000</li>
+				<li class="list_item item_name">Speed Tick Duration</li>
+				<li class="list_item data" id="data_3">5256000.0000</li>
+				<li class="list_item item_name">Speed Bonus / Tick</li>
+				<li class="list_item data" id="data_4">0.02</li>
+				<li class="list_item item_name">Production Tick Duration</li>
+				<li class="list_item data" id="data_5">5256000.0000</li>
+				<li class="list_item item_name">Production Bonus / Tick</li>
+				<li class="list_item data" id="data_6">0.050</li>
+			</ul>
+		</div>
+		<div class="item3 item">
+			<label for="lvl_charge_req">Charge Required</label><br>
+			<input class="stat input" id="lvl_charge_req" max="100" min="0" onchange="update_data()" type="number" value="0"><br>
+			<label for="lvl_speed_bonus">Speed Bonus / Tick</label><br>
+			<input class="stat input" id="lvl_speed_bonus" max="100" min="0" onchange="update_data()" type="number" value="0"><br>
+			<label for="lvl_production_bonus">Production Bonus / Tick</label><br>
+			<input class="stat input" id="lvl_production_bonus" max="100" min="0" onchange="update_data()" type="number" value="0"><br>
+			<label for="lvl_charge_dura">Charge Duration</label><br>
+			<input class="stat input" id="lvl_charge_dura" max="100" min="0" onchange="update_data()" type="number" value="0"><br>
+			<label for="lvl_speed_dura">Speed Tick Duration</label><br>
+			<input class="stat input" id="lvl_speed_dura" max="100" min="0" onchange="update_data()" type="number" value="0"><br>
+			<label for="lvl_production_dura">Production Tick Duration</label><br>
+			<input class="stat input" id="lvl_production_dura" max="100" min="0" onchange="update_data()" type="number" value="0">
+		</div>
+		<div class="item4 item">
+			<h2>Upgrades</h2>
+			<ul class="list">
+				<li class="list_item item_name">Charge Required -5% (mul.)</li>
+				<li class="list_item cost" id="cost_1">25</li>
+				<li class="list_item item_name">Speed Bonus / Tick +1% (add.)</li>
+				<li class="list_item cost" id="cost_2">10</li>
+				<li class="list_item item_name">Production Bonus / Tick +2.5% (add.)</li>
+				<li class="list_item cost" id="cost_3">8</li>
+				<li class="list_item item_name">Charge Duration -10% (mul.)</li>
+				<li class="list_item cost" id="cost_4">15</li>
+				<li class="list_item item_name">Speed Tick Duration -10% (mul.)</li>
+				<li class="list_item cost" id="cost_5">30</li>
+				<li class="list_item item_name">Production Tick Duration -10% (mul.)</li>
+				<li class="list_item cost" id="cost_6">10</li>
+			</ul>
+		</div>
+		<div class="item5 item">
+			<h1>Charge time</h1>
+			<div class="stat input" id="result"></div><input class="submit" onclick="calc()" type="button" value="Simulate">
+			<div class="util_btn">
+				<input class="set_btn" onclick="set_min()" type="button" value="min"> <input class="set_btn" onclick="set_max()" type="button" value="max">
+			</div>
+		</div>
+	</div>
+	<script src="main.js"></script>
 </body>
 </html>
-<!-- 
-    Add stone chart to "sidebar"
--->
