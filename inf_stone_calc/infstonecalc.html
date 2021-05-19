@@ -3,131 +3,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-<style>
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin:0;
-}
-body {
-    background-color: #252525;
-    color: #f5f5f5;
-    font-family: Arial, Helvetica, sans-serif;
-}
-.item1 { grid-area: top; }
-.item2 { grid-area: left; }
-.item3 { grid-area: middle; }
-.item4 { grid-area: right; }
-.item5 { grid-area: bottom; }
-.container {
-    width: 960px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-areas:
-    'top top top'
-    'left middle right'
-    'bottom bottom bottom';
-    padding: 10px;
-}
-.item {
-    background: #333;
-    padding: 20px;
-    margin: 5px;
-    font-size: 14px;
-    text-align: center;
-}
-.item h2 {
-    margin-bottom: 15px;
-    color: #aaa;
-    text-shadow: 0px 1px 2px #000;
-}
-.item3 {
-    text-align: left;
-}
-h1 {
-    margin: 10px 0 25px 0;
-    color: #ddd;
-    text-shadow: 0px 1px 2px #000;
-}
-.list {
-    list-style: none;
-    padding:0;
-}
-.item_name {
-    font-weight: bold;
-    color: #aaa;
-    text-shadow: 0px 1px 2px #000;
-    margin-bottom:5px;
-}
-.data, .cost {
-    margin-bottom: 15px;
-}
-.input {
-    background-color:#444;
-    height: 35px;
-    width: 100%;
-    margin-top: 3px;
-    margin-bottom: 15px;
-}
-.input_container {
-    width: 400px;
-    margin-inline:  auto;
-    margin-top: 10px;
-    height: 35px;
-}
-.input_container label {
-    color: #aaa;
-    text-shadow: 0px 1px 2px #000;
-    width: 150px;
-    height: 100%;
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 35px;
-    text-align: center;
-    float: left;
-}
-.container label {
-    color: #f5f5f5;
-    text-shadow: 0px 1px 2px #000;
-    font-weight: bold;
-}
-.inf_bar {
-    background-color:#444;
-    width: 250px;
-    height: 100%;
-}
-.inf_bar, .input {
-    border: 1px solid #222;
-    padding: 8px;
-    color: #fff;
-}
-.submit {
-    color:#f5f5f5;
-    text-shadow: 0px 1px 2px #000;
-    margin-top: 5px;
-    margin-bottom: 20px;
-    background-color:#555;
-    border: 1px solid #222;
-    height: 25px;
-    width: 250px;
-}
-#result {
-    width: 250px;
-    margin: 0 auto;
-}
-
-</style>
+    <title>TPT2 Nesslow - Infinity Stone Calculator</title>
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
+    <div class="toggle_container">
+        Toggle scientific <input type="checkbox" id="sci_no_toggle" onclick="sci_toggle()">
+    </div>
     <div class="container">
         <div class="item1 item">
             <h1>Infinity Stone Calculator</h1>
-            <div class="input_container"><label for="inf_ext">Extraction</label><input id="inf_ext" type="number" class="inf_bar" value="6"></div>
-            <div class="input_container"><label for="inf_spe">Speed</label><input id="inf_spe" type="number" class="inf_bar" value="6"></div>
-            <div class="input_container"><label for="inf_amo">Amount</label><input id="inf_amo" type="number" class="inf_bar" value="6"></div>
+            <div class="input_container"><label for="inf_ext">Extraction</label><input id="inf_ext" type="number" class="inf_bar" value="6" onchange="update_data()"></div>
+            <div class="input_container"><label for="inf_spe">Speed</label><input id="inf_spe" type="number" class="inf_bar" value="6" onchange="update_data()"></div>
+            <div class="input_container"><label for="inf_amo">Amount</label><input id="inf_amo" type="number" class="inf_bar" value="6" onchange="update_data()"></div>
         </div>
         <div class="item2 item">
             <h2>Data</h2>
@@ -148,17 +36,17 @@ h1 {
         </div>
         <div class="item3 item">
             <label for="lvl_charge_req">Charge Required</label><br>
-            <input id="lvl_charge_req" type="number" class="stat input" value="0" min="0" max="100" onchange="data_1_lvl()"><br>
+            <input id="lvl_charge_req" type="number" class="stat input" value="0" min="0" max="100" onchange="update_data()"><br>
             <label for="lvl_speed_bonus">Speed Bonus / Tick</label><br>
-            <input id="lvl_speed_bonus" type="number" class="stat input" value="0" min="0" max="100" onchange="data_2_lvl()"><br>
+            <input id="lvl_speed_bonus" type="number" class="stat input" value="0" min="0" max="100" onchange="update_data()"><br>
             <label for="lvl_production_bonus">Production Bonus / Tick</label><br>
-            <input id="lvl_production_bonus" type="number" class="stat input" value="0" min="0" max="100" onchange="data_3_lvl()"><br>
+            <input id="lvl_production_bonus" type="number" class="stat input" value="0" min="0" max="100" onchange="update_data()"><br>
             <label for="lvl_charge_dura">Charge Duration</label><br>
-            <input id="lvl_charge_dura" type="number" class="stat input" value="0" min="0" max="100" onchange="data_4_lvl()"><br>
+            <input id="lvl_charge_dura" type="number" class="stat input" value="0" min="0" max="100" onchange="update_data()"><br>
             <label for="lvl_speed_dura">Speed Tick Duration</label><br>
-            <input id="lvl_speed_dura" type="number" class="stat input" value="0" min="0" max="100" onchange="data_5_lvl()"><br>
+            <input id="lvl_speed_dura" type="number" class="stat input" value="0" min="0" max="100" onchange="update_data()"><br>
             <label for="lvl_production_dura">Production Tick Duration</label><br>
-            <input id="lvl_production_dura" type="number" class="stat input" value="0" min="0" max="100" onchange="data_6_lvl()">
+            <input id="lvl_production_dura" type="number" class="stat input" value="0" min="0" max="100" onchange="update_data()">
         </div>
         <div class="item4 item">
             <h2>Upgrades</h2>
@@ -181,203 +69,16 @@ h1 {
             <h1>Charge time</h1>
             <div id="result" class="stat input"></div>
             <input class="submit" type="button" value="Simulate" onclick="calc()">
+            <div class="util_btn">
+                <input class="set_btn" type="button" value="min" onclick="set_min()">
+                <input class="set_btn" type="button" value="max" onclick="set_max()">
+            </div>
         </div>
     </div>
+
+    <script src="main.js"></script>
 </body>
-<script>
-    const base_dura = 31536000;
-
-    let charge_req = 1000000000000;
-    let charge_dura = base_dura;
-
-    let speed_bonus = 0.02; //percent
-    let speed_dura = base_dura;
-
-    let production_bonus = 0.05; //percent
-    let production_dura = base_dura;
-
-    let inf_ext = 0;
-    let inf_spe = 0;
-    let inf_amo = 0;
-
-    let lvl_charge_req = 0;
-    let lvl_speed_bonus = 0;
-    let lvl_production_bonus = 0;
-    let lvl_charge_dura = 0;
-    let lvl_speed_dura = 0;
-    let lvl_production_dura = 0;
-
-    let upg_charge_req;
-    let upg_speed_bonus;
-    let upg_production_bonus;
-    let upg_charge_dura;
-    let upg_speed_dura;
-    let upg_production_dura;
-
-    let cost_upg_1 = 0;
-    let cost_upg_2 = 0;
-    let cost_upg_3 = 0;
-    let cost_upg_4 = 0;
-    let cost_upg_5 = 0;
-    let cost_upg_6 = 0;
-
-    function data_1_lvl() {
-        lvl_charge_req = document.getElementById("lvl_charge_req").value;
-        upg_charge_req = charge_req;
-        cost_upg_1 = 25;
-        if(lvl_charge_req != 0) {
-            for(let i=0; i<lvl_charge_req; i++){
-                upg_charge_req = upg_charge_req-(upg_charge_req*0.05);
-            }
-            for(let x=0; x<lvl_charge_req; x++){
-                cost_upg_1 = cost_upg_1*1.1;
-            }
-        }
-        document.getElementById("data_1").innerHTML = upg_charge_req.toFixed(0);
-        document.getElementById("cost_1").innerHTML = cost_upg_1.toFixed(0);
-    }
-
-    function data_2_lvl() {
-        lvl_speed_bonus = document.getElementById("lvl_speed_bonus").value;
-        upg_speed_bonus = speed_bonus;
-        cost_upg_2 = 10;
-        if(lvl_speed_bonus != 0) {
-            for(let i=0; i<lvl_speed_bonus; i++){
-                upg_speed_bonus += 0.01;
-            }
-            for(let x=0; x<lvl_speed_bonus; x++){
-                cost_upg_2 = cost_upg_2*1.22;
-            }
-        }
-        document.getElementById("data_4").innerHTML = upg_speed_bonus.toFixed(2);
-        document.getElementById("cost_2").innerHTML = cost_upg_2.toFixed(0);
-    }
-
-    function data_3_lvl() {
-        lvl_production_bonus = document.getElementById("lvl_production_bonus").value;
-        upg_production_bonus = production_bonus;
-        cost_upg_3 = 8;
-        if(lvl_production_bonus != 0) {
-            for(let i=0; i<lvl_production_bonus; i++){
-                upg_production_bonus += 0.025;
-            }
-            for(let x=0; x<lvl_production_bonus; x++){
-                cost_upg_3 = cost_upg_3*1.15;
-            }
-        }
-        document.getElementById("data_6").innerHTML = upg_production_bonus.toFixed(3);
-        document.getElementById("cost_3").innerHTML = cost_upg_3.toFixed(0);
-    }
-
-    function data_4_lvl() {
-        lvl_charge_dura = document.getElementById("lvl_charge_dura").value;
-        inf_ext = document.getElementById("inf_ext").value;
-        console.log(`Extraction Inf: ${inf_ext}`);
-        cost_upg_4 = 15;
-        if(inf_ext == 0){
-            inf_ext = base_dura;
-        } else {
-            inf_ext = base_dura / inf_ext;
-        }
-
-        upg_charge_dura = inf_ext;
-        if(lvl_charge_dura != 0) {
-            for(let i=0; i<lvl_charge_dura; i++){
-                upg_charge_dura = upg_charge_dura-(upg_charge_dura*0.1);
-            }
-            for(let x=0; x<lvl_charge_dura; x++){
-                cost_upg_4 = cost_upg_4*1.17;
-            }
-        }
-        document.getElementById("data_2").innerHTML = upg_charge_dura.toFixed(4);
-        document.getElementById("cost_4").innerHTML = cost_upg_4.toFixed(0);
-    }
-
-    function data_5_lvl() {
-        lvl_speed_dura = document.getElementById("lvl_speed_dura").value;
-        inf_spe = document.getElementById("inf_spe").value;
-        console.log(`Speed Inf: ${inf_spe}`);
-        cost_upg_5 = 30;
-        if(inf_spe == 0){
-            inf_spe = base_dura;
-        } else {
-            inf_spe = base_dura / inf_spe;
-        }
-
-        upg_speed_dura = inf_spe;
-        if(lvl_speed_dura != 0) {
-            for(let i=0; i<lvl_speed_dura; i++){
-                upg_speed_dura = upg_speed_dura-(upg_speed_dura*0.1);
-            }
-            for(let x=0; x<lvl_speed_dura; x++){
-                cost_upg_5 = cost_upg_5*1.22;
-            }
-        }
-        document.getElementById("data_3").innerHTML = upg_speed_dura.toFixed(4);
-        document.getElementById("cost_5").innerHTML = cost_upg_5.toFixed(0);
-    }
-
-    function data_6_lvl() {
-        lvl_production_dura = document.getElementById("lvl_production_dura").value;
-        inf_amo = document.getElementById("inf_amo").value;
-        console.log(`Amount Inf: ${inf_amo}`);
-        cost_upg_6 = 10;
-        if(inf_amo == 0){
-            inf_amo = base_dura;
-        } else {
-            inf_amo = base_dura / inf_amo;
-        }
-
-        upg_production_dura = inf_amo;
-        if(lvl_production_dura != 0) {
-            for(let i=0; i<lvl_production_dura; i++){
-                upg_production_dura = upg_production_dura-(upg_production_dura*0.1);
-            }
-            for(let x=0; x<lvl_production_dura; x++){
-                cost_upg_6 = cost_upg_6*1.15;
-            }
-        }
-        document.getElementById("data_5").innerHTML = upg_production_dura.toFixed(4);
-        document.getElementById("cost_6").innerHTML = cost_upg_6.toFixed(0);
-    }
-
-    function calc() {
-
-        data_1_lvl();
-        data_2_lvl();
-        data_3_lvl();
-        data_4_lvl();
-        data_5_lvl();
-        data_6_lvl();
-
-        let levels = [lvl_charge_req, lvl_speed_bonus, lvl_production_bonus, lvl_charge_dura, lvl_speed_dura, lvl_production_dura];
-
-        console.log(`Upgrades: ${levels}`);
-
-        let tick = upg_charge_dura;
-        let total_ticks = 0;
-        let charge_tick = 0;
-        let current_charge = 0;
-
-        while(current_charge < upg_charge_req){
-            total_ticks += tick;
-
-            let speed_tick = (upg_speed_bonus/upg_speed_dura)*total_ticks;
-            let extraction_tick = 0.01 * (upg_production_bonus/upg_production_dura)*total_ticks;
-            let extraction_dura = upg_charge_dura/(speed_tick);
-
-            charge_tick += extraction_tick*(tick/extraction_dura);
-
-            current_charge = charge_tick;
-
-            if(current_charge < upg_charge_req/1000) {
-                 tick *= 1.01;
-            }
-        }
-
-        document.getElementById("result").innerHTML = total_ticks.toFixed(4);
-        console.log(`Charged in: ${total_ticks}`);
-
-    }
-</script>
 </html>
+<!-- 
+    Add stone chart to "sidebar"
+-->
