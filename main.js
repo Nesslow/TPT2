@@ -49,29 +49,8 @@ function update_data() {
 	data_6_lvl();
 }
 
-function set_min() {
-	document.getElementById("inf_ext").value = 1;
-	document.getElementById("inf_spe").value = 1;
-	document.getElementById("inf_amo").value = 1;
-	document.getElementById("lvl_charge_req").value = 0;
-	document.getElementById("lvl_speed_bonus").value = 0;
-	document.getElementById("lvl_production_bonus").value = 0;
-	document.getElementById("lvl_charge_dura").value = 0;
-	document.getElementById("lvl_speed_dura").value = 0;
-	document.getElementById("lvl_production_dura").value = 0;
-	update_data();
-}
-
-function set_max() {
-	document.getElementById("inf_ext").value = 99999999999;
-	document.getElementById("inf_spe").value = 99999999999;
-	document.getElementById("inf_amo").value = 99999999999;
-	document.getElementById("lvl_charge_req").value = 100;
-	document.getElementById("lvl_speed_bonus").value = 100;
-	document.getElementById("lvl_production_bonus").value = 100;
-	document.getElementById("lvl_charge_dura").value = 100;
-	document.getElementById("lvl_speed_dura").value = 100;
-	document.getElementById("lvl_production_dura").value = 100;
+function set_max(x) {
+	document.getElementById(x).value = 100;
 	update_data();
 }
 

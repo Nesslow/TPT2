@@ -37,6 +37,7 @@ h2 {
 	margin: 0 auto;
 	display: grid;
 	grid-template-areas: 'top top top' 'left middle right' 'bottom bottom bottom';
+	grid-template-columns: 30% 35% 35%;
 	padding: 10px;
 }
 .item {
@@ -61,12 +62,27 @@ h2 {
 .data, .cost {
 	margin-bottom: 15px;
 }
+.item_container {
+	height: 35px;
+	margin-bottom: 28px;
+}
 .input {
 	background-color: #444;
-	height: 35px;
-	width: 100%;
+	height: 100%;
+	width: 80%;
 	margin-top: 3px;
 	margin-bottom: 15px;
+}
+.set_btn {
+	height: 35px;
+	width: 18%;
+	color: #f5f5f5;
+	text-shadow: 0px 1px 2px #000;
+	background-color: #444;
+	border: 1px solid #222;
+}
+.set_btn:hover {
+	background-color: #555;
 }
 .input_container {
 	width: 400px;
@@ -128,17 +144,10 @@ input[type="checkbox"] {
 .submit:hover {
 	background: rgb(75, 75, 75);
 }
-.set_btn {
-	color: #f5f5f5;
-	text-shadow: 0px 1px 2px #000;
-	background-color: #555;
-	border: 1px solid #222;
-	padding: 4px 8px
-}
-.set_btn:hover {
-	background: rgb(75, 75, 75);
-}
 #result {
 	width: 250px;
 	margin: 0 auto;
+	background-color: #444;
+	height: 35px;
+	margin-top: 3px;
 }
