@@ -3,7 +3,7 @@
 # Infinity stone calc (WIP)  
 To do:
 - [ ] Add optimal upgrading path to inf stone calc
-- [ ] Clean up code...
+- [x] Clean up code...
   
 # [Infinity calc (WIP)](https://infcalc.netlify.app/infcalc.html "Infinity calc (WIP)")  
 To do:
