@@ -1,0 +1,194 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body {
+    background-color: #252525;
+    color: #fff;
+}
+.container {
+    width: 200px;
+    margin: 150px auto;
+}
+.stat, .input {
+    font-size: 16px;
+    font-size: max(16px, 1em);
+    font-family: inherit;
+    padding: 0.25rem 0.5rem;
+    margin: 0.15rem 0;
+    background-color: #fff;
+    border: 2px solid var(--input-border);
+    border-radius: 2px;
+    width: 100%;
+}
+.input {
+    margin-bottom:10px;
+}
+.stat[readonly] {
+    --input-border: #ccc;
+
+    background-color: #eee;
+    cursor: not-allowed;
+}
+.top {
+    margin-bottom: 30px;
+}
+.submit {
+    margin-top: 10px;
+}
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="top">
+            <div class="input_contrainer">Extraction: <input id="inf_ext" type="number" class="stat input" value="1000000"></div>
+            <div class="input_contrainer">Speed: <input id="inf_spe" type="number" class="stat input" value="1000000"></div>
+            <div class="input_contrainer">Amount: <input id="inf_amo" type="number" class="stat input" value="1000000"></div>
+        </div>
+        <div class="bottom">
+            <div class="input_contrainer">Charge Required: <input id="lvl_charge_req" type="number" class="stat input" value="50" max="100"></div>
+            <div class="input_contrainer">Speed Bonus / Tick: <input id="lvl_speed_bonus" type="number" class="stat input" value="50" max="100"></div>
+            <div class="input_contrainer">Production Bonus / Tick: <input id="lvl_production_bonus" type="number" class="stat input" value="50" max="100"></div>
+            <div class="input_contrainer">Charge Duration: <input id="lvl_charge_dura" type="number" class="stat input" value="50" max="100"></div>
+            <div class="input_contrainer">Speed Tick Duration: <input id="lvl_speed_dura" type="number" class="stat input" value="50" max="100"></div>
+            <div class="input_contrainer">Production Tick Duration: <input id="lvl_production_dura" type="number" class="stat input" value="50" max="100"></div>
+            <input class="submit" type="button" value="Submit" onclick="calc()">
+            <br><br>
+            <div class="input_contrainer">Result (s): <input id="result" type="number" class="stat input" value=""></div>
+        </div>
+    </div>
+</body>
+<script>
+
+    function calc() {
+
+        let lvl_charge_req = document.getElementById("lvl_charge_req").value;
+        let lvl_speed_bonus = document.getElementById("lvl_speed_bonus").value;
+        let lvl_production_bonus = document.getElementById("lvl_production_bonus").value;
+        let lvl_charge_dura = document.getElementById("lvl_charge_dura").value;
+        let lvl_speed_dura = document.getElementById("lvl_speed_dura").value;
+        let lvl_production_dura = document.getElementById("lvl_production_dura").value;
+
+        let levels = [lvl_charge_req, lvl_speed_bonus, lvl_production_bonus, lvl_charge_dura, lvl_speed_dura, lvl_production_dura];
+        let upg_result = [];
+
+        for(let i = 0; i < levels.length; i++) {
+
+            levels[i]++;
+
+            const base_dura = 31536000;
+
+            let charge_req = 1000000000000;
+            let charge_dura = base_dura;
+
+            let speed_bonus = 0.02; //percent
+            let speed_dura = base_dura;
+
+            let production_bonus = 0.05; //percent
+            let production_dura = base_dura;
+
+            let inf_ext = document.getElementById("inf_ext").value;
+            let inf_spe = document.getElementById("inf_spe").value;
+            let inf_amo = document.getElementById("inf_amo").value;
+            
+            if(inf_ext == 0){
+                inf_ext = base_dura;
+            } else {
+                inf_ext = base_dura / inf_ext;
+            }
+            if(inf_spe == 0){
+                inf_spe = base_dura;
+            } else {
+                inf_spe = base_dura / inf_spe;
+            }
+            if(inf_amo == 0){
+                inf_amo = base_dura;
+            } else {
+                inf_amo = base_dura / inf_amo;
+            }
+
+            let upg_charge_req = charge_req;
+            if(levels[0] != 0) {
+                for(let i=0; i<levels[0]; i++){
+                    upg_charge_req = upg_charge_req-(upg_charge_req*0.05);
+                }
+            }
+
+            let upg_speed_bonus = speed_bonus;
+            if(levels[1] != 0) {
+                for(let i=0; i<levels[1]; i++){
+                    upg_speed_bonus += 0.01;
+                }
+            }
+
+            let upg_production_bonus = production_bonus;
+            if(levels[2] != 0) {
+                for(let i=0; i<levels[2]; i++){
+                    upg_production_bonus += 0.025;
+                }
+            }
+
+            let upg_charge_dura = inf_ext;
+            if(levels[3] != 0) {
+                for(let i=0; i<levels[3]; i++){
+                    upg_charge_dura = upg_charge_dura-(upg_charge_dura*0.1);
+                }
+            }
+
+            let upg_speed_dura = inf_spe;
+            if(levels[4] != 0) {
+                for(let i=0; i<levels[4]; i++){
+                    upg_speed_dura = upg_speed_dura-(upg_speed_dura*0.1);
+                }
+            }
+
+            let upg_production_dura = inf_amo;
+            if(levels[5] != 0) {
+                for(let i=0; i<levels[5]; i++){
+                    upg_production_dura = upg_production_dura-(upg_production_dura*0.1);
+                }
+            }
+
+            let tick = upg_charge_dura;
+            let total_ticks = 0;
+            let charge_tick = 0;
+            let current_charge = 0;
+
+            while(current_charge < upg_charge_req){
+                total_ticks += tick;
+
+                let speed_tick = (upg_speed_bonus/upg_speed_dura)*total_ticks;
+                let extraction_tick = 0.01 * (upg_production_bonus/upg_production_dura)*total_ticks;
+                let extraction_dura = upg_charge_dura/(speed_tick);
+
+                charge_tick += extraction_tick*(tick/extraction_dura);
+
+                current_charge = charge_tick;
+
+                if(current_charge < upg_charge_req/1000) {
+                    tick *= 1.01;
+                }
+            }
+            upg_result.push(total_ticks);
+
+            console.log(`Charged in: ${total_ticks}`);
+            console.log(`Upgrades: ${levels}`);
+            
+            levels[i]--;
+
+        }
+        let next_upg = upg_result.indexOf(Math.min(...upg_result));
+        console.log(`Next Upgrade: ${next_upg} Result: ${upg_result}`);
+    }
+</script>
+</html>
