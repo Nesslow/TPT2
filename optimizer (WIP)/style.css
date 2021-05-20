@@ -32,11 +32,14 @@ h2 {
 .item5 {
 	grid-area: bottom;
 }
+.item6 {
+	grid-area: result;
+}
 .container {
 	width: 960px;
 	margin: 0 auto;
 	display: grid;
-	grid-template-areas: 'top top top' 'left middle right' 'bottom bottom bottom';
+	grid-template-areas: 'top top top' 'left middle right' 'bottom bottom bottom' 'result result result';
 	grid-template-columns: 30% 35% 35%;
 	padding: 10px;
 }
@@ -150,4 +153,8 @@ input[type="checkbox"] {
 	background-color: #444;
 	height: 35px;
 	margin-top: 3px;
+}
+#result_area {
+	text-align: left;
+	width: 100%;
 }
