@@ -16,15 +16,15 @@
 			<h1>Infinity Stone Calculator</h1>
 			<div class="input_container">
 				<label for="inf_ext">Extraction</label>
-				<input class="inf_bar" id="inf_ext" onchange="update_data()" type="number" value="0" step="1000000" min="0" max="99999999999">
+				<input class="inf_bar" id="inf_ext" onchange="update_data()" type="number" value="0" step="1000000" min="0" max="99999999999" tabindex="1">
 			</div>
 			<div class="input_container">
 				<label for="inf_spe">Speed</label>
-				<input class="inf_bar" id="inf_spe" onchange="update_data()" type="number" value="0" step="1000000" min="0" max="99999999999">
+				<input class="inf_bar" id="inf_spe" onchange="update_data()" type="number" value="0" step="1000000" min="0" max="99999999999" tabindex="2">
 			</div>
 			<div class="input_container">
 				<label for="inf_amo">Amount</label>
-				<input class="inf_bar" id="inf_amo" onchange="update_data()" type="number" value="0" step="1000000" min="0" max="99999999999">
+				<input class="inf_bar" id="inf_amo" onchange="update_data()" type="number" value="0" step="1000000" min="0" max="99999999999" tabindex="3">
 			</div>
 		</div>
 		<div class="item2 item">
@@ -47,32 +47,32 @@
 		<div class="item3 item">
 			<div class="item_container">
 				<label for="lvl_charge_req">Charge Required</label>
-				<input class="stat input" id="lvl_charge_req" max="100" min="0" onchange="update_data()" type="number" value="0">
+				<input class="stat input" id="lvl_charge_req" max="100" min="0" onchange="update_data()" type="number" value="0" tabindex="4">
 				<input class="set_btn" onclick="set_max(this.name)" type="button" value="max" name="lvl_charge_req">
 			</div>
 			<div class="item_container">
 				<label for="lvl_speed_bonus">Speed Bonus / Tick</label>
-				<input class="stat input" id="lvl_speed_bonus" max="100" min="0" onchange="update_data()" type="number" value="0">
+				<input class="stat input" id="lvl_speed_bonus" max="100" min="0" onchange="update_data()" type="number" value="0" tabindex="5">
 				<input class="set_btn" onclick="set_max(this.name)" type="button" value="max" name="lvl_speed_bonus">
 			</div>
 			<div class="item_container">
 				<label for="lvl_production_bonus">Production Bonus / Tick</label>
-				<input class="stat input" id="lvl_production_bonus" max="100" min="0" onchange="update_data()" type="number" value="0">
+				<input class="stat input" id="lvl_production_bonus" max="100" min="0" onchange="update_data()" type="number" value="0" tabindex="6">
 				<input class="set_btn" onclick="set_max(this.name)" type="button" value="max" name="lvl_production_bonus">
 			</div>
 			<div class="item_container">
 				<label for="lvl_charge_dura">Charge Duration</label>
-				<input class="stat input" id="lvl_charge_dura" max="100" min="0" onchange="update_data()" type="number" value="0">
+				<input class="stat input" id="lvl_charge_dura" max="100" min="0" onchange="update_data()" type="number" value="0" tabindex="7">
 				<input class="set_btn" onclick="set_max(this.name)" type="button" value="max" name="lvl_charge_dura">
 			</div>
 			<div class="item_container">
 				<label for="lvl_speed_dura">Speed Tick Duration</label>
-				<input class="stat input" id="lvl_speed_dura" max="100" min="0" onchange="update_data()" type="number" value="0">
+				<input class="stat input" id="lvl_speed_dura" max="100" min="0" onchange="update_data()" type="number" value="0" tabindex="8">
 				<input class="set_btn" onclick="set_max(this.name)" type="button" value="max" name="lvl_speed_dura">
 			</div>
 			<div class="item_container">
 				<label for="lvl_production_dura">Production Tick Duration</label>
-				<input class="stat input" id="lvl_production_dura" max="100" min="0" onchange="update_data()" type="number" value="0">
+				<input class="stat input" id="lvl_production_dura" max="100" min="0" onchange="update_data()" type="number" value="0" tabindex="9">
 				<input class="set_btn" onclick="set_max(this.name)" type="button" value="max" name="lvl_production_dura">
 			</div>
 		</div>
@@ -95,10 +95,8 @@
 		</div>
 		<div class="item5 item">
 			<h1>Charge time</h1>
-			<div class="stat input" id="result"></div><input class="submit" onclick="calc()" type="button" value="Simulate">
-			<!-- <div class="util_btn">
-				<input class="set_btn" onclick="set_min()" type="button" value="min"> <input class="set_btn" onclick="set_max()" type="button" value="max">
-			</div> -->
+			<div class="stat input" id="result"></div>
+			<input class="submit" onclick="calc()" type="button" value="Simulate" tabindex="10">
 		</div>
 	</div>
 	<script src="main.js"></script>
