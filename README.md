@@ -5,7 +5,7 @@ To do:
 - [ ] Add optimal upgrading path to inf stone calc
 - [x] Clean up code...
   
-# [Infinity calc (WIP)](https://infcalc.netlify.app/infcalc.html "Infinity calc (WIP)")  
+# [Infinity calc (WIP)](https://tpt2-nesslow.netlify.app/inf_estimate_calc%20(wip)/infcalc "Infinity calc (WIP)")  
 To do:
 - [ ] FPS / Region included in calc
 - [ ] Additional data shown
