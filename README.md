@@ -2,8 +2,9 @@
 
 # [Infinity stone calc](https://tpt2-nesslow.netlify.app/  "Infinity stone calc")
 To do:
-- [ ] Add optimal upgrading path to inf stone calc
+- [x] Add optimal upgrading path to inf stone calc
 - [x] Clean up code...
+- [x] add localStorage
   
 # [Infinity calc (WIP)](https://tpt2-nesslow.netlify.app/inf_estimate_calc%20(wip)/infcalc "Infinity calc (WIP)")  
 To do:
