@@ -12,16 +12,16 @@ let total_start_cost = 0;
 let total_upg_cost = 0;
 let cost_total = 0;
 
-const inf_ext = 8491398;
-const inf_spe = 2016004;
-const inf_amo = 10127004;
+const inf_ext = 2579005;
+const inf_spe = 16226604;
+const inf_amo = 13501411;
 
 let lvl_charge_req = 100;
-let lvl_speed_bonus = 60;
-let lvl_production_bonus = 89;
-let lvl_charge_dura = 74;
-let lvl_speed_dura = 54;
-let lvl_production_dura = 87;
+let lvl_speed_bonus = 65;
+let lvl_production_bonus = 94;
+let lvl_charge_dura = 80;
+let lvl_speed_dura = 63;
+let lvl_production_dura = 93;
 
 let upg_charge_req;
 let upg_speed_bonus;
