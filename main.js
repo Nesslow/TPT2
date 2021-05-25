@@ -1,266 +1,535 @@
-const base_dura = 31536000;
-let charge_req = 1000000000000;
-let charge_dura = base_dura;
-let speed_bonus = 0.02; //percent
-let speed_dura = base_dura;
-let production_bonus = 0.05; //percent
-let production_dura = base_dura;
-let inf_ext = 0;
-let inf_spe = 0;
-let inf_amo = 0;
-let lvl_charge_req = 0;
-let lvl_speed_bonus = 0;
-let lvl_production_bonus = 0;
-let lvl_charge_dura = 0;
-let lvl_speed_dura = 0;
-let lvl_production_dura = 0;
-let upg_charge_req;
-let upg_speed_bonus;
-let upg_production_bonus;
-let upg_charge_dura;
-let upg_speed_dura;
-let upg_production_dura;
-let cost_upg_1 = 0;
-let cost_upg_2 = 0;
-let cost_upg_3 = 0;
-let cost_upg_4 = 0;
-let cost_upg_5 = 0;
-let cost_upg_6 = 0;
-let sci_no = false;
+function cacheDOM() {
 
-function sci_toggle() {
-	if (document.getElementById("sci_no_toggle").checked == true) {
-		sci_no = true;
-		console.log(`sci_enabled: ${sci_no}`);
-		update_data();
-	} else if (document.getElementById("sci_no_toggle").checked == false) {
-		sci_no = false;
-		console.log(`sci_enabled: ${sci_no}`);
-		update_data();
-	}
+	resArea = document.getElementById("result_area");
+	inf_arr.push(document.getElementById("inf_1").valueAsNumber);
+	inf_arr.push(document.getElementById("inf_2").valueAsNumber);
+	inf_arr.push(document.getElementById("inf_3").valueAsNumber);
+	lvl_arr.push(document.getElementById("lvl_upg_1").valueAsNumber);
+	lvl_arr.push(document.getElementById("lvl_upg_2").valueAsNumber);
+	lvl_arr.push(document.getElementById("lvl_upg_3").valueAsNumber);
+	lvl_arr.push(document.getElementById("lvl_upg_4").valueAsNumber);
+	lvl_arr.push(document.getElementById("lvl_upg_5").valueAsNumber);
+	lvl_arr.push(document.getElementById("lvl_upg_6").valueAsNumber);
+
 }
 
-function update_data() {
-	data_1_lvl();
-	data_2_lvl();
-	data_3_lvl();
-	data_4_lvl();
-	data_5_lvl();
-	data_6_lvl();
+const baseChargeDura = 31536000;
+const baseChargeReq = 1000000000000;
+
+let chargeDura = baseChargeDura;
+let speedBonus = 0.02; //percent
+let speedDura = baseChargeDura;
+let productionBonus = 0.05; //percent
+let productionDura = baseChargeDura;
+
+const baseCostUpg1 = 25;
+const baseCostUpg2 = 10;
+const baseCostUpg3 = 8;
+const baseCostUpg4 = 15;
+const baseCostUpg5 = 30;
+const baseCostUpg6 = 10;
+
+let totalTicks;
+let totalCost;
+let remCost;
+
+let result_area;
+let loops;
+let optUpgradeCost;
+
+let inf1;
+let inf2;
+let inf3;
+let lvlUpg1;
+let lvlUpg2;
+let lvlUpg3;
+let lvlUpg4;
+let lvlUpg5;
+let lvlUpg6;
+
+let inf_arr = [];
+let lvl_arr = [];
+let cost_arr = [];
+let data_arr = [];
+let value_arr = [];
+
+// Cache DOM elements
+cacheDOM();
+
+function update() {
+
+	inf_arr = [];
+	lvl_arr = [];
+	cacheDOM();
+
+	updateCost();
+	updateData();
+
+	saveData();
+
 }
 
-function set_max(x) {
+function updateCost() {
+	totalCost = 0;
+	upgCost1();
+	upgCost2();
+	upgCost3();
+	upgCost4();
+	upgCost5();
+	upgCost6();
+}
+
+function updateData() {
+	upgData1();
+	upgData2();
+	upgData3();
+	upgData4();
+	upgData5();
+	upgData6();
+}
+
+function add_100(x) {
 	document.getElementById(x).value = 100;
-	update_data();
+	update();
 }
 
-function data_1_lvl() {
-	lvl_charge_req = document.getElementById("lvl_charge_req").value;
-	upg_charge_req = charge_req;
-	cost_upg_1 = 25;
-	if (lvl_charge_req != 0) {
-		for (let i = 0; i < lvl_charge_req; i++) {
-			upg_charge_req = upg_charge_req - (upg_charge_req * 0.05);
+function getLoops() {
+	loops = lvl_arr.reduce(function(a, b) {
+		return a + b;
+	}, 0);
+	loops = 600 - loops;
+	console.log(`total loops: ${loops}`);
+}
+
+function upgCost1() {
+	let costUpg1 = baseCostUpg1;
+	let a = lvl_arr[0];
+	totalCost += baseCostUpg1;
+	if (a == -1) {
+		totalCost -= baseCostUpg1;
+	} else if (a >= 100) {
+		for (let i = 0; i < 100; i++) { 
+			costUpg1 = costUpg1 * 1.1;
+			totalCost += costUpg1;
 		}
-		if (lvl_charge_req == 100) {
-			document.getElementById("cost_1").innerHTML = "Max.";
+		document.getElementById("cost_upg_1").innerHTML = "Max.";
+	} else {
+		for (let i = 0; i < a; i++) { 
+			costUpg1 = costUpg1 * 1.1;
+			totalCost += costUpg1;
+		}
+		if (costUpg1 > 9999) {
+			document.getElementById("cost_upg_1").innerHTML = costUpg1.toExponential(3);
 		} else {
-			for (let x = 0; x < lvl_charge_req; x++) {
-				cost_upg_1 = cost_upg_1 * 1.1;
-				if (cost_upg_1 > 9999 && sci_no == true) {
-					document.getElementById("cost_1").innerHTML = cost_upg_1.toExponential(3);
-				} else {
-					document.getElementById("cost_1").innerHTML = cost_upg_1.toFixed(0);
-				}
-			}
+			document.getElementById("cost_upg_1").innerHTML = costUpg1.toFixed(0);
 		}
-	} else {
-		document.getElementById("cost_1").innerHTML = cost_upg_1.toFixed(0);
 	}
-	if (upg_charge_req > 9999 && sci_no == true) {
-		document.getElementById("data_1").innerHTML = upg_charge_req.toExponential(3);
-	} else {
-		document.getElementById("data_1").innerHTML = upg_charge_req.toFixed(0);
-	}
+	cost_arr.splice(0, 1, costUpg1);
 }
 
-function data_2_lvl() {
-	lvl_speed_bonus = document.getElementById("lvl_speed_bonus").value;
-	upg_speed_bonus = speed_bonus;
-	cost_upg_2 = 10;
-	if (lvl_speed_bonus != 0) {
-		for (let i = 0; i < lvl_speed_bonus; i++) {
-			upg_speed_bonus += 0.01;
+function upgCost2() {
+	let costUpg2 = baseCostUpg2;
+	let a = lvl_arr[1];
+	totalCost += baseCostUpg2;
+	if (a == -1) {
+		totalCost -= baseCostUpg2;
+	} else if (a >= 100) {
+		for (let i = 0; i < 100; i++) { 
+			costUpg2 = costUpg2 * 1.22;
+			totalCost += costUpg2;
 		}
-		if (lvl_speed_bonus == 100) {
-			document.getElementById("cost_2").innerHTML = "Max.";
+		document.getElementById("cost_upg_2").innerHTML = "Max.";
+	} else {
+		for (let i = 0; i < a; i++) { 
+			costUpg2 = costUpg2 * 1.22;
+			totalCost += costUpg2;
+		}
+		if (costUpg2 > 9999) {
+			document.getElementById("cost_upg_2").innerHTML = costUpg2.toExponential(3);
 		} else {
-			for (let x = 0; x < lvl_speed_bonus; x++) {
-				cost_upg_2 = cost_upg_2 * 1.22;
-				if (cost_upg_2 > 9999 && sci_no == true) {
-					document.getElementById("cost_2").innerHTML = cost_upg_2.toExponential(3);
-				} else {
-					document.getElementById("cost_2").innerHTML = cost_upg_2.toFixed(0);
-				}
-			}
+			document.getElementById("cost_upg_2").innerHTML = costUpg2.toFixed(0);
 		}
-	} else {
-		document.getElementById("cost_2").innerHTML = cost_upg_2.toFixed(0);
 	}
-	document.getElementById("data_4").innerHTML = upg_speed_bonus.toFixed(2);
+	cost_arr.splice(1, 1, costUpg2);
 }
 
-function data_3_lvl() {
-	lvl_production_bonus = document.getElementById("lvl_production_bonus").value;
-	upg_production_bonus = production_bonus;
-	cost_upg_3 = 8;
-	if (lvl_production_bonus != 0) {
-		for (let i = 0; i < lvl_production_bonus; i++) {
-			upg_production_bonus += 0.025;
+function upgCost3() {
+	let costUpg3 = baseCostUpg3;
+	let a = lvl_arr[2];
+	totalCost += baseCostUpg3;
+	if (a == -1) {
+		totalCost -= baseCostUpg3;
+	} else if (a >= 100) {
+		for (let i = 0; i < 100; i++) { 
+			costUpg3 = costUpg3 * 1.15;
+			totalCost += costUpg3;
 		}
-		if (lvl_production_bonus == 100) {
-			document.getElementById("cost_3").innerHTML = "Max.";
+		document.getElementById("cost_upg_3").innerHTML = "Max.";
+	} else {
+		for (let i = 0; i < a; i++) { 
+			costUpg3 = costUpg3 * 1.15;
+			totalCost += costUpg3;
+		}
+		if (costUpg3 > 9999) {
+			document.getElementById("cost_upg_3").innerHTML = costUpg3.toExponential(3);
 		} else {
-			for (let x = 0; x < lvl_production_bonus; x++) {
-				cost_upg_3 = cost_upg_3 * 1.15;
-				if (cost_upg_3 > 9999 && sci_no == true) {
-					document.getElementById("cost_3").innerHTML = cost_upg_3.toExponential(3);
-				} else {
-					document.getElementById("cost_3").innerHTML = cost_upg_3.toFixed(0);
-				}
-			}
+			document.getElementById("cost_upg_3").innerHTML = costUpg3.toFixed(0);
 		}
-	} else {
-		document.getElementById("cost_3").innerHTML = cost_upg_3.toFixed(0);
 	}
-	document.getElementById("data_6").innerHTML = upg_production_bonus.toFixed(3);
+	cost_arr.splice(2, 1, costUpg3);
 }
 
-function data_4_lvl() {
-	lvl_charge_dura = document.getElementById("lvl_charge_dura").value;
-	inf_ext = document.getElementById("inf_ext").value;
-	cost_upg_4 = 15;
-	if (inf_ext == 0) {
-		inf_ext = base_dura;
-	} else {
-		inf_ext = base_dura / inf_ext;
-	}
-	upg_charge_dura = inf_ext;
-	if (lvl_charge_dura != 0) {
-		for (let i = 0; i < lvl_charge_dura; i++) {
-			upg_charge_dura = upg_charge_dura - (upg_charge_dura * 0.1);
+function upgCost4() {
+	let costUpg4 = baseCostUpg4;
+	let a = lvl_arr[3];
+	totalCost += baseCostUpg4;
+	if (a == -1) {
+		totalCost -= baseCostUpg4;
+	} else if (a >= 100) {
+		for (let i = 0; i < 100; i++) { 
+			costUpg4 = costUpg4 * 1.17;
+			totalCost += costUpg4;
 		}
-		if (lvl_charge_dura == 100) {
-			document.getElementById("cost_4").innerHTML = "Max.";
+		document.getElementById("cost_upg_4").innerHTML = "Max.";
+	} else {
+		for (let i = 0; i < a; i++) { 
+			costUpg4 = costUpg4 * 1.17;
+			totalCost += costUpg4;
+		}
+		if (costUpg4 > 9999) {
+			document.getElementById("cost_upg_4").innerHTML = costUpg4.toExponential(3);
 		} else {
-			for (let x = 0; x < lvl_charge_dura; x++) {
-				cost_upg_4 = cost_upg_4 * 1.17;
-				if (cost_upg_4 > 9999 && sci_no == true) {
-					document.getElementById("cost_4").innerHTML = cost_upg_4.toExponential(3);
-				} else {
-					document.getElementById("cost_4").innerHTML = cost_upg_4.toFixed(0);
-				}
-			}
+			document.getElementById("cost_upg_4").innerHTML = costUpg4.toFixed(0);
 		}
-	} else {
-		document.getElementById("cost_4").innerHTML = cost_upg_4.toFixed(0);
 	}
-	document.getElementById("data_2").innerHTML = upg_charge_dura.toFixed(4);
+	cost_arr.splice(3, 1, costUpg4);
 }
 
-function data_5_lvl() {
-	lvl_speed_dura = document.getElementById("lvl_speed_dura").value;
-	inf_spe = document.getElementById("inf_spe").value;
-	cost_upg_5 = 30;
-	if (inf_spe == 0) {
-		inf_spe = base_dura;
-	} else {
-		inf_spe = base_dura / inf_spe;
-	}
-	upg_speed_dura = inf_spe;
-	if (lvl_speed_dura != 0) {
-		for (let i = 0; i < lvl_speed_dura; i++) {
-			upg_speed_dura = upg_speed_dura - (upg_speed_dura * 0.1);
+function upgCost5() {
+	let costUpg5 = baseCostUpg5;
+	let a = lvl_arr[4];
+	totalCost += baseCostUpg5;
+	if (a == -1) {
+		totalCost -= baseCostUpg5;
+	} else if (a >= 100) {
+		for (let i = 0; i < 100; i++) { 
+			costUpg5 = costUpg5 * 1.22;
+			totalCost += costUpg5;
 		}
-		if (lvl_speed_dura == 100) {
-			document.getElementById("cost_5").innerHTML = "Max.";
+		document.getElementById("cost_upg_5").innerHTML = "Max.";
+	} else {
+		for (let i = 0; i < a; i++) { 
+			costUpg5 = costUpg5 * 1.22;
+			totalCost += costUpg5;
+		}
+		if (costUpg5 > 9999) {
+			document.getElementById("cost_upg_5").innerHTML = costUpg5.toExponential(3);
 		} else {
-			for (let x = 0; x < lvl_speed_dura; x++) {
-				cost_upg_5 = cost_upg_5 * 1.22;
-				if (cost_upg_5 > 9999 && sci_no == true) {
-					document.getElementById("cost_5").innerHTML = cost_upg_5.toExponential(3);
-				} else {
-					document.getElementById("cost_5").innerHTML = cost_upg_5.toFixed(0);
-				}
-			}
+			document.getElementById("cost_upg_5").innerHTML = costUpg5.toFixed(0);
 		}
-	} else {
-		document.getElementById("cost_5").innerHTML = cost_upg_5.toFixed(0);
 	}
-	document.getElementById("data_3").innerHTML = upg_speed_dura.toFixed(4);
+	cost_arr.splice(4, 1, costUpg5);
 }
 
-function data_6_lvl() {
-	lvl_production_dura = document.getElementById("lvl_production_dura").value;
-	inf_amo = document.getElementById("inf_amo").value;
-	cost_upg_6 = 10;
-	if (inf_amo == 0) {
-		inf_amo = base_dura;
-	} else {
-		inf_amo = base_dura / inf_amo;
-	}
-	upg_production_dura = inf_amo;
-	if (lvl_production_dura != 0) {
-		for (let i = 0; i < lvl_production_dura; i++) {
-			upg_production_dura = upg_production_dura - (upg_production_dura * 0.1);
+function upgCost6() {
+	let costUpg6 = baseCostUpg6;
+	let a = lvl_arr[5];
+	totalCost += baseCostUpg6;
+	if (a == -1) {
+		totalCost -= baseCostUpg6;
+	} else if (a >= 100) {
+		for (let i = 0; i < 100; i++) { 
+			costUpg6 = costUpg6 * 1.15;
+			totalCost += costUpg6;
 		}
-		if (lvl_production_dura == 100) {
-			document.getElementById("cost_6").innerHTML = "Max.";
+		document.getElementById("cost_upg_6").innerHTML = "Max.";
+	} else {
+		for (let i = 0; i < a; i++) { 
+			costUpg6 = costUpg6 * 1.15;
+			totalCost += costUpg6;
+		}
+		if (costUpg6 > 9999) {
+			document.getElementById("cost_upg_6").innerHTML = costUpg6.toExponential(3);
 		} else {
-			for (let x = 0; x < lvl_production_dura; x++) {
-				cost_upg_6 = cost_upg_6 * 1.15;
-				if (cost_upg_6 > 9999 && sci_no == true) {
-					document.getElementById("cost_6").innerHTML = cost_upg_6.toExponential(3);
-				} else {
-					document.getElementById("cost_6").innerHTML = cost_upg_6.toFixed(0);
-				}
-			}
+			document.getElementById("cost_upg_6").innerHTML = costUpg6.toFixed(0);
 		}
-	} else {
-		document.getElementById("cost_6").innerHTML = cost_upg_6.toFixed(0);
 	}
-	document.getElementById("data_5").innerHTML = upg_production_dura.toFixed(4);
+	cost_arr.splice(5, 1, costUpg6);
 }
 
-function calc() {
-	update_data();
-	let levels = [lvl_charge_req, lvl_speed_bonus, lvl_production_bonus, lvl_charge_dura, lvl_speed_dura, lvl_production_dura];
-	console.log(`Upgrades: ${levels}`);
-	let tick = upg_charge_dura;
-	let total_ticks = 0;
-	let charge_tick = 0;
-	let current_charge = 0;
-	while (current_charge < upg_charge_req) {
-		total_ticks += tick;
-		let speed_tick = (upg_speed_bonus / upg_speed_dura) * total_ticks;
-		let extraction_tick = 0.01 * (upg_production_bonus / upg_production_dura) * total_ticks;
-		let extraction_dura = upg_charge_dura / (speed_tick);
-		charge_tick += extraction_tick * (tick / extraction_dura);
-		current_charge = charge_tick;
-		if (current_charge < upg_charge_req / 1000) {
+function upgData1() {
+	let upgData1 = baseChargeReq;
+	let a = lvl_arr[0];
+	if (a == 0) {
+		upgData1 = baseChargeReq;
+	} else if (a >= 100) {
+		for (let i = 0; i < 100; i++) { 
+			upgData1 = upgData1 - (upgData1 * 0.05);
+		}
+	} else {
+		for (let i = 0; i < a; i++) { 
+			upgData1 = upgData1 - (upgData1 * 0.05);
+		}
+	}
+	document.getElementById("data_upg_1").innerHTML = upgData1.toExponential(3);
+	data_arr.splice(0, 1, upgData1);
+}
+
+function upgData2() {
+	let upgData2 = speedBonus;
+	let a = lvl_arr[1];
+	if (a == 0) {
+		upgData2 = speedBonus;
+	} else if (a >= 100) {
+		for (let i = 0; i < 100; i++) { 
+			upgData2 = upgData2 += 0.01;
+		}
+	} else {
+		for (let i = 0; i < a; i++) { 
+			upgData2 = upgData2 += 0.01;
+		}
+	}
+	x = upgData2 * 100;
+	document.getElementById("data_upg_2").innerHTML = x.toFixed(0) + "%";
+	data_arr.splice(1, 1, upgData2);
+}
+
+function upgData3() {
+	let upgData3 = productionBonus;
+	let a = lvl_arr[2];
+	if (a == 0) {
+		upgData3 = productionBonus;
+	} else if (a >= 100) {
+		for (let i = 0; i < 100; i++) { 
+			upgData3 = upgData3 += 0.025;
+		}
+	} else {
+		for (let i = 0; i < a; i++) { 
+			upgData3 = upgData3 += 0.025;
+		}
+	}
+	x = upgData3 * 100;
+	document.getElementById("data_upg_3").innerHTML = x.toFixed(1) + "%";
+	data_arr.splice(2, 1, upgData3);
+}
+
+function upgData4() {
+	if (inf_arr[0] == 0) {
+		inf_arr[0] = 1;
+	}
+	let upgData4 = baseChargeDura / inf_arr[0];
+	let a = lvl_arr[3];
+	if (a == 0) {
+		upgData4 = baseChargeDura / inf_arr[0];
+	} else if (a >= 100) {
+		for (let i = 0; i < 100; i++) { 
+			upgData4 = upgData4 - (upgData4 * 0.1);
+		}
+	} else {
+		for (let i = 0; i < a; i++) { 
+			upgData4 = upgData4 - (upgData4 * 0.1);
+		}
+	}
+	if (upgData4 >= 100) {
+		document.getElementById("data_upg_4").innerHTML = upgData4.toFixed(0);
+	} else {
+		document.getElementById("data_upg_4").innerHTML = upgData4.toFixed(4);
+	}
+	data_arr.splice(3, 1, upgData4);
+}
+
+function upgData5() {
+	if (inf_arr[1] == 0) {
+		inf_arr[1] = 1;
+	}
+	let upgData5 = baseChargeDura / inf_arr[1];
+	let a = lvl_arr[4];
+	if (a == 0) {
+		upgData5 = baseChargeDura / inf_arr[1];
+	} else if (a >= 100) {
+		for (let i = 0; i < 100; i++) { 
+			upgData5 = upgData5 - (upgData5 * 0.1);
+		}
+	} else {
+		for (let i = 0; i < a; i++) { 
+			upgData5 = upgData5 - (upgData5 * 0.1);
+		}
+	}
+	if (upgData5 >= 100) {
+		document.getElementById("data_upg_5").innerHTML = upgData5.toFixed(0);
+	} else {
+		document.getElementById("data_upg_5").innerHTML = upgData5.toFixed(4);
+	}
+	data_arr.splice(4, 1, upgData5);
+}
+
+function upgData6() {
+	if (inf_arr[2] == 0) {
+		inf_arr[2] = 1;
+	}
+	let upgData6 = baseChargeDura / inf_arr[2];
+	let a = lvl_arr[5];
+	if (a == 0) {
+		upgData6 = baseChargeDura / inf_arr[2];
+	} else if (a >= 100) {
+		for (let i = 0; i < 100; i++) { 
+			upgData6 = upgData6 - (upgData6 * 0.1);
+		}
+	} else {
+		for (let i = 0; i < a; i++) { 
+			upgData6 = upgData6 - (upgData6 * 0.1);
+		}
+	}
+	if (upgData6 >= 100) {
+		document.getElementById("data_upg_6").innerHTML = upgData6.toFixed(0);
+	} else {
+		document.getElementById("data_upg_6").innerHTML = upgData6.toFixed(4);
+	}
+	data_arr.splice(5, 1, upgData6);
+}
+
+function calcData() {
+	
+	let cReq = data_arr[0];
+	let tick = data_arr[3];
+	let CPT = 0;
+	let cCur = 0;
+	totalTicks = 0;
+
+	while (cCur < cReq) {
+		totalTicks += tick;
+		let speed_tick = (data_arr[1] / data_arr[4]) * totalTicks;
+		let extraction_tick = 0.01 * (data_arr[2] / data_arr[5]) * totalTicks;
+		let extraction_dura = data_arr[3] / (speed_tick);
+		CPT += extraction_tick * (tick / extraction_dura);
+		cCur = CPT;
+		if (cCur < cReq / 1000) {
 			tick *= 1.01;
 		}
 	}
-	if (total_ticks > 3600) {
-		hours = Math.floor(total_ticks / 3600);
-		total_ticks %= 3600;
-		minutes = Math.floor(total_ticks / 60);
-		seconds = total_ticks % 60;
-		seconds = seconds.toFixed(4);
-		total_ticks = hours + "h " + minutes + "m " + seconds + "s";
-		document.getElementById("result").innerHTML = total_ticks;
-	} else {
-		document.getElementById("result").innerHTML = total_ticks.toFixed(4) + "s";
-	}
-	console.log(`Charged in: ${total_ticks}`);
+	let tickValue = CPT / cReq;
+	let value = totalCost / tickValue;
+	value_arr.push(value);
 }
+
+function optimize() {
+	getLoops();
+
+	// resArea
+	resArea.deleteTHead();
+	let th = resArea.createTHead();
+	let thRow = th.insertRow(0);
+	let thCell0 = thRow.insertCell(0);
+	let thCell1 = thRow.insertCell(1);
+	let thCell2 = thRow.insertCell(2);
+	let thCell3 = thRow.insertCell(3);
+	let thCell4 = thRow.insertCell(4);
+
+	thCell0.setAttribute("class", "calc-input-wrap heading w20-input ");
+	thCell1.setAttribute("class", "calc-input-wrap heading w20-input");
+	thCell2.setAttribute("class", "calc-input-wrap heading w20-input number-container");
+	thCell3.setAttribute("class", "calc-input-wrap heading w20-input number-container");
+	thCell4.setAttribute("class", "calc-input-wrap heading w20-input number-container");
+
+	thCell0.innerHTML = "Upgrade";
+	thCell1.innerHTML = "Charge";
+	thCell2.innerHTML = "Cost";
+	thCell3.innerHTML = "Cost Total";
+	thCell4.innerHTML = "Upgrades List";
+
+	let upgArr = ["Charge Req","Speed Bonus","Production Bonus","Charge Dura","Speed Dura","Production Dura"];
+
+	for(let i = 0; i < loops; i++) {
+		value_arr = [];
+		for(let x = 0; x < lvl_arr.length; x++) {
+			if(lvl_arr[x] == 100) {
+				value_arr.push(9007199254740991);
+				updateCost();
+				updateData();
+			} else {
+				lvl_arr[x]++;
+				updateCost();
+				updateData();
+				calcData();
+				lvl_arr[x]--;
+			}
+		}
+		let bestValue = value_arr.indexOf(Math.min(...value_arr));
+		let row = resArea.insertRow(-1);
+		let cell0 = row.insertCell(0);
+		let cell1 = row.insertCell(1);
+		let cell2 = row.insertCell(2);
+		let cell3 = row.insertCell(3);
+		let cell4 = row.insertCell(4);
+		cell0.setAttribute("class", "text bold");
+		cell1.setAttribute("class", "text ");
+		cell2.setAttribute("class", "text bold number-container");
+		cell3.setAttribute("class", "text number-container");
+		cell4.setAttribute("class", "text number-container");
+
+		optUpgradeCost += cost_arr[bestValue];
+		lvl_arr[bestValue] += 1;
+
+		cell0.innerHTML = upgArr[bestValue];
+		cell1.innerHTML = totalTicks.toFixed(4);
+		cell2.innerHTML = cost_arr[bestValue].toExponential(3);
+		cell3.innerHTML = totalCost.toExponential(3);
+		cell4.innerHTML = lvl_arr.join(",");
+	}
+}
+
+function calc() {
+
+	// Max level
+	lvl_arr = [100,100,100,100,100,100];
+	updateData();
+	calcData();
+	document.getElementById("js_result_2").innerHTML = totalTicks.toFixed(4);
+
+	// Current Charge
+	update();
+	calcData();
+	document.getElementById("js_result_1").innerHTML = totalTicks.toFixed(4);
+
+	// Total Cost & Remaining Cost
+	for (i = 0; i < lvl_arr.length; i++) {
+		lvl_arr[i] -= 1;
+	}
+	updateCost();
+	remCost = 79361244616.8430 - totalCost;
+	document.getElementById("js_result_3").innerHTML = totalCost.toFixed(0);
+	document.getElementById("js_result_4").innerHTML = remCost.toFixed(0);
+
+	update();
+	optimize();
+}
+
+function saveData() {
+	localStorage.setItem("inf1", inf_arr[0]);
+	localStorage.setItem("inf2", inf_arr[1]);
+	localStorage.setItem("inf3", inf_arr[2]);
+
+	localStorage.setItem("upgLvl1", lvl_arr[0]);
+	localStorage.setItem("upgLvl2", lvl_arr[1]);
+	localStorage.setItem("upgLvl3", lvl_arr[2]);
+	localStorage.setItem("upgLvl4", lvl_arr[3]);
+	localStorage.setItem("upgLvl5", lvl_arr[4]);
+	localStorage.setItem("upgLvl6", lvl_arr[5]);
+}
+
+function loadData() {
+	document.getElementById("inf_1").value = localStorage.getItem("inf1");
+	document.getElementById("inf_2").value = localStorage.getItem("inf2");
+	document.getElementById("inf_3").value = localStorage.getItem("inf3");
+
+	document.getElementById("lvl_upg_1").value = localStorage.getItem("upgLvl1");
+	document.getElementById("lvl_upg_2").value = localStorage.getItem("upgLvl2");
+	document.getElementById("lvl_upg_3").value = localStorage.getItem("upgLvl3");
+	document.getElementById("lvl_upg_4").value = localStorage.getItem("upgLvl4");
+	document.getElementById("lvl_upg_5").value = localStorage.getItem("upgLvl5");
+	document.getElementById("lvl_upg_6").value = localStorage.getItem("upgLvl6");
+
+	update();
+}
+
+loadData();

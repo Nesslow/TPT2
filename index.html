@@ -8,95 +8,229 @@
 	<link href="style.css" rel="stylesheet">
 </head>
 <body>
-	<div class="toggle_container">
-		Toggle scientific <input id="sci_no_toggle" onclick="sci_toggle()" type="checkbox">
-	</div>
-	<div class="container">
-		<div class="item1 item">
-			<h1>Infinity Stone Calculator</h1>
-			<div class="input_container">
-				<label for="inf_ext">Extraction</label>
-				<input class="inf_bar" id="inf_ext" onchange="update_data()" type="number" value="0" step="1000000" min="0" max="99999999999" tabindex="1">
-			</div>
-			<div class="input_container">
-				<label for="inf_spe">Speed</label>
-				<input class="inf_bar" id="inf_spe" onchange="update_data()" type="number" value="0" step="1000000" min="0" max="99999999999" tabindex="2">
-			</div>
-			<div class="input_container">
-				<label for="inf_amo">Amount</label>
-				<input class="inf_bar" id="inf_amo" onchange="update_data()" type="number" value="0" step="1000000" min="0" max="99999999999" tabindex="3">
-			</div>
-		</div>
-		<div class="item2 item">
-			<h2>Data</h2>
-			<ul class="list">
-				<li class="list_item item_name">Charge Required</li>
-				<li class="list_item data" id="data_1">1000000000000</li>
-				<li class="list_item item_name">Charge Countdown</li>
-				<li class="list_item data" id="data_2">31536000.0000</li>
-				<li class="list_item item_name">Speed Tick Duration</li>
-				<li class="list_item data" id="data_3">31536000.0000</li>
-				<li class="list_item item_name">Speed Bonus / Tick</li>
-				<li class="list_item data" id="data_4">0.02</li>
-				<li class="list_item item_name">Production Tick Duration</li>
-				<li class="list_item data" id="data_5">31536000.0000</li>
-				<li class="list_item item_name">Production Bonus / Tick</li>
-				<li class="list_item data" id="data_6">0.050</li>
-			</ul>
-		</div>
-		<div class="item3 item">
-			<div class="item_container">
-				<label for="lvl_charge_req">Charge Required</label>
-				<input class="stat input" id="lvl_charge_req" max="100" min="0" onchange="update_data()" type="number" value="0" tabindex="4">
-				<input class="set_btn" onclick="set_max(this.name)" type="button" value="max" name="lvl_charge_req">
-			</div>
-			<div class="item_container">
-				<label for="lvl_speed_bonus">Speed Bonus / Tick</label>
-				<input class="stat input" id="lvl_speed_bonus" max="100" min="0" onchange="update_data()" type="number" value="0" tabindex="5">
-				<input class="set_btn" onclick="set_max(this.name)" type="button" value="max" name="lvl_speed_bonus">
-			</div>
-			<div class="item_container">
-				<label for="lvl_production_bonus">Production Bonus / Tick</label>
-				<input class="stat input" id="lvl_production_bonus" max="100" min="0" onchange="update_data()" type="number" value="0" tabindex="6">
-				<input class="set_btn" onclick="set_max(this.name)" type="button" value="max" name="lvl_production_bonus">
-			</div>
-			<div class="item_container">
-				<label for="lvl_charge_dura">Charge Duration</label>
-				<input class="stat input" id="lvl_charge_dura" max="100" min="0" onchange="update_data()" type="number" value="0" tabindex="7">
-				<input class="set_btn" onclick="set_max(this.name)" type="button" value="max" name="lvl_charge_dura">
-			</div>
-			<div class="item_container">
-				<label for="lvl_speed_dura">Speed Tick Duration</label>
-				<input class="stat input" id="lvl_speed_dura" max="100" min="0" onchange="update_data()" type="number" value="0" tabindex="8">
-				<input class="set_btn" onclick="set_max(this.name)" type="button" value="max" name="lvl_speed_dura">
-			</div>
-			<div class="item_container">
-				<label for="lvl_production_dura">Production Tick Duration</label>
-				<input class="stat input" id="lvl_production_dura" max="100" min="0" onchange="update_data()" type="number" value="0" tabindex="9">
-				<input class="set_btn" onclick="set_max(this.name)" type="button" value="max" name="lvl_production_dura">
-			</div>
-		</div>
-		<div class="item4 item">
-			<h2>Upgrades</h2>
-			<ul class="list">
-				<li class="list_item item_name">Charge Required -5% (mul.)</li>
-				<li class="list_item cost" id="cost_1">25</li>
-				<li class="list_item item_name">Speed Bonus / Tick +1% (add.)</li>
-				<li class="list_item cost" id="cost_2">10</li>
-				<li class="list_item item_name">Production Bonus / Tick +2.5% (add.)</li>
-				<li class="list_item cost" id="cost_3">8</li>
-				<li class="list_item item_name">Charge Duration -10% (mul.)</li>
-				<li class="list_item cost" id="cost_4">15</li>
-				<li class="list_item item_name">Speed Tick Duration -10% (mul.)</li>
-				<li class="list_item cost" id="cost_5">30</li>
-				<li class="list_item item_name">Production Tick Duration -10% (mul.)</li>
-				<li class="list_item cost" id="cost_6">10</li>
-			</ul>
-		</div>
-		<div class="item5 item">
-			<h1>Charge time</h1>
-			<div class="stat input" id="result"></div>
-			<input class="submit" onclick="calc()" type="button" value="Simulate" tabindex="10">
+	<div class="calc-wrap">
+		<div class="calc-container">
+			<form class="calc-form">
+				<span class="section-heading">Infinities</span>
+				<div class="calc-section">
+					<div class="calc-input-wrap w33-input">
+						<span class="calc-input-label input-heading">Extraction</span>
+						<input type="number" class="calc-input input" id="inf_1" step="1000000" min="0" max="99999999999" tabindex="1" value="0" onchange="update()" onClick="this.select();">
+					</div>
+					<div class="calc-input-wrap w33-input">
+						<span class="calc-input-label input-heading">Speed</span>
+						<input type="number" class="calc-input input" id="inf_2" step="1000000" min="0" max="99999999999" tabindex="2" value="0" onchange="update()" onClick="this.select();">
+					</div>
+					<div class="calc-input-wrap w33-input">
+						<span class="calc-input-label input-heading">Amount</span>
+						<input type="number" class="calc-input input" id="inf_3" step="1000000" min="0" max="99999999999" tabindex="3" value="0" onchange="update()" onClick="this.select();">
+					</div>
+				</div>
+				<span class="section-heading">Upgrades</span>
+				<div class="calc-section">
+					<div class="calc-input-wrap w25-input">
+						<div class="calc-input-container">
+							<span class="input-heading">Name</span>
+						</div>
+						<div class="calc-input-container">
+							<span class="calc-input-label input">Charge Required</span>
+						</div>
+						<div class="calc-input-container">
+							<span class="calc-input-label input">Speed Bonus / Tick</span>
+						</div>
+						<div class="calc-input-container">
+							<span class="calc-input-label input">Production Bonus / Tick</span>
+						</div>
+						<div class="calc-input-container">
+							<span class="calc-input-label input">Charge Duration</span>
+						</div>
+						<div class="calc-input-container">
+							<span class="calc-input-label input">Speed Tick Duration</span>
+						</div>
+						<div class="calc-input-container">
+							<span class="calc-input-label input">Production Tick Duration</span>
+						</div>
+					</div>
+					<div class="calc-input-wrap w25-input">
+						<div class="calc-input-container">
+							<span class="input-heading">Level</span>
+						</div>
+						<div class="calc-input-container">
+							<div class="w80-input">
+								<input type="number" class="calc-input input" id="lvl_upg_1" max="100" min="0" value="0" tabindex="4" onchange="update()" onClick="this.select();">
+							</div>
+							<div class="w20-input">
+								<input type="button" class="calc-button input" value="max" onclick="add_100(this.name)" name="lvl_upg_1">
+							</div>
+							<!-- <div class="w20-input">
+								<input type="button" class="calc-button input" value="10" onclick="add_10(this.name)" name="lvl_upg_1">
+							</div> -->
+						</div>
+						<div class="calc-input-container">
+							<div class="w80-input">
+								<input type="number" class="calc-input input" id="lvl_upg_2" max="100" min="0" value="0" tabindex="5" onchange="update()" onClick="this.select();">
+							</div>
+							<div class="w20-input">
+								<input type="button" class="calc-button input" value="max" onclick="add_100(this.name)" name="lvl_upg_2">
+							</div>
+							<!-- <div class="w20-input">
+								<input type="button" class="calc-button input" value="10" onclick="add_10(this.name)" name="lvl_upg_2">
+							</div> -->
+						</div>
+						<div class="calc-input-container">
+							<div class="w80-input">
+								<input type="number" class="calc-input input" id="lvl_upg_3" max="100" min="0" value="0" tabindex="6" onchange="update()" onClick="this.select();">
+							</div>
+							<div class="w20-input">
+								<input type="button" class="calc-button input" value="max" onclick="add_100(this.name)" name="lvl_upg_3">
+							</div>
+							<!-- <div class="w20-input">
+								<input type="button" class="calc-button input" value="10" onclick="add_10(this.name)" name="lvl_upg_3">
+							</div> -->
+						</div>
+						<div class="calc-input-container">
+							<div class="w80-input">
+								<input type="number" class="calc-input input" id="lvl_upg_4" max="100" min="0" value="0" tabindex="7" onchange="update()" onClick="this.select();">
+							</div>
+							<div class="w20-input">
+								<input type="button" class="calc-button input" value="max" onclick="add_100(this.name)" name="lvl_upg_4">
+							</div>
+							<!-- <div class="w20-input">
+								<input type="button" class="calc-button input" value="10" onclick="add_10(this.name)" name="lvl_upg_4">
+							</div> -->
+						</div>
+						<div class="calc-input-container">
+							<div class="w80-input">
+								<input type="number" class="calc-input input" id="lvl_upg_5" max="100" min="0" value="0" tabindex="8" onchange="update()" onClick="this.select();">
+							</div>
+							<div class="w20-input">
+								<input type="button" class="calc-button input" value="max" onclick="add_100(this.name)" name="lvl_upg_5">
+							</div>
+							<!-- <div class="w20-input">
+								<input type="button" class="calc-button input" value="10" onclick="add_10(this.name)" name="lvl_upg_5">
+							</div> -->
+						</div>
+						<div class="calc-input-container">
+							<div class="w80-input">
+								<input type="number" class="calc-input input" id="lvl_upg_6" max="100" min="0" value="0" tabindex="9" onchange="update()" onClick="this.select();">
+							</div>
+							<div class="w20-input">
+								<input type="button" class="calc-button input" value="max" onclick="add_100(this.name)" name="lvl_upg_6">
+							</div>
+							<!-- <div class="w20-input">
+								<input type="button" class="calc-button input" value="10" onclick="add_10(this.name)" name="lvl_upg_6">
+							</div> -->
+						</div>
+					</div>
+					<div class="calc-input-wrap w25-input number-container">
+						<div class="calc-input-container">
+							<span class="input-heading">Cost</span>
+						</div>
+						<div class="calc-input-container">
+							<span id="cost_upg_1" class="calc-input-data">25</span>
+							<span class="calc-input-label label-small">+10% (mul.)</span>
+						</div>
+						<div class="calc-input-container">
+							<span id="cost_upg_2" class="calc-input-data">10</span>
+							<span class="calc-input-label label-small">+22% (mul.)</span>
+						</div>
+						<div class="calc-input-container">
+							<span id="cost_upg_3" class="calc-input-data">8</span>
+							<span class="calc-input-label label-small">+15% (mul.)</span>
+						</div>
+						<div class="calc-input-container">
+							<span id="cost_upg_4" class="calc-input-data">15</span>
+							<span class="calc-input-label label-small">+17% (mul.)</span>
+						</div>
+						<div class="calc-input-container">
+							<span id="cost_upg_5" class="calc-input-data">30</span>
+							<span class="calc-input-label label-small">+22% (mul.)</span>
+						</div>
+						<div class="calc-input-container">
+							<span id="cost_upg_6" class="calc-input-data">10</span>
+							<span class="calc-input-label label-small">+15% (mul.)</span>
+						</div>
+					</div>
+					<div class="calc-input-wrap w25-input number-container">
+						<div class="calc-input-container">
+							<span class="input-heading">Data</span>
+						</div>
+						<div class="calc-input-container">
+							<span id="data_upg_1" class="calc-input-data">1000000000000</span>
+							<span class="calc-input-label label-small">-5% (mul.)</span>
+						</div>
+						<div class="calc-input-container">
+							<span id="data_upg_2" class="calc-input-data">2%</span>
+							<span class="calc-input-label label-small">+1% (add.)</span>
+						</div>
+						<div class="calc-input-container">
+							<span id="data_upg_3" class="calc-input-data">5.0%</span>
+							<span class="calc-input-label label-small">+2% (add.)</span>
+						</div>
+						<div class="calc-input-container">
+							<span id="data_upg_4" class="calc-input-data">31536000</span>
+							<span class="calc-input-label label-small">-10% (mul.)</span>
+						</div>
+						<div class="calc-input-container">
+							<span id="data_upg_5" class="calc-input-data">31536000</span>
+							<span class="calc-input-label label-small">-10% (mul.)</span>
+						</div>
+						<div class="calc-input-container">
+							<span id="data_upg_6" class="calc-input-data">31536000</span>
+							<span class="calc-input-label label-small">-10% (mul.)</span>
+						</div>
+					</div>
+				</div>
+				<span class="section-heading"><input class="calc-button input submit" onclick="calc()" type="button" value="Calculate" tabindex="10"></span>
+				<div class="calc-section result-section">
+					<div class="calc-input-wrap w25-input">
+						<div class="calc-input-container">
+							<span class="input-heading">Current Charge</span>
+						</div>
+						<div class="calc-input-container">
+							<span id="js_result_1" class="calc-input-data">&infin;</span>
+						</div>
+					</div>
+					<div class="calc-input-wrap w25-input">
+						<div class="calc-input-container">
+							<span class="input-heading">Charge (at max.)</span>
+						</div>
+						<div class="calc-input-container">
+							<span id="js_result_2" class="calc-input-data">&infin;</span>
+						</div>
+					</div>
+					<div class="calc-input-wrap w25-input number-container">
+						<div class="calc-input-container">
+							<span class="input-heading">Total Invested</span>
+						</div>
+						<div class="calc-input-container">
+							<span id="js_result_3" class="calc-input-data">&infin;</span>
+						</div>
+					</div>
+					<div class="calc-input-wrap w25-input number-container">
+						<div class="calc-input-container">
+							<span class="input-heading">Remaining Cost</span>
+						</div>
+						<div class="calc-input-container">
+							<span id="js_result_4" class="calc-input-data">&infin;</span>
+						</div>
+					</div>
+				</div>
+
+				<table id="result_area" class="calc-section result-section">
+					<thead>
+						<tr>
+							<td>
+								<span style="text-align: center;">Update 2021.05.26:<br><br>
+								- "Optimize" script giving you the best upgrade for cost path to max stones.<br>
+								- Calculator will now stores last input data locally.<br><br>
+								Feedback is very welcome. Nesslow#1499, enjoy!<br>
+								</span>
+							</td>
+						</tr>
+					</thead>
+				</table>
+			</form>
 		</div>
 	</div>
 	<script src="main.js"></script>
