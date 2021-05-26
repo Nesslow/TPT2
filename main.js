@@ -538,29 +538,25 @@ function calc() {
 }
 
 function saveData() {
-	localStorage.setItem("inf1", inf_arr[0]);
-	localStorage.setItem("inf2", inf_arr[1]);
-	localStorage.setItem("inf3", inf_arr[2]);
-
-	localStorage.setItem("upgLvl1", lvl_arr[0]);
-	localStorage.setItem("upgLvl2", lvl_arr[1]);
-	localStorage.setItem("upgLvl3", lvl_arr[2]);
-	localStorage.setItem("upgLvl4", lvl_arr[3]);
-	localStorage.setItem("upgLvl5", lvl_arr[4]);
-	localStorage.setItem("upgLvl6", lvl_arr[5]);
+	localStorage.setItem('infs', JSON.stringify(inf_arr));
+	localStorage.setItem('upgLvls', JSON.stringify(lvl_arr));
 }
 
 function loadData() {
-	document.getElementById("inf_1").value = localStorage.getItem("inf1");
-	document.getElementById("inf_2").value = localStorage.getItem("inf2");
-	document.getElementById("inf_3").value = localStorage.getItem("inf3");
+	inf_arr = JSON.parse(localStorage.getItem('infs'));
 
-	document.getElementById("lvl_upg_1").value = localStorage.getItem("upgLvl1");
-	document.getElementById("lvl_upg_2").value = localStorage.getItem("upgLvl2");
-	document.getElementById("lvl_upg_3").value = localStorage.getItem("upgLvl3");
-	document.getElementById("lvl_upg_4").value = localStorage.getItem("upgLvl4");
-	document.getElementById("lvl_upg_5").value = localStorage.getItem("upgLvl5");
-	document.getElementById("lvl_upg_6").value = localStorage.getItem("upgLvl6");
+	document.getElementById("inf_1").value = inf_arr[0];
+	document.getElementById("inf_2").value = inf_arr[1];
+	document.getElementById("inf_3").value = inf_arr[2];
+
+	lvl_arr = JSON.parse(localStorage.getItem('upgLvls'));
+
+	document.getElementById("lvl_upg_1").value = lvl_arr[0];
+	document.getElementById("lvl_upg_2").value = lvl_arr[1];
+	document.getElementById("lvl_upg_3").value = lvl_arr[2];
+	document.getElementById("lvl_upg_4").value = lvl_arr[3];
+	document.getElementById("lvl_upg_5").value = lvl_arr[4];
+	document.getElementById("lvl_upg_6").value = lvl_arr[5];
 
 	update();
 }
