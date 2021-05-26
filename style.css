@@ -153,6 +153,22 @@ table .text {
 	line-height: 30px;
 	border-bottom: 1px solid #181818;
 }
+.notepad-container {
+	background: #222;
+	position: fixed;
+	top: 50%;
+	left: -420px;
+	transform: translate(0, -50%);
+	transition: 0.5s;
+	padding: 15px;
+	width: 450px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	border: 1px solid #ccc;
+	border-radius: 0 5px 5px 0;	
+}
+.notepad-container:hover {
+	left: -1px;
+}
 
 /* .item1 {
 	grid-area: top;

@@ -538,11 +538,16 @@ function calc() {
 }
 
 function saveData() {
+	let notes = document.getElementById("notepad").innerHTML;
+	localStorage.setItem('notes', notes);
 	localStorage.setItem('infs', JSON.stringify(inf_arr));
 	localStorage.setItem('upgLvls', JSON.stringify(lvl_arr));
 }
 
 function loadData() {
+
+	document.getElementById('notepad').innerHTML = localStorage.getItem('notes');
+	
 	inf_arr = JSON.parse(localStorage.getItem('infs'));
 
 	document.getElementById("inf_1").value = inf_arr[0];
