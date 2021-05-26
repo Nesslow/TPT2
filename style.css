@@ -122,11 +122,16 @@ body {
 	width: 100%;
 	margin: 0 0 -5px 0;
 }
+div.result-section {
+	width: 98%;
+	margin-inline: auto;
+}
 table.calc-section {
 	padding: 10px 0;
 }
 table {
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 90%;
 	background: #222;
 	border: 1px solid #181818;
 	margin-bottom: 20px;
