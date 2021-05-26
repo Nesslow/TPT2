@@ -61,10 +61,8 @@ function update() {
 	inf_arr = [];
 	lvl_arr = [];
 	cacheDOM();
-
 	updateCost();
 	updateData();
-
 	// saveData();
 
 }
@@ -86,6 +84,20 @@ function updateData() {
 	upgData4();
 	upgData5();
 	upgData6();
+}
+
+function convertTime(time) {
+	if (time > 3600) {
+		hours = Math.floor(time / 3600);
+		time %= 3600;
+		minutes = Math.floor(time / 60);
+		seconds = time % 60;
+		seconds = seconds.toFixed(0);
+		time = hours + "h " + minutes + "m " + seconds + "s";
+		return time;
+	} else {
+		return time.toFixed(4) + "s";
+	}
 }
 
 function add_100(x) {
@@ -440,6 +452,7 @@ function optimize() {
 		thCell4.innerHTML = "Upgrades list";
 
 		let upgArr = ["Charge Req","Speed Bonus","Production Bonus","Charge Dura","Speed Dura","Production Dura"];
+		let upgTotalCost = 0;
 
 		for(let i = 0; i < loops; i++) {
 			value_arr = [];
@@ -473,27 +486,18 @@ function optimize() {
 			lvl_arr[bestValue] += 1;
 
 			cell0.innerHTML = upgArr[bestValue];
+			cell1.innerHTML = convertTime(totalTicks);
 
-			if (totalTicks > 3600) {
-				hours = Math.floor(totalTicks / 3600);
-				totalTicks %= 3600;
-				minutes = Math.floor(totalTicks / 60);
-				seconds = totalTicks % 60;
-				seconds = seconds.toFixed(0);
-				totalTicks = hours + "h " + minutes + "m " + seconds + "s";
-				cell1.innerHTML = totalTicks;
-			} else {
-				cell1.innerHTML = totalTicks.toFixed(4); + "s";
-			}
 			if (cost_arr[bestValue] > 9999) {
 				cell2.innerHTML = cost_arr[bestValue].toExponential(3);
 			} else {
 				cell2.innerHTML = cost_arr[bestValue].toFixed(0);
 			}
-			if (totalCost > 9999) {
-				cell3.innerHTML = totalCost.toExponential(3);
+			upgTotalCost += cost_arr[bestValue];
+			if (upgTotalCost > 9999) {
+				cell3.innerHTML = upgTotalCost.toExponential(3);
 			} else {
-				cell3.innerHTML = totalCost.toFixed(0);
+				cell3.innerHTML = upgTotalCost.toFixed(0);
 			}
 			cell4.innerHTML = lvl_arr.join(",");
 		}
@@ -510,24 +514,15 @@ function calc() {
 	update();
 	calcData();
 
-	if (totalTicks > 3600) {
-		hours = Math.floor(totalTicks / 3600);
-		totalTicks %= 3600;
-		minutes = Math.floor(totalTicks / 60);
-		seconds = totalTicks % 60;
-		seconds = seconds.toFixed(0);
-		totalTicks = hours + "h " + minutes + "m " + seconds + "s";
-		document.getElementById("js_result_1").innerHTML = totalTicks;
-	} else {
-		document.getElementById("js_result_1").innerHTML = totalTicks.toFixed(4) + "s";
-	}
+	document.getElementById("js_result_1").innerHTML = convertTime(totalTicks);
 
 	// Total Cost & Remaining Cost
 	for (i = 0; i < lvl_arr.length; i++) {
 		lvl_arr[i] -= 1;
 	}
 	updateCost();
-	remCost = 79361244616.8430 - totalCost;
+
+	remCost = 79372987741.35 - totalCost;
 	if (totalCost > 9999) {
 		document.getElementById("js_result_3").innerHTML = totalCost.toExponential(3);
 	} else {
@@ -541,7 +536,6 @@ function calc() {
 
 	update();
 }
-
 
 // function saveData() {
 // 	localStorage.setItem("inf1", inf_arr[0]);
