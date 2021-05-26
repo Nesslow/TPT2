@@ -162,6 +162,7 @@ table .text {
 	transition: 0.5s;
 	padding: 15px;
 	width: 450px;
+	min-height: 150px;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	border: 1px solid #ccc;
 	border-radius: 0 5px 5px 0;	
