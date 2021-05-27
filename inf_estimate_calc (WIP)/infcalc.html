@@ -57,12 +57,16 @@ body {
             <input id="i_cs" type="number" class="stat input clearspeed" value="55">
             <!-- <label for="i_fps">FPS</label>
             <select id="i_fps" name="fps" id="" class="stat input fps">
-                <option value="120">120 fps</option>
-                <option value="60">60 fps</option>
-                <option value="30">30 fps</option>
+                <option value="1">120 fps</option>
+                <option value="2">60 fps</option>
+                <option value="3">30 fps</option>
             </select> -->
         </div>
         <div class="bottom">
+            <label for="result">Accel farm (s)</label>
+            <input id="aDura" type="text" class="stat result">
+            <label for="result">Push (s)</label>
+            <input id="pDura" type="text" class="stat result"><br><br>
             <label for="result">Estimated Inf's</label>
             <input id="result" type="text" class="stat result">
             <input class="submit" type="button" value="Submit" onclick="calc()">
@@ -70,6 +74,19 @@ body {
     </div>
 </body>
 <script>
+    function convertTime(time) {
+        if (time > 3600) {
+            hours = Math.floor(time / 3600);
+            time %= 3600;
+            minutes = Math.floor(time / 60);
+            seconds = time % 60;
+            seconds = seconds.toFixed(0);
+            time = hours + "h " + minutes + "m " + seconds + "s";
+            return time;
+        } else {
+            return time.toFixed(4) + "s";
+        }
+    }
     function calc() {
         // Get inputs
         rt = document.getElementById("i_rt").value;
@@ -81,6 +98,9 @@ body {
         // Split time between accel & push
         a_res = rt_sec * 1.576 - rt_sec;
         p_res = rt_sec * 1.424 - rt_sec;
+
+        document.getElementById("aDura").value = convertTime(a_res);
+        document.getElementById("pDura").value = convertTime(p_res);
 
         // Calculate wave acceleration & wave interval
         wa_x = (43*1800) + (15*30);
