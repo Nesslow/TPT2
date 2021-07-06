@@ -12,8 +12,10 @@
   box-sizing: border-box;
 }
 body {
-    background-color: #252525;
-    color: #fff;
+    background-color: #151515;
+	color: #f5f5f5;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
 }
 .container {
     width: 200px;
@@ -32,29 +34,90 @@ body {
 }
 .input {
     margin-bottom:10px;
-}
-.stat[readonly] {
-    --input-border: #ccc;
-
-    background-color: #eee;
-    cursor: not-allowed;
+    background: #222;
+	color:#f5f5f5;
+	border: 1px solid #333;
 }
 .top {
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 .submit {
     margin-top: 10px;
+    cursor: pointer;
+	padding: 8px 10px;
+	background: #333;
+	color:#f5f5f5;
+	border: 1px solid #333;
 }
+.submit:hover {
+    background: #292929;
+	color:#f5f5f5;
+	border: 1px solid #333;
+}
+.help_icon {
+    color: #fff;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    display: inline-block;
+    border: 1px solid #fff;
+    border-radius: 100%;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+}
+.help_icon .help_text {
+    visibility: hidden;
+    width: 320px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -160px;
+
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.help_text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+}
+.help_icon:hover .help_text {
+    visibility: visible;
+    opacity: 1;
+}
+.dev_note {
+    display:inline-block;
+    margin-top: 30px;
+    color:#777;
+}
+
 
 </style>
 </head>
 <body>
     <div class="container">
         <div class="top">
-            <label for="i_rt">Total runtime</label>
-            <input id="i_rt" type="number" class="stat input runtime">
-            <label for="i_cs">Waves /s (~55 is average)</label>
-            <input id="i_cs" type="number" class="stat input clearspeed" value="55">
+            <div class="input_wrap">
+                <label for="i_rt">Total runtime (hours)</label>
+                <input id="i_rt" type="number" class="stat input runtime">
+            </div>
+            <div class="input_wrap">
+                <label for="i_cs">Clear speed <a href="#" class="help_icon">?<span class="help_text">
+                    Do a ~5min test on the region you want to inf push.<br><br>
+                    <i>Total kills / Game time / 4 (on easy)</i>.<br><br>
+                    55 clear speed is avg. with 120+ fps and instant kills.</span></a></label>
+                <input id="i_cs" type="number" class="stat input clearspeed" value="55">
+            </div>
             <!-- <label for="i_fps">FPS</label>
             <select id="i_fps" name="fps" id="" class="stat input fps">
                 <option value="1">120 fps</option>
@@ -63,14 +126,21 @@ body {
             </select> -->
         </div>
         <div class="bottom">
-            <label for="result">Accel farm (s)</label>
-            <input id="aDura" type="text" class="stat result">
-            <label for="result">Push (s)</label>
-            <input id="pDura" type="text" class="stat result"><br><br>
-            <label for="result">Estimated Inf's</label>
-            <input id="result" type="text" class="stat result">
+            <div class="input_wrap">
+                <label for="result">Accel farm</label>
+                <input id="aDura" type="text" class="stat input result" disabled>
+            </div>
+            <div class="input_wrap">
+                <label for="result">Push</label>
+                <input id="pDura" type="text" class="stat input result" disabled>
+            </div>
+            <div class="input_wrap">
+                <label for="result">Estimated Inf's</label>
+                <input id="result" type="text" class="stat input result" disabled>
+            </div>
             <input class="submit" type="button" value="Submit" onclick="calc()">
         </div>
+        <span class="dev_note">*Used to estimate inf's based on time spent.<br><br>More functionality is planned but currently waiting for MP update before making changes or additions.</span>
     </div>
 </body>
 <script>
