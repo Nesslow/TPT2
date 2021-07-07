@@ -114,16 +114,10 @@ body {
             <div class="input_wrap">
                 <label for="i_cs">Clear speed <a href="#" class="help_icon">?<span class="help_text">
                     Do a ~5min test on the region you want to inf push.<br><br>
-                    <i>Total kills / Game time / 4 (on easy)</i>.<br><br>
+                    <i>kills / seconds / paths</i>.<br><br>
                     55 clear speed is avg. with 120+ fps and instant kills.</span></a></label>
                 <input id="i_cs" type="number" class="stat input clearspeed" value="55">
             </div>
-            <!-- <label for="i_fps">FPS</label>
-            <select id="i_fps" name="fps" id="" class="stat input fps">
-                <option value="1">120 fps</option>
-                <option value="2">60 fps</option>
-                <option value="3">30 fps</option>
-            </select> -->
         </div>
         <div class="bottom">
             <div class="input_wrap">
@@ -144,6 +138,11 @@ body {
     </div>
 </body>
 <script>
+
+    // SET 1 mil inf : 8,062903
+    // SET 10mil inf : 21,39047
+    // SET 100mil inf : 56,74781503
+
     function convertTime(time) {
         if (time > 3600) {
             hours = Math.floor(time / 3600);
@@ -158,26 +157,21 @@ body {
         }
     }
     function calc() {
-        // Get inputs
         rt = document.getElementById("i_rt").value;
         cs = document.getElementById("i_cs").value;
 
-        // Covert to seconds
         rt_sec = rt * 3600;
 
-        // Split time between accel & push
         a_res = rt_sec * 1.576 - rt_sec;
         p_res = rt_sec * 1.424 - rt_sec;
 
         document.getElementById("aDura").value = convertTime(a_res);
         document.getElementById("pDura").value = convertTime(p_res);
 
-        // Calculate wave acceleration & wave interval
         wa_x = (43*1800) + (15*30);
         wa = 154290000000000*Math.pow((a_res/wa_x),2);
         wi = wa/60;
 
-        // Calculate infinity result
         r_x = Math.pow(wi,0.68);
         r_z = r_x * 360 * 11 * 1.1 / 100000000000;
         result = Math.round(r_z * cs * p_res);
