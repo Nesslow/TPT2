@@ -582,51 +582,71 @@ function saveData10() {
 function loadData1() {
 	inf_arr = JSON.parse(localStorage.getItem('infs1'));
 	lvl_arr = JSON.parse(localStorage.getItem('upgLvls1'));
+	document.getElementById("headStone1").style.color = "#67edff";
+	document.getElementById("headStone2").style.color = "#67edff";
 	loadMaster();
 }
 function loadData2() {
 	inf_arr = JSON.parse(localStorage.getItem('infs2'));
 	lvl_arr = JSON.parse(localStorage.getItem('upgLvls2'));
+	document.getElementById("headStone1").style.color = "#892fc5";
+	document.getElementById("headStone2").style.color = "#892fc5";
 	loadMaster();
 }
 function loadData3() {
 	inf_arr = JSON.parse(localStorage.getItem('infs3'));
 	lvl_arr = JSON.parse(localStorage.getItem('upgLvls3'));
+	document.getElementById("headStone1").style.color = "#8d5629";
+	document.getElementById("headStone2").style.color = "#8d5629";
 	loadMaster();
 }
 function loadData4() {
 	inf_arr = JSON.parse(localStorage.getItem('infs4'));
 	lvl_arr = JSON.parse(localStorage.getItem('upgLvls4'));
+	document.getElementById("headStone1").style.color = "#faf615";
+	document.getElementById("headStone2").style.color = "#faf615";
 	loadMaster();
 }
 function loadData5() {
 	inf_arr = JSON.parse(localStorage.getItem('infs5'));
 	lvl_arr = JSON.parse(localStorage.getItem('upgLvls5'));
+	document.getElementById("headStone1").style.color = "#d8150f";
+	document.getElementById("headStone2").style.color = "#d8150f";
 	loadMaster();
 }
 function loadData6() {
 	inf_arr = JSON.parse(localStorage.getItem('infs6'));
 	lvl_arr = JSON.parse(localStorage.getItem('upgLvls6'));
+	document.getElementById("headStone1").style.color = "#fafca0";
+	document.getElementById("headStone2").style.color = "#fafca0";
 	loadMaster();
 }
 function loadData7() {
 	inf_arr = JSON.parse(localStorage.getItem('infs7'));
 	lvl_arr = JSON.parse(localStorage.getItem('upgLvls7'));
+	document.getElementById("headStone1").style.color = "#14d82e";
+	document.getElementById("headStone2").style.color = "#14d82e";
 	loadMaster();
 }
 function loadData8() {
 	inf_arr = JSON.parse(localStorage.getItem('infs8'));
 	lvl_arr = JSON.parse(localStorage.getItem('upgLvls8'));
+	document.getElementById("headStone1").style.color = "#f5f5f5";
+	document.getElementById("headStone2").style.color = "#f5f5f5";
 	loadMaster();
 }
 function loadData9() {
 	inf_arr = JSON.parse(localStorage.getItem('infs9'));
 	lvl_arr = JSON.parse(localStorage.getItem('upgLvls9'));
+	document.getElementById("headStone1").style.color = "#555";
+	document.getElementById("headStone2").style.color = "#555";
 	loadMaster();
 }
 function loadData10() {
 	inf_arr = JSON.parse(localStorage.getItem('infs10'));
 	lvl_arr = JSON.parse(localStorage.getItem('upgLvls10'));
+	document.getElementById("headStone1").style.color = "#2553e9";
+	document.getElementById("headStone2").style.color = "#2553e9";
 	loadMaster();
 }
 function loadMaster() {
