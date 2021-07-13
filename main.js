@@ -659,5 +659,5 @@ function loadMaster() {
 	document.getElementById("lvl_upg_4").value = lvl_arr[3];
 	document.getElementById("lvl_upg_5").value = lvl_arr[4];
 	document.getElementById("lvl_upg_6").value = lvl_arr[5];
-	update();
+	calc();
 }
