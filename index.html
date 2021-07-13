@@ -11,6 +11,58 @@
 	<div class="notepad-container">
 		<span id="notepad" contenteditable="true" oninput="saveData()"></span>
 	</div>
+	<div class="config">
+		<div class="stone slot1">
+			<a href="#" class="saveData" onClick="saveData1()">Save</a>
+			<a href="#" class="saveData" onClick="loadData1()">Load</a>
+			<img src="images/Infinity_Air.png" id="slot1" class="icon" />
+		</div>
+		<div class="stone slot2">
+			<a href="#" class="saveData" onClick="saveData2()">Save</a>
+			<a href="#" class="saveData" onClick="loadData2()">Load</a>
+			<img src="images/Infinity_Darkness.png" id="slot2" class="icon" />
+		</div>
+		<div class="stone slot3">
+			<a href="#" class="saveData" onClick="saveData3()">Save</a>
+			<a href="#" class="saveData" onClick="loadData3()">Load</a>
+			<img src="images/Infinity_Earth.png" id="slot3" class="icon" />
+		</div>
+		<div class="stone slot4">
+			<a href="#" class="saveData" onClick="saveData4()">Save</a>
+			<a href="#" class="saveData" onClick="loadData4()">Load</a>
+			<img src="images/Infinity_Electricity.png" id="slot4" class="icon" />
+		</div>
+		<div class="stone slot5">
+			<a href="#" class="saveData" onClick="saveData5()">Save</a>
+			<a href="#" class="saveData" onClick="loadData5()">Load</a>
+			<img src="images/Infinity_Fire.png" id="slot5" class="icon" />
+		</div>
+		<div class="stone slot6">
+			<a href="#" class="saveData" onClick="saveData6()">Save</a>
+			<a href="#" class="saveData" onClick="loadData6()">Load</a>
+			<img src="images/Infinity_Light.png" id="slot6" class="icon" />
+		</div>
+		<div class="stone slot7">
+			<a href="#" class="saveData" onClick="saveData7()">Save</a>
+			<a href="#" class="saveData" onClick="loadData7()">Load</a>
+			<img src="images/Infinity_Nature.png" id="slot7" class="icon" />
+		</div>
+		<div class="stone slot8">
+			<a href="#" class="saveData" onClick="saveData8()">Save</a>
+			<a href="#" class="saveData" onClick="loadData8()">Load</a>
+			<img src="images/Infinity_Neutral.png" id="slot8" class="icon" />
+		</div>
+		<div class="stone slot9">
+			<a href="#" class="saveData" onClick="saveData9()">Save</a>
+			<a href="#" class="saveData" onClick="loadData9()">Load</a>
+			<img src="images/Infinity_Universal.png" id="slot9" class="icon" />
+		</div>
+		<div class="stone slot10">
+			<a href="#" class="saveData" onClick="saveData10()">Save</a>
+			<a href="#" class="saveData" onClick="loadData10()">Load</a>
+			<img src="images/Infinity_Water.png" id="slot10" class="icon" />
+		</div>
+	</div>
 	<div class="calc-wrap">
 		<div class="calc-container">
 			<form class="calc-form">
@@ -224,11 +276,13 @@
 					<thead>
 						<tr>
 							<td>
-								<span style="text-align: center;">Update 2021.05.26:<br><br>
-								- "Optimize" script giving you the best upgrade for cost path to max stones.<br>
-								- Calculator will now stores last input data locally.<br><br>
-								Feedback is very welcome. Nesslow#1499, enjoy!<br>
-								</span>
+								<span style="text-align: center;"><b>How to use:</b><br><br>
+								1. Input infinities.<br>
+								2. Input upgrade levels (compare cost with in-game cost). You can use arrow keys to increase / decrese level quickly.<br>
+								3. Click calculate to get charge time and upgrades table.<br>
+								4. Save the input data by hovering the sidepanel and clicking "save".<br><br>
+								<i>The data is saved locally. Using incognito or clearing browser data will reset your data.</i><br><br>
+								Feedback and suggestions are very welcome. Discord: <b>Nesslow#1499</b><br>
 							</td>
 						</tr>
 					</thead>

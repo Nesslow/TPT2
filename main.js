@@ -63,7 +63,7 @@ function update() {
 	cacheDOM();
 	updateCost();
 	updateData();
-	saveData();
+	// saveData();
 
 }
 
@@ -522,7 +522,8 @@ function calc() {
 	}
 	updateCost();
 
-	remCost = 79372987741.35 - totalCost;
+	remCost = Math.round(79361244616.8 - totalCost);
+	console.log(remCost);
 	if (totalCost > 9999) {
 		document.getElementById("js_result_3").innerHTML = totalCost.toExponential(3);
 	} else {
@@ -537,33 +538,106 @@ function calc() {
 	update();
 }
 
-function saveData() {
-	let notes = document.getElementById("notepad").innerHTML;
-	localStorage.setItem('notes', notes);
-	localStorage.setItem('infs', JSON.stringify(inf_arr));
-	localStorage.setItem('upgLvls', JSON.stringify(lvl_arr));
+function saveData1() {
+	localStorage.setItem('infs1', JSON.stringify(inf_arr));
+	localStorage.setItem('upgLvls1', JSON.stringify(lvl_arr));
+}
+function saveData2() {
+	localStorage.setItem('infs2', JSON.stringify(inf_arr));
+	localStorage.setItem('upgLvls2', JSON.stringify(lvl_arr));
+}
+function saveData3() {
+	localStorage.setItem('infs3', JSON.stringify(inf_arr));
+	localStorage.setItem('upgLvls3', JSON.stringify(lvl_arr));
+}
+function saveData4() {
+	localStorage.setItem('infs4', JSON.stringify(inf_arr));
+	localStorage.setItem('upgLvls4', JSON.stringify(lvl_arr));
+}
+function saveData5() {
+	localStorage.setItem('infs5', JSON.stringify(inf_arr));
+	localStorage.setItem('upgLvls5', JSON.stringify(lvl_arr));
+}
+function saveData6() {
+	localStorage.setItem('infs6', JSON.stringify(inf_arr));
+	localStorage.setItem('upgLvls6', JSON.stringify(lvl_arr));
+}
+function saveData7() {
+	localStorage.setItem('infs7', JSON.stringify(inf_arr));
+	localStorage.setItem('upgLvls7', JSON.stringify(lvl_arr));
+}
+function saveData8() {
+	localStorage.setItem('infs8', JSON.stringify(inf_arr));
+	localStorage.setItem('upgLvls8', JSON.stringify(lvl_arr));
+}
+function saveData9() {
+	localStorage.setItem('infs9', JSON.stringify(inf_arr));
+	localStorage.setItem('upgLvls9', JSON.stringify(lvl_arr));
+}
+function saveData10() {
+	localStorage.setItem('infs10', JSON.stringify(inf_arr));
+	localStorage.setItem('upgLvls10', JSON.stringify(lvl_arr));
 }
 
-function loadData() {
-
-	document.getElementById('notepad').innerHTML = localStorage.getItem('notes');
-	
-	inf_arr = JSON.parse(localStorage.getItem('infs'));
-
+function loadData1() {
+	inf_arr = JSON.parse(localStorage.getItem('infs1'));
+	lvl_arr = JSON.parse(localStorage.getItem('upgLvls1'));
+	loadMaster();
+}
+function loadData2() {
+	inf_arr = JSON.parse(localStorage.getItem('infs2'));
+	lvl_arr = JSON.parse(localStorage.getItem('upgLvls2'));
+	loadMaster();
+}
+function loadData3() {
+	inf_arr = JSON.parse(localStorage.getItem('infs3'));
+	lvl_arr = JSON.parse(localStorage.getItem('upgLvls3'));
+	loadMaster();
+}
+function loadData4() {
+	inf_arr = JSON.parse(localStorage.getItem('infs4'));
+	lvl_arr = JSON.parse(localStorage.getItem('upgLvls4'));
+	loadMaster();
+}
+function loadData5() {
+	inf_arr = JSON.parse(localStorage.getItem('infs5'));
+	lvl_arr = JSON.parse(localStorage.getItem('upgLvls5'));
+	loadMaster();
+}
+function loadData6() {
+	inf_arr = JSON.parse(localStorage.getItem('infs6'));
+	lvl_arr = JSON.parse(localStorage.getItem('upgLvls6'));
+	loadMaster();
+}
+function loadData7() {
+	inf_arr = JSON.parse(localStorage.getItem('infs7'));
+	lvl_arr = JSON.parse(localStorage.getItem('upgLvls7'));
+	loadMaster();
+}
+function loadData8() {
+	inf_arr = JSON.parse(localStorage.getItem('infs8'));
+	lvl_arr = JSON.parse(localStorage.getItem('upgLvls8'));
+	loadMaster();
+}
+function loadData9() {
+	inf_arr = JSON.parse(localStorage.getItem('infs9'));
+	lvl_arr = JSON.parse(localStorage.getItem('upgLvls9'));
+	loadMaster();
+}
+function loadData10() {
+	inf_arr = JSON.parse(localStorage.getItem('infs10'));
+	lvl_arr = JSON.parse(localStorage.getItem('upgLvls10'));
+	loadMaster();
+}
+function loadMaster() {
 	document.getElementById("inf_1").value = inf_arr[0];
 	document.getElementById("inf_2").value = inf_arr[1];
 	document.getElementById("inf_3").value = inf_arr[2];
-
-	lvl_arr = JSON.parse(localStorage.getItem('upgLvls'));
-
 	document.getElementById("lvl_upg_1").value = lvl_arr[0];
 	document.getElementById("lvl_upg_2").value = lvl_arr[1];
 	document.getElementById("lvl_upg_3").value = lvl_arr[2];
 	document.getElementById("lvl_upg_4").value = lvl_arr[3];
 	document.getElementById("lvl_upg_5").value = lvl_arr[4];
 	document.getElementById("lvl_upg_6").value = lvl_arr[5];
-
 	update();
 }
-
-loadData();
