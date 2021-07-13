@@ -208,6 +208,12 @@ table .text {
 .stone a {
 	color: #f5f5f5;
 }
+.stone a:hover {
+	color: #ccc;
+}
+.stone a:active {
+	color: #999;
+}
 img.icon {
 	width: 24px;
 	height: 24px;
