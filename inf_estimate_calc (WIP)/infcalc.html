@@ -172,11 +172,17 @@ body {
         wa = 154290000000000*Math.pow((a_res/wa_x),2);
         wi = wa/60;
 
+        console.log(`accel: ${wa} | int: ${wi}`);
+
         r_x = Math.pow(wi,0.68);
         r_z = r_x * 360 * 11 * 1.1 / 100000000000;
         result = Math.round(r_z * cs * p_res);
         
-        document.getElementById("result").value = result.toLocaleString('en-US');
+        if(result > 9999) {
+            document.getElementById("result").value = result.toLocaleString('en-US');
+        } else {
+            document.getElementById("result").value = result;
+        }
     }
 </script>
 </html>
