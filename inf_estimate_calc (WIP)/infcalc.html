@@ -108,6 +108,12 @@ body {
     <div class="container">
         <div class="top">
             <div class="input_wrap">
+                <label for="x3">Speed x3</label>
+                <input type="checkbox" id="x3" value="TRUE">
+                <label for="wa15">Wave Accel Boost</label>
+                <input type="checkbox" id="wa15" value="TRUE">
+            </div><br>
+            <div class="input_wrap">
                 <label for="i_rt">Total runtime (hours)</label>
                 <input id="i_rt" type="number" class="stat input runtime">
             </div>
@@ -169,14 +175,38 @@ body {
         document.getElementById("pDura").value = convertTime(p_res);
 
         wa_x = (43*1800) + (15*30);
-        wa = 154290000000000*Math.pow((a_res/wa_x),2);
-        wi = wa/60;
+
+        if(document.getElementById("x3").checked) {
+            a_res = a_res * 1.5;
+            wa = 154290000000000*Math.pow((a_res/wa_x),2);
+        } else {
+            wa = 154290000000000*Math.pow((a_res/wa_x),2);
+        }
+        
+        if(document.getElementById("wa15").checked) {
+            wa = wa * 1.5;
+            wi = wa/60;
+        } else {
+            wi = wa/60;
+        }
+
+        wa = wa.toExponential(3);
+        wi = wi.toExponential(3);
 
         console.log(`accel: ${wa} | int: ${wi}`);
+        accelTime = a_res * 2 / 60;
+        pushTime = p_res * 2 / 60;
+        console.log(`accel time: ${accelTime} | push time: ${pushTime}`);
 
         r_x = Math.pow(wi,0.68);
         r_z = r_x * 360 * 11 * 1.1 / 100000000000;
-        result = Math.round(r_z * cs * p_res);
+
+        if(document.getElementById("x3").checked) {
+            p_res = p_res * 1.5;
+            result = Math.round(r_z * cs * p_res);
+        } else {
+            result = Math.round(r_z * cs * p_res);
+        }
         
         if(result > 9999) {
             document.getElementById("result").value = result.toLocaleString('en-US');
