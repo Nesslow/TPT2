@@ -86,15 +86,6 @@ function updateData() {
 	upgData6();
 }
 
-function toggleSidebar() {
-	let bar = document.getElementById("config");
-	if (bar.style.left === "-1px") {
-		bar.style.left = "-100px";
-	} else {
-		bar.style.left = "-1px";
-	}
-}
-
 function convertTime(time) {
 	if (time > 60) {
 		hours = Math.floor(time / 3600);

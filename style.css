@@ -184,7 +184,7 @@ table .text {
 	background: #333;
 	position: fixed;
 	top: 50%;
-	left: -100px;
+	left: -1px;
 	transform: translate(0, -50%);
 	padding: 8px;
 	border: 1px solid #ccc;
