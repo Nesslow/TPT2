@@ -190,9 +190,9 @@ table .text {
 	border: 1px solid #ccc;
 	border-radius: 0 5px 5px 0;
 }
-.config:hover {
+/* .config:hover {
 	left: -1px;
-}
+} */
 .stone {
 	height: 24px;
 	width: 120px;

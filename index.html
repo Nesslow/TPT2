@@ -11,7 +11,7 @@
 	<div class="notepad-container">
 		<span id="notepad" contenteditable="true" oninput="saveData()"></span>
 	</div>
-	<div class="config">
+	<div id="config" class="config" onClick="toggleSidebar()">
 		<div class="stone slot1">
 			<a href="#" class="saveData" onClick="saveData1()">Save</a>
 			<a href="#" class="saveData" onClick="loadData1()">Load</a>
@@ -117,9 +117,6 @@
 							<div class="w20-input">
 								<input type="button" class="calc-button input" value="max" onclick="add_100(this.name)" name="lvl_upg_1">
 							</div>
-							<!-- <div class="w20-input">
-								<input type="button" class="calc-button input" value="10" onclick="add_10(this.name)" name="lvl_upg_1">
-							</div> -->
 						</div>
 						<div class="calc-input-container">
 							<div class="w80-input">
@@ -128,9 +125,6 @@
 							<div class="w20-input">
 								<input type="button" class="calc-button input" value="max" onclick="add_100(this.name)" name="lvl_upg_2">
 							</div>
-							<!-- <div class="w20-input">
-								<input type="button" class="calc-button input" value="10" onclick="add_10(this.name)" name="lvl_upg_2">
-							</div> -->
 						</div>
 						<div class="calc-input-container">
 							<div class="w80-input">
@@ -139,9 +133,6 @@
 							<div class="w20-input">
 								<input type="button" class="calc-button input" value="max" onclick="add_100(this.name)" name="lvl_upg_3">
 							</div>
-							<!-- <div class="w20-input">
-								<input type="button" class="calc-button input" value="10" onclick="add_10(this.name)" name="lvl_upg_3">
-							</div> -->
 						</div>
 						<div class="calc-input-container">
 							<div class="w80-input">
@@ -150,9 +141,6 @@
 							<div class="w20-input">
 								<input type="button" class="calc-button input" value="max" onclick="add_100(this.name)" name="lvl_upg_4">
 							</div>
-							<!-- <div class="w20-input">
-								<input type="button" class="calc-button input" value="10" onclick="add_10(this.name)" name="lvl_upg_4">
-							</div> -->
 						</div>
 						<div class="calc-input-container">
 							<div class="w80-input">
@@ -161,9 +149,6 @@
 							<div class="w20-input">
 								<input type="button" class="calc-button input" value="max" onclick="add_100(this.name)" name="lvl_upg_5">
 							</div>
-							<!-- <div class="w20-input">
-								<input type="button" class="calc-button input" value="10" onclick="add_10(this.name)" name="lvl_upg_5">
-							</div> -->
 						</div>
 						<div class="calc-input-container">
 							<div class="w80-input">
@@ -172,9 +157,6 @@
 							<div class="w20-input">
 								<input type="button" class="calc-button input" value="max" onclick="add_100(this.name)" name="lvl_upg_6">
 							</div>
-							<!-- <div class="w20-input">
-								<input type="button" class="calc-button input" value="10" onclick="add_10(this.name)" name="lvl_upg_6">
-							</div> -->
 						</div>
 					</div>
 					<div class="calc-input-wrap w25-input number-container">
