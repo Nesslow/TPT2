@@ -92,6 +92,7 @@ function convertTime(time) {
 		time %= 3600;
 		minutes = Math.floor(time / 60);
 		seconds = time % 60;
+		seconds = Math.floor(seconds);
 		seconds = seconds.toFixed(0);
 		time = hours + "h " + minutes + "m " + seconds + "s";
 		return time;
@@ -415,7 +416,7 @@ function calcData() {
 		let extraction_dura = data_arr[3] / (speed_tick);
 		CPT += extraction_tick * (tick / extraction_dura);
 		cCur = CPT;
-		// if (cCur < cReq / 1000) {
+		// if (cCur < cReq / 10000) {
 		// 	tick *= 1.01;
 		// }
 	}
