@@ -1,16 +1,24 @@
 function cacheDOM() {
 
 	resArea = document.getElementById("result_area");
-	inf_arr.push(document.getElementById("inf_1").valueAsNumber);
-	inf_arr.push(document.getElementById("inf_2").valueAsNumber);
-	inf_arr.push(document.getElementById("inf_3").valueAsNumber);
+	if (document.getElementById("infx2").checked) {
+		inf1 = document.getElementById("inf_1").valueAsNumber * 2;
+		inf2 = document.getElementById("inf_2").valueAsNumber * 2;
+		inf3 = document.getElementById("inf_3").valueAsNumber * 2;
+	} else {
+		inf1 = document.getElementById("inf_1").valueAsNumber;
+		inf2 = document.getElementById("inf_2").valueAsNumber;
+		inf3 = document.getElementById("inf_3").valueAsNumber;
+	}
+	inf_arr.push(inf1);
+	inf_arr.push(inf2);
+	inf_arr.push(inf3);
 	lvl_arr.push(document.getElementById("lvl_upg_1").valueAsNumber);
 	lvl_arr.push(document.getElementById("lvl_upg_2").valueAsNumber);
 	lvl_arr.push(document.getElementById("lvl_upg_3").valueAsNumber);
 	lvl_arr.push(document.getElementById("lvl_upg_4").valueAsNumber);
 	lvl_arr.push(document.getElementById("lvl_upg_5").valueAsNumber);
 	lvl_arr.push(document.getElementById("lvl_upg_6").valueAsNumber);
-
 }
 
 const baseChargeDura = 31536000;
@@ -330,9 +338,6 @@ function upgData4() {
 	if (inf_arr[0] == 0) {
 		inf_arr[0] = 1;
 	}
-	if (document.getElementById("infx2").checked) {
-		inf_arr[0] = inf_arr[0] * 2;
-	}
 	let upgData4 = baseChargeDura / inf_arr[0];
 	let a = lvl_arr[3];
 	if (a == 0) {
@@ -358,9 +363,6 @@ function upgData5() {
 	if (inf_arr[1] == 0) {
 		inf_arr[1] = 1;
 	}
-	if (document.getElementById("infx2").checked) {
-		inf_arr[1] = inf_arr[1] * 2;
-	}
 	let upgData5 = baseChargeDura / inf_arr[1];
 	let a = lvl_arr[4];
 	if (a == 0) {
@@ -385,9 +387,6 @@ function upgData5() {
 function upgData6() {
 	if (inf_arr[2] == 0) {
 		inf_arr[2] = 1;
-	}
-	if (document.getElementById("infx2").checked) {
-		inf_arr[2] = inf_arr[2] * 2;
 	}
 	let upgData6 = baseChargeDura / inf_arr[2];
 	let a = lvl_arr[5];
