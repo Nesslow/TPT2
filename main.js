@@ -415,9 +415,9 @@ function calcData() {
 		let extraction_dura = data_arr[3] / (speed_tick);
 		CPT += extraction_tick * (tick / extraction_dura);
 		cCur = CPT;
-		if (cCur < cReq / 1000) {
-			tick *= 1.01;
-		}
+		// if (cCur < cReq / 1000) {
+		// 	tick *= 1.01;
+		// }
 	}
 	let tickValue = CPT / cReq;
 	let value = totalCost / tickValue;
