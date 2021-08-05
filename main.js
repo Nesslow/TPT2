@@ -87,7 +87,7 @@ function updateData() {
 }
 
 function convertTime(time) {
-	if (time > 3600) {
+	if (time > 60) {
 		hours = Math.floor(time / 3600);
 		time %= 3600;
 		minutes = Math.floor(time / 60);
