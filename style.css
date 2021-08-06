@@ -218,3 +218,8 @@ img.icon {
 	width: 24px;
 	height: 24px;
 }
+.x2label {
+	font-size: 16px;
+	font-weight: normal;
+	margin:0 5px 0 10px;
+}
