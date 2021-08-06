@@ -1,18 +1,9 @@
 function cacheDOM() {
 
 	resArea = document.getElementById("result_area");
-	if (document.getElementById("infx2").checked) {
-		inf1 = document.getElementById("inf_1").valueAsNumber * 2;
-		inf2 = document.getElementById("inf_2").valueAsNumber * 2;
-		inf3 = document.getElementById("inf_3").valueAsNumber * 2;
-	} else {
-		inf1 = document.getElementById("inf_1").valueAsNumber;
-		inf2 = document.getElementById("inf_2").valueAsNumber;
-		inf3 = document.getElementById("inf_3").valueAsNumber;
-	}
-	inf_arr.push(inf1);
-	inf_arr.push(inf2);
-	inf_arr.push(inf3);
+	inf_arr.push(document.getElementById("inf_1").valueAsNumber);
+	inf_arr.push(document.getElementById("inf_2").valueAsNumber);
+	inf_arr.push(document.getElementById("inf_3").valueAsNumber);
 	lvl_arr.push(document.getElementById("lvl_upg_1").valueAsNumber);
 	lvl_arr.push(document.getElementById("lvl_upg_2").valueAsNumber);
 	lvl_arr.push(document.getElementById("lvl_upg_3").valueAsNumber);
@@ -25,9 +16,9 @@ const baseChargeDura = 31536000;
 const baseChargeReq = 1000000000000;
 
 let chargeDura = baseChargeDura;
-let speedBonus = 0.02; //percent
+let speedBonus = 0.02;
 let speedDura = baseChargeDura;
-let productionBonus = 0.05; //percent
+let productionBonus = 0.05;
 let productionDura = baseChargeDura;
 
 const baseCostUpg1 = 25;
@@ -61,18 +52,14 @@ let cost_arr = [];
 let data_arr = [];
 let value_arr = [];
 
-// Cache DOM elements
 cacheDOM();
 
 function update() {
-
 	inf_arr = [];
 	lvl_arr = [];
 	cacheDOM();
 	updateCost();
 	updateData();
-	// saveData();
-
 }
 
 function updateCost() {
@@ -338,10 +325,14 @@ function upgData4() {
 	if (inf_arr[0] == 0) {
 		inf_arr[0] = 1;
 	}
-	let upgData4 = baseChargeDura / inf_arr[0];
+	data4inf =  inf_arr[0];
+	if (document.getElementById("infx2").checked) {
+		data4inf *= 2;
+	}
+	let upgData4 = baseChargeDura / data4inf;
 	let a = lvl_arr[3];
 	if (a == 0) {
-		upgData4 = baseChargeDura / inf_arr[0];
+		upgData4 = baseChargeDura / data4inf;
 	} else if (a >= 100) {
 		for (let i = 0; i < 100; i++) { 
 			upgData4 = upgData4 - (upgData4 * 0.1);
@@ -363,10 +354,14 @@ function upgData5() {
 	if (inf_arr[1] == 0) {
 		inf_arr[1] = 1;
 	}
-	let upgData5 = baseChargeDura / inf_arr[1];
+	data5inf =  inf_arr[1];
+	if (document.getElementById("infx2").checked) {
+		data5inf *= 2;
+	}
+	let upgData5 = baseChargeDura / data5inf;
 	let a = lvl_arr[4];
 	if (a == 0) {
-		upgData5 = baseChargeDura / inf_arr[1];
+		upgData5 = baseChargeDura / data5inf;
 	} else if (a >= 100) {
 		for (let i = 0; i < 100; i++) { 
 			upgData5 = upgData5 - (upgData5 * 0.1);
@@ -388,10 +383,14 @@ function upgData6() {
 	if (inf_arr[2] == 0) {
 		inf_arr[2] = 1;
 	}
-	let upgData6 = baseChargeDura / inf_arr[2];
+	data6inf =  inf_arr[2];
+	if (document.getElementById("infx2").checked) {
+		data6inf *= 2;
+	}
+	let upgData6 = baseChargeDura / data6inf;
 	let a = lvl_arr[5];
 	if (a == 0) {
-		upgData6 = baseChargeDura / inf_arr[2];
+		upgData6 = baseChargeDura / data6inf;
 	} else if (a >= 100) {
 		for (let i = 0; i < 100; i++) { 
 			upgData6 = upgData6 - (upgData6 * 0.1);
@@ -424,9 +423,6 @@ function calcData() {
 		let extraction_dura = data_arr[3] / (speed_tick);
 		CPT += extraction_tick * (tick / extraction_dura);
 		cCur = CPT;
-		// if (cCur < cReq / 10000) {
-		// 	tick *= 1.01;
-		// }
 	}
 	let tickValue = CPT / cReq;
 	let value = totalCost / tickValue;
