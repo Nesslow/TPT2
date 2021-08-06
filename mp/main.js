@@ -49,6 +49,7 @@ let lvlUpg6;
 let inf_arr = [];
 let lvl_arr = [];
 let cost_arr = [];
+let tick_arr = [];
 let data_arr = [];
 let value_arr = [];
 
@@ -426,6 +427,7 @@ function calcData() {
 	}
 	let tickValue = CPT / cReq;
 	let value = totalCost / tickValue;
+	tick_arr.push(totalTicks);
 	value_arr.push(value);
 }
 
@@ -461,9 +463,11 @@ function optimize() {
 
 		for(let i = 0; i < loops; i++) {
 			value_arr = [];
+			tick_arr = [];
 			for(let x = 0; x < lvl_arr.length; x++) {
 				if(lvl_arr[x] == 100) {
 					value_arr.push(9007199254740991);
+					tick_arr.push(9007199254740991);
 					updateCost();
 					updateData();
 				} else {
@@ -491,7 +495,8 @@ function optimize() {
 			lvl_arr[bestValue] += 1;
 
 			cell0.innerHTML = upgArr[bestValue];
-			cell1.innerHTML = convertTime(totalTicks);
+
+			cell1.innerHTML = convertTime(tick_arr[bestValue]);
 
 			if (cost_arr[bestValue] > 9999) {
 				cell2.innerHTML = cost_arr[bestValue].toExponential(3);
@@ -520,6 +525,7 @@ function calc() {
 	calcData();
 
 	document.getElementById("js_result_1").innerHTML = convertTime(totalTicks);
+	console.log(`calc ticks: ${totalTicks}`);
 
 	// Total Cost & Remaining Cost
 	for (i = 0; i < lvl_arr.length; i++) {
