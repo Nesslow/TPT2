@@ -102,12 +102,28 @@ function add_100(x) {
 	update();
 }
 
+function upg_to_stone(v) {
+	let lvl_arr = [];
+	lvl_arr = v.split(",");
+	console.log(v);
+	document.getElementById("lvl_upg_1").value = lvl_arr[0];
+	document.getElementById("lvl_upg_2").value = lvl_arr[1];
+	document.getElementById("lvl_upg_3").value = lvl_arr[2];
+	document.getElementById("lvl_upg_4").value = lvl_arr[3];
+	document.getElementById("lvl_upg_5").value = lvl_arr[4];
+	document.getElementById("lvl_upg_6").value = lvl_arr[5];
+
+	document.body.scrollTop = 0; // safari support (please swap)
+  	document.documentElement.scrollTop = 0;
+
+	calc();
+}
+
 function getLoops() {
 	loops = lvl_arr.reduce(function(a, b) {
 		return a + b;
 	}, 0);
 	loops = 600 - loops;
-	console.log(`total loops: ${loops}`);
 }
 
 function upgCost1() {
@@ -433,11 +449,10 @@ function calcData() {
 
 function optimize() {
 	getLoops();
-
 	resArea.deleteTHead();
 
 	if (loops != 0) {
-		// resArea
+		// Generate table header
 		let th = resArea.createTHead();
 		let thRow = th.insertRow(0);
 		let thCell0 = thRow.insertCell(0);
@@ -445,18 +460,21 @@ function optimize() {
 		let thCell2 = thRow.insertCell(2);
 		let thCell3 = thRow.insertCell(3);
 		let thCell4 = thRow.insertCell(4);
+		let thCell5 = thRow.insertCell(5);
 
 		thCell0.setAttribute("class", "calc-input-wrap heading w20-input ");
 		thCell1.setAttribute("class", "calc-input-wrap heading w20-input");
 		thCell2.setAttribute("class", "calc-input-wrap heading w20-input number-container");
 		thCell3.setAttribute("class", "calc-input-wrap heading w20-input number-container");
 		thCell4.setAttribute("class", "calc-input-wrap heading w20-input number-container");
+		thCell5.setAttribute("class", "calc-input-wrap heading w20-input number-container");
 
 		thCell0.innerHTML = "Upgrade name";
 		thCell1.innerHTML = "Charge time";
 		thCell2.innerHTML = "Upgrade cost";
 		thCell3.innerHTML = "Cost total";
 		thCell4.innerHTML = "Upgrades list";
+		thCell5.innerHTML = "Apply";
 
 		let upgArr = ["Charge Req","Speed Bonus","Production Bonus","Charge Dura","Speed Dura","Production Dura"];
 		let upgTotalCost = 0;
@@ -479,25 +497,28 @@ function optimize() {
 				}
 			}
 			let bestValue = value_arr.indexOf(Math.min(...value_arr));
+
+			// Generate table cells, attach to end
 			let row = resArea.insertRow(-1);
 			let cell0 = row.insertCell(0);
 			let cell1 = row.insertCell(1);
 			let cell2 = row.insertCell(2);
 			let cell3 = row.insertCell(3);
 			let cell4 = row.insertCell(4);
+			let cell5 = row.insertCell(5);
 			cell0.setAttribute("class", "text bold");
 			cell1.setAttribute("class", "text ");
 			cell2.setAttribute("class", "text bold number-container");
 			cell3.setAttribute("class", "text number-container");
 			cell4.setAttribute("class", "text number-container");
+			cell5.setAttribute("class", "text number-container upg_btn");
 
+			// Populate table cells
 			optUpgradeCost += cost_arr[bestValue];
 			lvl_arr[bestValue] += 1;
 
 			cell0.innerHTML = upgArr[bestValue];
-
 			cell1.innerHTML = convertTime(tick_arr[bestValue]);
-
 			if (cost_arr[bestValue] > 9999) {
 				cell2.innerHTML = cost_arr[bestValue].toExponential(3);
 			} else {
@@ -510,6 +531,7 @@ function optimize() {
 				cell3.innerHTML = upgTotalCost.toFixed(0);
 			}
 			cell4.innerHTML = lvl_arr.join(",");
+			cell5.innerHTML = "<input type='button' id='upg_btn_"+ i +"' class='calc-button input' value='+' name='"+ lvl_arr +"' onclick='upg_to_stone(this.name)'>";
 		}
 	}
 }
@@ -520,12 +542,11 @@ function calc() {
 	update();
 	optimize();
 
-	// Current Charge
+	// Calculate current
 	update();
 	calcData();
 
 	document.getElementById("js_result_1").innerHTML = convertTime(totalTicks);
-	console.log(`calc ticks: ${totalTicks}`);
 
 	// Total Cost & Remaining Cost
 	for (i = 0; i < lvl_arr.length; i++) {
@@ -534,7 +555,6 @@ function calc() {
 	updateCost();
 
 	remCost = Math.round(79361244616.8 - totalCost);
-	console.log(remCost);
 	if (totalCost > 9999) {
 		document.getElementById("js_result_3").innerHTML = totalCost.toExponential(3);
 	} else {
