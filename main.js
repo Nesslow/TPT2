@@ -10,15 +10,16 @@ function cacheDOM() {
 	lvl_arr.push(document.getElementById("lvl_upg_4").valueAsNumber);
 	lvl_arr.push(document.getElementById("lvl_upg_5").valueAsNumber);
 	lvl_arr.push(document.getElementById("lvl_upg_6").valueAsNumber);
+
 }
 
 const baseChargeDura = 31536000;
 const baseChargeReq = 1000000000000;
 
 let chargeDura = baseChargeDura;
-let speedBonus = 0.02;
+let speedBonus = 0.02; //percent
 let speedDura = baseChargeDura;
-let productionBonus = 0.05;
+let productionBonus = 0.05; //percent
 let productionDura = baseChargeDura;
 
 const baseCostUpg1 = 25;
@@ -49,18 +50,21 @@ let lvlUpg6;
 let inf_arr = [];
 let lvl_arr = [];
 let cost_arr = [];
-let tick_arr = [];
 let data_arr = [];
 let value_arr = [];
 
+// Cache DOM elements
 cacheDOM();
 
 function update() {
+
 	inf_arr = [];
 	lvl_arr = [];
 	cacheDOM();
 	updateCost();
 	updateData();
+	// saveData();
+
 }
 
 function updateCost() {
@@ -326,14 +330,13 @@ function upgData4() {
 	if (inf_arr[0] == 0) {
 		inf_arr[0] = 1;
 	}
-	data4inf =  inf_arr[0];
 	if (document.getElementById("infx2").checked) {
-		data4inf *= 2;
+		inf_arr[0] = inf_arr[0] * 2;
 	}
-	let upgData4 = baseChargeDura / data4inf;
+	let upgData4 = baseChargeDura / inf_arr[0];
 	let a = lvl_arr[3];
 	if (a == 0) {
-		upgData4 = baseChargeDura / data4inf;
+		upgData4 = baseChargeDura / inf_arr[0];
 	} else if (a >= 100) {
 		for (let i = 0; i < 100; i++) { 
 			upgData4 = upgData4 - (upgData4 * 0.1);
@@ -355,14 +358,13 @@ function upgData5() {
 	if (inf_arr[1] == 0) {
 		inf_arr[1] = 1;
 	}
-	data5inf =  inf_arr[1];
 	if (document.getElementById("infx2").checked) {
-		data5inf *= 2;
+		inf_arr[1] = inf_arr[1] * 2;
 	}
-	let upgData5 = baseChargeDura / data5inf;
+	let upgData5 = baseChargeDura / inf_arr[1];
 	let a = lvl_arr[4];
 	if (a == 0) {
-		upgData5 = baseChargeDura / data5inf;
+		upgData5 = baseChargeDura / inf_arr[1];
 	} else if (a >= 100) {
 		for (let i = 0; i < 100; i++) { 
 			upgData5 = upgData5 - (upgData5 * 0.1);
@@ -384,14 +386,13 @@ function upgData6() {
 	if (inf_arr[2] == 0) {
 		inf_arr[2] = 1;
 	}
-	data6inf =  inf_arr[2];
 	if (document.getElementById("infx2").checked) {
-		data6inf *= 2;
+		inf_arr[2] = inf_arr[2] * 2;
 	}
-	let upgData6 = baseChargeDura / data6inf;
+	let upgData6 = baseChargeDura / inf_arr[2];
 	let a = lvl_arr[5];
 	if (a == 0) {
-		upgData6 = baseChargeDura / data6inf;
+		upgData6 = baseChargeDura / inf_arr[2];
 	} else if (a >= 100) {
 		for (let i = 0; i < 100; i++) { 
 			upgData6 = upgData6 - (upgData6 * 0.1);
@@ -424,10 +425,12 @@ function calcData() {
 		let extraction_dura = data_arr[3] / (speed_tick);
 		CPT += extraction_tick * (tick / extraction_dura);
 		cCur = CPT;
+		// if (cCur < cReq / 10000) {
+		// 	tick *= 1.01;
+		// }
 	}
 	let tickValue = CPT / cReq;
 	let value = totalCost / tickValue;
-	tick_arr.push(totalTicks);
 	value_arr.push(value);
 }
 
@@ -463,11 +466,9 @@ function optimize() {
 
 		for(let i = 0; i < loops; i++) {
 			value_arr = [];
-			tick_arr = [];
 			for(let x = 0; x < lvl_arr.length; x++) {
 				if(lvl_arr[x] == 100) {
 					value_arr.push(9007199254740991);
-					tick_arr.push(9007199254740991);
 					updateCost();
 					updateData();
 				} else {
@@ -495,8 +496,7 @@ function optimize() {
 			lvl_arr[bestValue] += 1;
 
 			cell0.innerHTML = upgArr[bestValue];
-
-			cell1.innerHTML = convertTime(tick_arr[bestValue]);
+			cell1.innerHTML = convertTime(totalTicks);
 
 			if (cost_arr[bestValue] > 9999) {
 				cell2.innerHTML = cost_arr[bestValue].toExponential(3);
@@ -525,7 +525,6 @@ function calc() {
 	calcData();
 
 	document.getElementById("js_result_1").innerHTML = convertTime(totalTicks);
-	console.log(`calc ticks: ${totalTicks}`);
 
 	// Total Cost & Remaining Cost
 	for (i = 0; i < lvl_arr.length; i++) {
