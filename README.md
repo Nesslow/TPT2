@@ -8,15 +8,6 @@ Will produce a list showing optimal upgrades and gives you a quick way to see ho
 Use cost to determine level of upgrade.
   
 # [Infinity calc (WIP)](https://tpt2-nesslow.netlify.app/inf_estimate_calc%20(wip)/infcalc "Infinity calc (WIP)")  
-To do:
-- [ ] FPS / Region included in calc
-- [ ] Additional data shown
-- [ ] Settings to set run preference
-    
-## BP & AI - To Do
-- [ ] Add BP's & AI's
-- [ ] Do a final complete run test
-- [x] Test new inf BP in high inf
 
 ## Module notes (inf+)
 | Module | Note |
