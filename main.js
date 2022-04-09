@@ -540,7 +540,10 @@ function calc() {
 
 	// Optimize
 	update();
-	optimize();
+
+	if (document.getElementById("fast_mode").checked == false) {
+		optimize();
+	}
 
 	// Calculate current
 	update();
