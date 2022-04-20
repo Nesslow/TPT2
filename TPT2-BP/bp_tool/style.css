@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+body {
+    background-color: #252525;
+}
+.A_atk {background: #ff4949;}
+.B_def {background: #4983ff;}
+.C_utl {background: #fdc610;}
+.D_ult {background: #d23dff;}
+.E_spc {background: #6d6d6d;}
+.container {
+    width: 60%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0;
+    display:-webkit-flex;
+    display:flex;
+    -webkit-justify-content:center;
+    justify-content:center;
+    -webkit-align-items:flex-start;
+    align-items:flex-start;
+}
+.box {
+    width: 50%;
+    margin: 0 10px;
+    padding: 0;
+}
+textarea {
+    border: 1px solid #eee;
+    background-color: #fff;
+    padding: 2%;
+    width: 96%;
+}
+button {
+    margin-top: 5px;
+    height: 30px;
+    width: 100%;
+}
+#modtable1, #modtable2 {
+    background-color: #fff;
+    border: 1px solid #eee;
+    width: 100%;
+    min-height: 34px;
+    list-style-type: none;
+    margin: 0;
+    padding: 5px 0 2px 0;
+}
+.li-top {
+    border: 1px solid #333;
+    margin: 0 5px 2px 5px;
+    padding: 0 5px;
+    line-height: 1.5rem;
+    text-align: center;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 0 1px 2px #000;
+}
+.li-bot {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.7rem;
+    margin: -3px 5px 2px 5px;
+    padding: 1px 5px;
+    background:#ddd;
+    border: 1px solid #333;
+}
+.ui-state-highlight {
+    min-height: 42px;
+    margin: 0 5px 2px 5px;
+    padding: 0 5px;
+    background-color: #000;
+    opacity: 0.2;
+}

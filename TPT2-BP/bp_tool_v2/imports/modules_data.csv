@@ -1,0 +1,314 @@
+TYPE,NAME,LOCATION,CONDITION,DESCRIPTION,TAGS
+atk,Advanced Splash,R09: Beach,0.14%,Provides a 20% chance to damage enemies close to your primary target by a portion of your damage dealt to the primary target itself.,CHANCE AREA DAMAGE
+atk,Air Attack,R02: Desert,5%,Provides the tower some basic Air damage on every attack.,DAMAGE
+atk,Air Burst,R02: Desert,2%,Provides the tower a 20% chance to deal additional Air damage on an attack.,CHANCE DAMAGE
+atk,Air Crit,R02: Desert,1%,Provides a chance to multiply your projectile's Air damage.,CHANCE DAMAGE
+atk,Air Focus,R15: Chaos,1%,Increases Air damage dealt by the tower for 45 seconds.,ACTIVE INSTANT DAMAGE BUFF
+atk,Air Impetus,R10: Ocean,1%,Increases the total Air damage of the tower based on the distance between the target and the tower at the moment the projectile arrives.,DAMAGE
+atk,Air Slice,Experiment: Air,5.07M Pa,Provides a chance to create a gush of wind around the primary target that damages all nearby units and slows their attackspeed.,CHANCE AREA DAMAGE SLOW DEBUFF
+atk,Air Splash,R06: High Mountain,2%,Provides a 20% chance to damage all enemies in a 8M radius around the primary target by a fixed amount. Damage type is Air.,AREA DAMAGE
+atk,Air Subsistence,R12: Dark Realm,1%,Increases your Air damage based on your current energy percentage. Full bonus is applied at 100% energy. Drains 200 energy whenever the bonus is applied.,DAMAGE
+atk,Air Taste,Experiment: Air,"202,650 Pa",Deals additional damage of type Air based on a percentage of the total damage dealt. Damage of taste modules can not be further amplified.,DAMAGE
+atk,Anti-Air Crit,R13: Heaven,1%,Provides a chance to multiply your damage against Air enemies by 4.,CHANCE DAMAGE
+atk,Anti-Air Projectiles,R11: Neutral,1%,Increases the damage dealt against Air enemies.,DAMAGE
+atk,Anti-Darkness Crit,R12: Dark Realm,1%,Provides a chance to multiply your damage against Darkness enemies by 4.,CHANCE DAMAGE
+atk,Anti-Darkness Projectiles,R11: Neutral,1%,Increases the damage dealt against Darkness enemies.,DAMAGE
+atk,Anti-Earth Crit,R12: Dark Realm,1%,Provides a chance to multiply your damage against Earth enemies by 4.,CHANCE DAMAGE
+atk,Anti-Earth Projectiles,R11: Neutral,1%,Increases the damage dealt against Earth enemies.,DAMAGE
+atk,Anti-Electricity Crit,R13: Heaven,1%,Provides a chance to multiply your damage against Electricity enemies by 4.,CHANCE DAMAGE
+atk,Anti-Electricity Projectiles,R11: Neutral,1%,Increases the damage dealt against Electricity enemies.,DAMAGE
+atk,Anti-Fire Crit,R12: Dark Realm,1%,Provides a chance to multiply your damage against Fire enemies by 4.,CHANCE DAMAGE
+atk,Anti-Fire Projectiles,R11: Neutral,1%,Increases the damage dealt against Fire enemies.,DAMAGE
+atk,Anti-Light Crit,R13: Heaven,1%,Provides a chance to multiply your damage against Light enemies by 4.,CHANCE DAMAGE
+atk,Anti-Light Projectiles,R11: Neutral,1%,Increases the damage dealt against Light enemies.,DAMAGE
+atk,Anti-Nature Crit,R13: Heaven,1%,Provides a chance to multiply your damage against Nature enemies by 4.,CHANCE DAMAGE
+atk,Anti-Nature Projectiles,R11: Neutral,1%,Increases the damage dealt against Nature enemies.,DAMAGE
+atk,Anti-Neutral Projectiles,R11: Neutral,1%,Increases the damage dealt against Neutral enemies.,DAMAGE
+atk,Anti-Universal Projectiles,R11: Neutral,1%,Increases the damage dealt against Universal enemies.,DAMAGE
+atk,Anti-Water Crit,R12: Dark Realm,1%,Provides a chance to multiply your damage against Water enemies by 4.,CHANCE DAMAGE
+atk,Anti-Water Projectiles,R11: Neutral,1%,Increases the damage dealt against Water enemies.,DAMAGE
+atk,Attack Speed,Base mod,Unlocked from start,Modifies the towers attack speed.,ATTACKSPEED
+atk,Bash,R03: Winter,0.12%,Provides a small chance to stun a target for a short duration. Stunned units cannot move or attack.,CHANCE STUN DEBUFF
+atk,Basic Attack,Base mod,Unlocked from start,Provides the tower some basic Neutral damage.,DAMAGE
+atk,Basic Bouncing,R01: Forest,Wave 10,Provides the projectiles a chance to bounce off to additional targets. Does not bounce off to the same unit twice. The chance is calculated for each target separately so the missile might bounce off fewer times than the limit.,CHANCE AREA
+atk,Burning Attack,R05: Volcano,0.1%,Provides a 10% chance to ignite all enemies in a large area around the primary target. Burning them for a specific amount of fire damage each second. Lasts up to 5 seconds.,CHANCE AREA DAMAGE
+atk,Combustion,Experiment: Fire,"75,000°C",Provides a 25% chance that a destroyed enemy will explode and deal a part of its maximum hitpoints as Fire damage to surrounding enemies.,CHANCE DAMAGE
+atk,Critical Strike,Experiment: Neutral,6.5M,Provides a chance to deal more damage on an attack.,CHANCE DAMAGE
+atk,Dark Sacrifice,Era Experiment: Darkness,,Sacrifices 30% of the tower's current HP and in turn increases it's dark damage multiplicatevly by [sacrificed amount]^0.2 for a certain amount of time,ACTIVE INSTANT BUFF
+atk,Darkness Attack,R03: Winter,5%,Provides the tower some basic Darkness damage on every attack.,DAMAGE
+atk,Darkness Burst,R03: Winter,2%,Provides the tower a 20% chance to deal additional Darkness on an attack.,CHANCE DAMAGE
+atk,Darkness Crit,R03: Winter,1%,Provides a chance to multiply your projectile's Darkness damage.,CHANCE DAMAGE
+atk,Darkness Focus,R15: Chaos,1%,Increases Darkness damage dealt by the tower for 45 seconds.,ACTIVE INSTANT DAMAGE BUFF
+atk,Darkness Impetus,R10: Ocean,1%,Increases the total Darkness damage of the tower based on the distance between the target and the tower at the moment the projectile arrives.,DAMAGE
+atk,Darkness Splash,R07: Jungle,0.9%,Provides a 20% chance to damage all enemies in a 8M radius around the primary target by a fixed amount. Damage type is Darkness.,AREA DAMAGE
+atk,Darkness Subsistence,R12: Dark Realm,1%,Increases your Darkness damage based on your current energy percentage. Full bonus is applied at 100% energy. Drains 200 energy whenever the bonus is applied.,DAMAGE
+atk,Darkness Taste,Experiment: Darkness,5 Particles,Deals additional damage of type Darkness based on a percentage of the total damage dealt. Damage of taste modules can not be further amplified.,DAMAGE
+atk,Daybloom,Experiment: Nature,30 Plants,Applies a part of module and damage factor related Light damage bonus to Nature damage as well.,DAMAGE
+atk,Death Wish,Arcade: Lucky Wheel,,Increases outgoing damage by a certain % and incoming damage by half of that amount.,DAMAGE WEAKEN
+atk,Desperado,Arcade: Lucky Wheel,,"Sprays the surrounding area full of lead, hitting all enemies anywhere from 0 to 2 times.",ACTIVE INSTANT AREA DAMAGE
+atk,Divine Blessing,R06: High Mountain,0.15%,Provides a chance to damage an enemy by 5% of the towers current hitpoints and to temporarily increase the towers maximum hitpoints. Every second the total amount of bonus HP reduces by 1% of its current value.,CHANCE DAMAGE HEALTH
+atk,Earth Attack,R01: Forest,5%,Provides the tower some basic Earth damage on every attack.,DAMAGE
+atk,Earth Burst,R01: Forest,2%,Provides the Tower a 20% chance to deal additional Earth damage on an attack.,CHANCE DAMAGE
+atk,Earth Crit,R03: Winter,1%,Provides a chance to multiply your projectile's Earth damage.,CHANCE DAMAGE
+atk,Earth Focus,R15: Chaos,1%,Increases Earth damage dealt by the tower for 45 seconds.,ACTIVE INSTANT DAMAGE BUFF
+atk,Earth Impetus,R10: Ocean,1%,Increases the total Earth damage of the tower based on the distance between the target and the tower at the moment the projectile arrives.,DAMAGE
+atk,Earth Splash,R07: Jungle,0.9%,Provides a 20% chance to damage all enemies in a 8M radius around the primary target by a fixed amount. Damage type is Earth.,AREA DAMAGE
+atk,Earth Subsistence,R12: Dark Realm,1%,Increases your Earth damage based on your current energy percentage. Full bonus is applied at 100% energy. Drains 200 energy whenever the bonus is applied.,DAMAGE
+atk,Earth Taste,Experiment: Earth,"1,750 kg/m³",Deals additional damage of type Earth based on a percentage of the total damage dealt. Damage of taste modules can not be further amplified.,DAMAGE
+atk,Earthquake,Experiment: Earth,55M kg/m³,Stuns all non-Earth enemies on the map and damages them by 15% of the towers maximum hitpoints. Damage type is Earth.,ACTIVE INSTANT AREA DAMAGE STUN DEBUFF
+atk,Electricity Attack,R02: Desert,5%,Provides the tower some basic Electricity damage on every attack.,DAMAGE
+atk,Electricity Burst,R02: Desert,2%,Provides the tower a 20% chance to deal additional Electricity damage on an attack.,CHANCE DAMAGE
+atk,Electricity Crit,R02: Desert,1%,Provides a chance to multiply your projectile's Electricity damage.,CHANCE DAMAGE
+atk,Electricity Focus,R15: Chaos,1%,Increases Electricity damage dealt by the tower for 45 seconds.,ACTIVE INSTANT DAMAGE BUFF
+atk,Electricity Impetus,R10: Ocean,1%,Increases the total Electricity damage of the tower based on the distance between the target and the tower at the moment the projectile arrives.,DAMAGE
+atk,Electricity Splash,R06: High Mountain,0.9%,Provides a 20% chance to damage all enemies in a 8M radius around the primary target by a fixed amount. Damage type is Electricity.,AREA DAMAGE
+atk,Electricity Subsistence,R12: Dark Realm,1%,Increases your Electricity damage based on your current energy percentage. Full bonus is applied at 100% energy. Drains 200 energy whenever the bonus is applied.,DAMAGE
+atk,Electricity Taste,Experiment: Electricity,5A,Deals additional damage of type Electricity based on a percentage of the total damage dealt. Damage of taste modules can not be further amplified.,DAMAGE
+atk,Emergency Critical,Experiment: Universal,>= 1.8G,Provides a chance to multiply outgoing damage. The chance is based on the current %-based hitpoints of the tower where 100% health provides a 0% chance and 0% health provides a 100% chance.,CHANCE DAMAGE
+atk,Execution,R09: Beach,1%,Allows the tower to deal additional Universal damage to an enemy if its hitpoints are below 45% of their maximum value.,DAMAGE
+atk,Extinguish,Experiment: Water,1000L (-22°C),Provides a chance to instantly destroy a fire enemy on an attack.,CHANCE DAMAGE
+atk,Fire Attack,R01: Forest,5%,Provides the tower some basic Fire damage on every attack.,DAMAGE
+atk,Fire Bomb,Artifact: Incendiary Device,,Place a bomb that will explode after one second and deal fire damage to enemies in a 12m radius.,ACTIVE GROUND AREA DAMAGE
+atk,Fire Breath,Experiment: Fire,"3,000°C",Provides a chance to release a wave of Fire that damages every unit on its way towards the primary target. Deals a fixed amount of damage.,CHANCE AREA DAMAGE
+atk,Fire Burst,R01: Forest,2%,Provides the Tower a 20% chance to deal additional Fire damage on an attack.,CHANCE DAMAGE
+atk,Fire Crit,R02: Desert,1%,Provides a chance to multiply your projectile's Fire damage.,CHANCE DAMAGE
+atk,Fire Focus,R15: Chaos,1%,Increases Fire damage dealt by the tower for 45 seconds.,ACTIVE INSTANT DAMAGE BUFF
+atk,Fire Impetus,R10: Ocean,1%,Increases the total Fire damage of the tower based on the distance between the target and the tower at the moment the projectile arrives.,DAMAGE
+atk,Fire Splash,R06: High Mountain,0.9%,Provides a 20% chance to damage all enemies in a 8M radius around the primary target by a fixed amount. Damage type is Fire.,AREA DAMAGE
+atk,Fire Subsistence,R12: Dark Realm,1%,Increases your Fire damage based on your current energy percentage. Full bonus is applied at 100% energy. Drains 200 energy whenever the bonus is applied.,DAMAGE
+atk,Fire Taste,Experiment: Fire,100°C,Deals additional damage of type Fire based on a percentage of the total damage dealt. Damage of taste modules can not be further amplified.,DAMAGE
+atk,Firestorm,R05: Volcano,1%,Unleashes a powerful firestorm at the targeted location which damages enemies by 40% of their max. hitpoints + a fixed amount of damage.,ACTIVE GROUND AREA DAMAGE
+atk,Fracture,Arcade: Jumble,,Temporarily subtracts 500% of the towers resistance (post-additive) but in turn multiplies all outgoing damage by a constant factor.,ACTIVE INSTANT BUFF RESISTANCE DAMAGE
+atk,Frost Splash,Era Experiment: Water,,Provides a 10% chance to slow the movement speed of all enemies in a large area around the primary target for 3 seconds. Stacks with other slowing effects.,CHANCE AREA SLOW
+atk,Gaia Synergy,Infinity grid: 15,1 Oc (1e27),Deals two independent instances of infinity Earth and Nature damage.,INFINITY DAMAGE
+atk,Gaia's path,Experiment: Nature,22 Plants,"Projectiles that hit Nature enemies will start to bounce off to nearby targets. Bouncing a total of 3 times, dealing Nature damage to additional targets.",AREA DAMAGE
+atk,Gigantic vines,Experiment: Nature,35 Plants,Spawns huge vines all over the map (requires solid ground). Enemies getting too close to the vines will receive a negative buff that slows their movement and attackspeed by 33% and deals 10% of their current hitpoints as Nature damage to them.,ACTIVE INSTANT AREA DAMAGE SLOW DEBUFF
+atk,Glacier Spikes,Experiment: Water,2500L (-40°C),Spawns multiple ice pillars at random positions around the map (requires solid ground). Enemies that get too close to the pillars will take a fixed amount of water damage multiplied by the towers water armor (multiplier cannot be lower than 1) and have their movement- and attackspeed slowed by 90%. The pillars will disappear after 20 seconds.,ACTIVE INSTANT AREA DAMAGE SLOW DEBUFF
+atk,Headhunting,Challenge: 2-3,Challenge Completion,"Increases the damage against non-normal enemy types. Includes Archers, Assassins, Wizards, Tanks and bosses.",DAMAGE ARCHER WIZARD ASSASSIN BOSS TANK
+atk,Ice breath,Era Experiment: Water,,Provides a chance to release a wave of frost that deals little damage and freezes all enemies in a straight line for 1.2 seconds.,CHANCE AREA STUN DEBUFF
+atk,Ice Shards,R10: Ocean,1%,Deals Water damage on impact and slows the movement speed of the primary target for 2 seconds.,DAMAGE SLOW DEBUFF
+atk,Impetus,Experiment: Neutral,10000,Increases the total damage of the tower based on the distance between the target and the tower at the moment the projectile arrives.,DAMAGE
+atk,Incineration,Experiment: Fire,"5,000,000°C",Increases Fire damage based on the current hitpoint percentage of the primary target.,DAMAGE
+atk,Infinity Attack,Infinity grid: 14,100 Sp (1e26),An incredibly refined attack module that allows the tower to damage infinity enemies. Damage type is Neutral.,INFINITY DAMAGE
+atk,Infinity Burst,Infinity grid: 7,100 Oc (1e29),Provides a 25% chance to deal additional Neutral infinity damage.,INFINITY DAMAGE CHANCE
+atk,Infinity Critical,Infinity grid: 9,1 Oc (1e27),Provides a chance to multiply the towers damage. The multiplier is not reduced for infinity enemies.,CHANCE INFINITY DAMAGE
+atk,Infinity Impetus,Infinity grid: 19,10 Oc (1e28),Increases the total damage of a projectile based on how close an enemy is to the tower at the moment the projectile arrives. Uses the towers attackrange as reference.,INFINITY DAMAGE
+atk,Infinity Splash,Infinity grid: 8,1 Oc (1e27),Provides a 20% chance to damage enemies close to your primary target by a portion of your damage dealt to the primary target itself as infinity damage.,CHANCE AREA INFINITY DAMAGE
+atk,Lifeleech,R07: Jungle,1.5%,Instantly drains life from surrounding enemies to heal the tower. Draining life counts as Nature damage.,ACTIVE INSTANT AREA LIFESTEAL
+atk,Lifesteal,Experiment: Neutral,2500,Converts a part of the attack damage dealt back to health for the tower.,HEALTH LIFESTEAL
+atk,Light Attack,R02: Desert,5%,Provides the tower some basic Light damage on every attack.,DAMAGE
+atk,Light Burst,R02: Desert,2%,Provides the tower a 20% chance to deal additional Light damage on an attack.,CHANCE DAMAGE
+atk,Light Crit,R02: Desert,1%,Provides a chance to multiply your projectile's Light damage.,CHANCE DAMAGE
+atk,Light Focus,R15: Chaos,1%,Increases Light damage dealt by the tower for 45 seconds.,ACTIVE INSTANT DAMAGE BUFF
+atk,Light Impetus,R10: Ocean,1%,Increases the total Light damage of the tower based on the distance between the target and the tower at the moment the projectile arrives.,DAMAGE
+atk,Light Splash,R06: High Mountain,0.9%,Provides a 20% chance to damage all enemies in a 8M radius around the primary target by a fixed amount. Damage type is Light.,AREA DAMAGE
+atk,Light Subsistence,R12: Dark Realm,1%,Increases your Light damage based on your current energy percentage. Full bonus is applied at 100% energy. Drains 200 energy whenever the bonus is applied.,DAMAGE
+atk,Light Taste,Experiment: Light,"5,000 LM",Deals additional damage of type Light based on a percentage of the total damage dealt. Damage of taste modules can not be further amplified.,DAMAGE
+atk,Lightning,Experiment: Electricity,12A,"Hits all surrounding enemies with the wrath of the thundergod. Deals Electricity damage in a large radius around the tower, stunning all affected targets for 2 seconds.",ACTIVE INSTANT AREA DAMAGE STUN DEBUFF
+atk,Multishot,R01: Forest,Wave 30,Provides a chance to shoot more missiles in order to hit additional targets on an attack.,CHANCE AREA
+atk,Nature Attack,R01: Forest,5%,Provides the tower some basic Nature damage on every attack.,DAMAGE
+atk,Nature Burst,R01: Forest,2%,Provides the tower a 20% chance to deal additional Nature damage on an attack.,CHANCE DAMAGE
+atk,Nature Crit,R01: Forest,2%,Provides a chance to multiply your projectile's Nature damage.,CHANCE DAMAGE
+atk,Nature Focus,R15: Chaos,1%,Increases Nature damage dealt by the tower for 45 seconds.,ACTIVE INSTANT DAMAGE BUFF
+atk,Nature Impetus,R10: Ocean,1%,Increases the total Nature damage of the tower based on the distance between the target and the tower at the moment the projectile arrives.,DAMAGE
+atk,Nature Splash,R07: Jungle,2%,Provides a 20% chance to damage all enemies in a 8M radius around the primary target by a fixed amount. Damage type is Nature.,AREA DAMAGE
+atk,Nature Subsistence,R12: Dark Realm,1%,Increases your Nature damage based on your current energy percentage. Full bonus is applied at 100% energy. Drains 200 energy whenever the bonus is applied.,DAMAGE
+atk,Nature Taste,Experiment: Nature,3 Plants,Deals additional damage of type Nature based on a percentage of the total damage dealt. Damage of taste modules can not be further amplified.,DAMAGE
+atk,Nature's Touch,R01: Forest,Wave 40,Deals Nature damage to the primary target and heals the tower by a percentage of the total damage dealt.,DAMAGE LIFESTEAL
+atk,Nature's wrath,Experiment: Nature,26 Plants,Amplifies Nature projectile damage dealt against Neutral enemies.,DAMAGE
+atk,Neutral Focus,R15: Chaos,1%,Increases Neutral damage dealt by the tower for 45 seconds.,ACTIVE INSTANT DAMAGE BUFF
+atk,Phoenix Bounce,Challenge: 1-1,Challenge Completion,Creates a very hot missile that deals Fire damage and bounces off to another target if the current target is of type Fire. Bounces up to 10 times.,AREA DAMAGE
+atk,Planned Strike,Challenge: 1-4,Challenge Completion,Every 10 attack deals more damage. Switching targets does not reset the counter.,DAMAGE
+atk,Quantum Speed,Infinity grid: 10,10 Oc (1e28),Provides the tower with the ability to reach much higher attack speed.,INFINITY ATTACKSPEED
+atk,Rapidfire,R09: Beach,0.6%,Provides a chance to temporarily increase the attack speed of the tower by 50% whenever an enemy is being destroyed.,CHANCE BUFF ATTACKSPEED
+atk,Redirect,Arcade: Lucky Wheel,,Sacrifices the towers shield an in turn increases its electricity damage multiplicatively by [sacrificed amount]^0.15 for a certain amount of time.,ACTIVE INSTANT BUFF
+atk,Relay,Era Experiment: Electricity,,Provides a chance to hit a maximum of 4 additional electricity enemies around the tower when attacking an electricity type enemy.,CHANCE AREA
+atk,Shatter,Experiment: Water,500L (-20°C),Increases water damage dealt against stunned or frozen enemies.,DAMAGE STUN
+atk,Shockwave,Era Experiment: Earth,,Hurls a shockwave towards the targeted point which stuns and damages all enemies on its way.,ACTIVE INSTANT DAMAGE STUN DEBUFF
+atk,Solar Strike,Era Experiment: Fire,,Provides a chance to multiply your outgoing damage. Damage is multiplied by another 10000 if the target is a Nature element.,CHANCE DAMAGE
+atk,Soul Harvesting,R04: Underground,0.1%,Provides a chance to deal 33% of the primary targets current health as additional Darkness damage.,CHANCE DAMAGE
+atk,Sparks,R08: Metallic Ruins,0.12%,Deals a random amount of damage and provides a 25% chance to stun non-Boss units for 1 second on an attack.,DAMAGE STUN DEBUFF ARCHER WIZARD ASSASSIN NORMAL TANK
+atk,Splash,R03: Winter,1%,Provides a 33% chance to damage all enemies in a 10M radius around the targeted unit by a fixed amount. Damage type is Neutral.,CHANCE AREA DAMAGE
+atk,Storm Synergy,Infinity grid: 11,1 Oc (1e27),Deals two independent instances of infinity Water and Air damage.,INFINITY DAMAGE
+atk,Sun Synergy,Infinity grid: 18,1 Oc (1e27),Deals two independent instances of infinity Fire and Electricity damage.,INFINITY DAMAGE
+atk,Super Multishot,R09: Beach,0.8%,Instantly fires a missile at multiple targets around the tower.,ACTIVE INSTANT AREA
+atk,Unholy Missile,Experiment: Darkness,75 Particles,Increases the damage based on the current missing hitpoint percentage of the primary target.,DAMAGE
+atk,Universal Attack,Experiment: Universal,>= 1.5G,Provides the tower some Universal damage. Universal damage is very effective against Universal type enemies and does full damage to all elements.,DAMAGE
+atk,Universal Focus,R15: Chaos,1%,Increases Universal damage dealt by the tower for 45 seconds.,ACTIVE INSTANT DAMAGE BUFF
+atk,Universal Infinity,Infinity grid: 20,100 Oc (1e29),Deals Universal infinity damage.,INFINITY DAMAGE
+atk,Violent Seeds,Experiment: Nature,12 Plants,Continuously increases the towers Nature damage until the end of the duration.,ACTIVE INSTANT BUFF
+atk,Void Synergy,Infinity grid: 5,100 Oc (1e29),Deals two independent instances of infinity Light and Darkness damage.,INFINITY DAMAGE
+atk,Water Attack,R03: Winter,5%,Provides the tower some basic Water damage on every attack.,DAMAGE
+atk,Water Burst,R03: Winter,2%,Provides the tower a 20% chance to deal additional Water damage on an attack.,CHANCE DAMAGE
+atk,Water Crit,R03: Winter,1%,Provides a chance to multiply your projectile's Water damage.,CHANCE DAMAGE
+atk,Water Focus,R15: Chaos,1%,Increases Water damage dealt by the tower for 45 seconds.,ACTIVE INSTANT DAMAGE BUFF
+atk,Water Impetus,R10: Ocean,1%,Increases the total Water damage of the tower based on the distance between the target and the tower at the moment the projectile arrives.,DAMAGE
+atk,Water Splash,R07: Jungle,0.9%,Provides a 20% chance to damage all enemies in a 8M radius around the primary target by a fixed amount. Damage type is Water.,AREA DAMAGE
+atk,Water Subsistence,R12: Dark Realm,1%,Increases your Water damage based on your current energy percentage. Full bonus is applied at 100% energy. Drains 200 energy whenever the bonus is applied.,DAMAGE
+atk,Water Taste,Experiment: Water,50L (15°C),Deals additional damage of type Water based on a percentage of the total damage dealt. Damage of taste modules can not be further amplified.,DAMAGE
+def,Adaptive Regeneration,Experiment: Nature,6 Plants,Automatically repairs the tower by an amount based on its maximum hitpoints.,HEALTH REGENERATION
+def,Advanced Heal,Challenge: 2-4,Challenge Completion,Instantly refills a percentage of the tower's maximum hitpoints.,ACTIVE INSTANT HEALTH
+def,Advanced Shield,Era Experiment: Earth,,"Provides the tower with an advanced shield, but disables health regeneration.",SHIELD REGENERATION
+def,Air Armor,R04: Underground,5%,Reduces incoming Air damage by a fixed amount.,ARMOR
+def,Air Barrier,R06: High Mountain,1%,Damages attackers by an amount (based on your max. shield points) of damage type Air as long as your current shield points are greater than 0.,REACTIVE DAMAGE
+def,Air Block,R14: Universe,1%,Provides a chance to fully block incoming Air damage.,BLOCK CHANCE
+def,Air Exchange,R09: Beach,1%,Divides incoming Air damage by a certain amount while at the same time multiplying incoming Earth damage.,RESISTANCE
+def,Air Protection,R13: Heaven,1%,Increases your Air armor (abs. resistance) by an amount that is based on the maximum shield value of the tower. Bonus is only active when the shield is active.,ARMOR
+def,Air Resistance,R02: Desert,5%,Reduces incoming Air damage by a percent based amount.,RESISTANCE
+def,Air Shell,R06: High Mountain,1%,Increases resistance against Air damage everytime the tower takes damage of the specified type. Stacks up to 100 times (multiplicatively) and lasts up to 4 seconds. Taking damage of the same type again refreshes the duration.,RESISTANCE BUFF
+def,Basic Regeneration,Base mod,Unlocked from start,Supplies the tower with the ability to slowly regenerate itself.,HEALTH REGENERATION
+def,Basic Shield,R03: Winter,Wave 50,Provides the tower with a shield that absorbs damage.,SHIELD
+def,Boss shield,R03: Winter,1.2%,Reduces the incoming damage from Boss enemies.,REACTIVE BLOCK BOSS
+def,Bulletproof,R06: High Mountain,0.9%,Provides resistance against incoming damage from ranged units like archers and wizards.,REACTIVE BLOCK ARCHER WIZARD
+def,Checkerboard Aura,Mine: Second Floor,0.5%,Reduces the base resistance of nearby enemies against Neutral and Universal damage. Negative base resistance amplifies damage of the according element type.,AURA DEBUFF
+def,Daigoparry,Arcade: Secret,Konami code,Parry the next 15 hits that would kill you,REACTIVE BLOCK
+def,Darkness Armor,R04: Underground,5%,Reduces incoming Darkness damage by a fixed amount.,ARMOR
+def,Darkness Barrier,R09: Beach,1%,Damages attackers by an amount (based on your max. shield points) of damage type Darkness as long as your current shield points are greater than 0.,REACTIVE DAMAGE
+def,Darkness Block,R14: Universe,1%,Provides a chance to fully block incoming Darkness damage.,BLOCK CHANCE
+def,Darkness Exchange,R09: Beach,1%,Divides incoming Darkness damage by a certain amount while at the same time multiplying incoming Light damage.,RESISTANCE
+def,Darkness Protection,R13: Heaven,1%,Increases your Darkness armor (abs. resistance) by an amount that is based on the maximum shield value of the tower. Bonus is only active when the shield is active.,ARMOR
+def,Darkness Resistance,R03: Winter,5%,Reduces incoming Darkness damage by a percent based amount.,RESISTANCE
+def,Darkness Shell,R10: Ocean,1%,Increases resistance against Darkness damage everytime the tower takes damage of the specified type. Stacks up to 100 times (multiplicatively) and lasts up to 4 seconds. Taking damage of the same type again refreshes the duration.,RESISTANCE BUFF
+def,Death Aura,Infinity grid: 17,10 Oc (1e28),Provides a chance for each individual non-Boss enemy around the tower to immediately die once every second.,AURA DAMAGE ARCHER WIZARD ASSASSIN NORMAL TANK
+def,Defiance,Experiment: Neutral,125000,"Everytime the tower is hit by death blow, all surrounding enemies will be stunned for 3 seconds and the tower survives with 1 hp left. Can only trigger once every few seconds.",REACTIVE BLOCK STUN DEBUFF
+def,Desert Gift,Challenge: 2-6,Challenge Completion,"Increases Neutral, Light, Fire and Earth damage while also increasing the resistance against these elements by the same value.",RESISTANCE
+def,Diamond Foundation,R08: Metallic Ruins,1%,This crystalized foundation provides a lot of hitpoints but becomes fragile if damaged. Divides incoming damage by a fixed factor that gets lower along with the hitpoints of the tower. At 1/3 of max. health there is a turning point where incoming damage is being amplified.,HEALTH RESISTANCE
+def,Dispel,Experiment: Light,"12,500 LM",Removes a negative buff from the tower.,ACTIVE INSTANT
+def,Dryness Aura,Experiment: Light,"750,000 LM","Reduces the base resistance of nearby enemies against Light, Water, Air and Electricity damage. Negative base resistance amplifies damage of the according element type.",AURA DEBUFF
+def,Earth Armor,R04: Underground,5%,Reduces incoming Earth damage by a fixed amount.,ARMOR
+def,Earth Barrier,R07: Jungle,1%,Damages attackers by an amount (based on your max. shield points) of damage type Earth as long as your current shield points are greater than 0.,REACTIVE DAMAGE
+def,Earth Block,R14: Universe,1%,Provides a chance to fully block incoming Earth damage.,BLOCK CHANCE
+def,Earth Exchange,R09: Beach,1%,Divides incoming Earth damage by a certain amount while at the same time multiplying incoming Air damage.,RESISTANCE
+def,Earth Protection,R13: Heaven,1%,Increases your Earth armor (abs. resistance) by an amount that is based on the maximum shield value of the tower. Bonus is only active when the shield is active.,ARMOR
+def,Earth Resistance,R01: Forest,5%,Reduces incoming Earth damage by a percent based amount.,RESISTANCE
+def,Earth Shell,R07: Jungle,1%,Increases resistance against Earth damage everytime the tower takes damage of the specified type. Stacks up to 100 times (multiplicatively) and lasts up to 4 seconds. Taking damage of the same type again refreshes the duration.,RESISTANCE BUFF
+def,Electricity Armor,R05: Volcano,5%,Reduces incoming Electricity damage by a fixed amount.,ARMOR
+def,Electricity Barrier,R08: Metallic Ruins,1%,Damages attackers by an amount (based on your max. shield points) of damage type Electricity as long as your current shield points are greater than 0.,REACTIVE DAMAGE
+def,Electricity Block,R14: Universe,1%,Provides a chance to fully block incoming Electricity damage.,BLOCK CHANCE
+def,Electricity Exchange,R09: Beach,1%,Divides incoming Electricity damage by a certain amount while at the same time multiplying incoming Nature damage.,RESISTANCE
+def,Electricity Protection,R13: Heaven,1%,Increases your Electricity armor (abs. resistance) by an amount that is based on the maximum shield value of the tower. Bonus is only active when the shield is active.,ARMOR
+def,Electricity Resistance,R02: Desert,5%,Reduces incoming Electricity damage by a percent based amount.,RESISTANCE
+def,Electricity Shell,R08: Metallic Ruins,1%,Increases resistance against Electricity damage everytime the tower takes damage of the specified type. Stacks up to 100 times (multiplicatively) and lasts up to 4 seconds. Taking damage of the same type again refreshes the duration.,RESISTANCE BUFF
+def,Elemental Resistance,R01: Forest,Wave 20,Reduces incoming Elemental damage by a certain percentage. Neutral and Universal damage are not considered Elemental.,RESISTANCE
+def,Fiery Aura,Era Experiment: Fire,,Damages enemies which are very close to the tower by a fixed and by an amount that is based on their current hitpoints. The fixed amount of damage is affected by amplifiers and bonuses and is applied independently from the %-based amount.,AURA DAMAGE
+def,Fire Armor,R05: Volcano,5%,Reduces incoming Fire damage by a fixed amount.,ARMOR
+def,Fire Barrier,R08: Metallic Ruins,1%,Damages attackers by an amount (based on your max. shield points) of damage type Fire as long as your current shield points are greater than 0.,REACTIVE DAMAGE
+def,Fire Block,R14: Universe,1%,Provides a chance to fully block incoming Fire damage.,BLOCK CHANCE
+def,Fire Exchange,R09: Beach,1%,Divides incoming Fire damage by a certain amount while at the same time multiplying incoming Water damage.,RESISTANCE
+def,Fire Protection,R13: Heaven,1%,Increases your Fire armor (abs. resistance) by an amount that is based on the maximum shield value of the tower. Bonus is only active when the shield is active.,ARMOR
+def,Fire Resistance,R01: Forest,5%,Reduces incoming Fire damage by a percent based amount.,RESISTANCE
+def,Fire Shell,R08: Metallic Ruins,1%,Increases resistance against Fire damage everytime the tower takes damage of the specified type. Stacks up to 100 times (multiplicatively) and lasts up to 4 seconds. Taking damage of the same type again refreshes the duration.,RESISTANCE BUFF
+def,Forest Gift,Challenge: 1-6,Challenge Completion,"Increases Neutral, Fire, Earth and Nature damage while also increasing the resistance against these elements by the same value.",RESISTANCE
+def,Frost Aura,R10: Ocean,0.8%,Slows the movement speed of enemies in a 20M radius around the tower.,AURA SLOW DEBUFF
+def,Frost Nova,Experiment: Water,75L (0°C),Releases a wave of frost around the tower. Enemies affected by the cold cannot move for 6 seconds.,ACTIVE INSTANT AREA STUN DEBUFF
+def,Granite Foundation,R02: Desert,Wave 10,A stronger foundation that provides more hitpoints than the stone foundation but slows the attackspeed of the tower in turn by 50%.,HEALTH ATTACKSPEED
+def,Gravel,Experiment: Earth,"30,000 kg/m³",Provides a chance to produce gravel around the tower when attacking (displayed as a buff). Whenever an enemy attacks it gets stunned by 0.1 seconds for each layer of the buff and the incoming damage gets reduced by 33% per layer (multiplicative). Stacks up to 50 times and disappears when taking damage.,REACTIVE STUN BLOCK
+def,Heartstopper Aura,Experiment: Darkness,15 Particles,Decreases the hitpoints of nearby non-Boss units by a percent based amount of damage type Darkness.,AURA DAMAGE ARCHER WIZARD ASSASSIN NORMAL TANK
+def,Infinity Reflect,Infinity grid: 23,100 No (1e32),Reflects a part of the incoming damage in form of neutral infinity damage.,REACTIVE DAMAGE
+def,Light Armor,R05: Volcano,5%,Reduces incoming Light damage by a fixed amount.,ARMOR
+def,Light Barrier,R08: Metallic Ruins,1%,Damages attackers by an amount (based on your max. shield points) of damage type Light as long as your current shield points are greater than 0.,REACTIVE DAMAGE
+def,Light Block,R14: Universe,1%,Provides a chance to fully block incoming Light damage.,BLOCK CHANCE
+def,Light Exchange,R09: Beach,1%,Divides incoming Light damage by a certain amount while at the same time multiplying incoming Darkness damage.,RESISTANCE
+def,Light Protection,R13: Heaven,1%,Increases your Light armor (abs. resistance) by an amount that is based on the maximum shield value of the tower. Bonus is only active when the shield is active.,ARMOR
+def,Light Resistance,R02: Desert,5%,Reduces incoming Light damage by a percent based amount.,RESISTANCE
+def,Light Shell,R08: Metallic Ruins,1%,Increases resistance against Light damage everytime the tower takes damage of the specified type. Stacks up to 100 times (multiplicatively) and lasts up to 4 seconds. Taking damage of the same type again refreshes the duration.,RESISTANCE BUFF
+def,Magical Orbs,Mine: Second Floor,0.5%,Spawns magical orbs that circle around the tower and stun nearby enemies on contact for 3 seconds.,ACTIVE INSTANT STUN DEBUFF
+def,Magical Protection,Era Experiment: Light,,Removes a negative buff once in a while.,AURA
+def,Magma Foundation,R05: Volcano,Wave 100,"A fiery foundation that provides the tower with some hitpoints and increases fire resistance, but lowers water resistance. In addition outgoing fire damage is multiplied by 40.",HEALTH RESISTANCE
+def,Marble Foundation,R11: Neutral,0.5%,Sturdy foundation that protects you from the fundamentals of the universe. Divides incoming neutral and universal damage by 200. (Counts as neutral/universal resistance in the stats menu.),HEALTH RESISTANCE
+def,Metal Plating,Artifact: Metal Plating,,A certain amount of electricity damage is prevented and instead dealt to a nearby enemy.,REACTIVE DAMAGE BLOCK
+def,Nature Armor,R04: Underground,5%,Reduces incoming Nature damage by a fixed amount.,ARMOR
+def,Nature Barrier,R07: Jungle,1%,Damages attackers by an amount (based on your max. shield points) of damage type Nature as long as your current shield points are greater than 0.,REACTIVE DAMAGE
+def,Nature Block,R14: Universe,1%,Provides a chance to fully block incoming Nature damage.,BLOCK CHANCE
+def,Nature Exchange,R09: Beach,1%,Divides incoming Nature damage by a certain amount while at the same time multiplying incoming Electricity damage.,RESISTANCE
+def,Nature Protection,R13: Heaven,1%,Increases your Nature armor (abs. resistance) by an amount that is based on the maximum shield value of the tower. Bonus is only active when the shield is active.,ARMOR
+def,Nature Resistance,R01: Forest,5%,Reduces incoming Nature damage by a percent based amount.,RESISTANCE
+def,Nature Shell,R07: Jungle,1%,Increases resistance against Nature damage everytime the tower takes damage of the specified type. Stacks up to 100 times (multiplicatively) and lasts up to 4 seconds. Taking damage of the same type again refreshes the duration.,RESISTANCE BUFF
+def,Neutral Exchange,R11: Neutral,1%,Divides incoming Neutral damage by a certain amount while at the same time multiplying incoming Universal damage.,RESISTANCE
+def,Overcharge,Experiment: Electricity,30A,Provides the tower a chance to receive +25% attackspeed for a certain amount of time whenever it receives damage from an Electricity type enemy.,REACTIVE ATTACKSPEED
+def,Phasing,Experiment: Gems,5 Stacks,A slight modification to the towers shield that allows it to completely block every few attacks. Only works as long as the towers shieldpoints are above 0.,REACTIVE BLOCK
+def,Power Conversion,Infinity grid: 2,100 No (1e32),Everytime the tower takes damage a part of its energy refills by converting the impact force in to raw power. Only works when shield is active!,REACTIVE ENERGY
+def,Quantum Defense,Infinity grid: 22,10 No (1e31),Reduces incoming damage by an exponential factor but requires energy everytime the tower is taking damage.,REACTIVE ENERGY BLOCK
+def,Quantum Fading,Infinity grid: 3,10 No (1e31),Completely absorbs incoming damage for a certain duration every 20 seconds by shifting the lower part of the tower in and out of reality.,REACTIVE BLOCK BUFF
+def,Refined Armor,Arcade: Lucky Wheel,,Multiplies each armor type of the tower by a constant value.,ARMOR
+def,Reflect,Experiment: Neutral,20000,Damages attackers by a part of their own attackdamage.,REACTIVE DAMAGE
+def,Sandstorm,Challenge: 2-5,Challenge Completion,"Unleashes a huge sandstorm all over the map which slows enemies by 30% and reduces their general armor and therefore increasing their incoming damage, And affects all enemies on the map.",ACTIVE INSTANT SLOW DEBUFF
+def,Shelter,R04: Underground,1%,Provides a chance to fully block incoming damage if the tower hitpoints are below 50%.,REACTIVE BLOCK
+def,Shield Amplifier,Era Experiment: Neutral,,Multiplies the maximum shieldpoints of the tower by a constant factor.,SHIELD
+def,Shield of Air,Experiment: Air,1.01M Pa,Engulfs the tower with a shield of Air which blocks a random amount of damage on each attack. If no shield is present then this ability will be inactive.,REACTIVE BLOCK
+def,Shield of Darkness,Experiment: Darkness,30 Particles,Divides incoming Darkness damage by a specific amount as long as the towers shieldpoints are above 0. If no shield is present then this ability will be inactive.,REACTIVE BLOCK
+def,Shield of Fire,Experiment: Fire,"950,000°C",Absorbs incoming Fire damage and releases it in an explosion once every second. Deals the absorbed damage multiplied by a specific factor to all enemies around the tower.,REACTIVE DAMAGE
+def,Shield of Frost,Experiment: Water,200L (-10°C),Slows the attackspeed of enemies that attack the tower. Lasts up to 5 seconds but refreshes once the unit attacks again.,REACTIVE SLOW DEBUFF
+def,Shield of Nature,Experiment: Nature,9 Plants,Provides a 25% chance that incoming damage permanently increases the towers hp-regeneration.,REACTIVE HEALTH REGENERATION
+def,Shield Recharger,R06: High Mountain,0.5%,Starts regenerating your shield by a percentage based amount after not taking any damage for at least 4 seconds.,SHIELD REACTIVE REGENERATION
+def,Shock ward,Experiment: Electricity,1000A,Creates a ward at the targeted location which stuns enemies once they enter its area of effect. Lasts up to 30 seconds before disappearing.,ACTIVE GROUND STUN DEBUFF
+def,Simple Evasion,Experiment: Neutral,500,Provides the tower a small chance to fully neglect incoming damage.,REACTIVE BLOCK
+def,Simple Heal,R02: Desert,Wave 1,Instantly heals the tower by a specific amount of hitpoints.,ACTIVE INSTANT HEALTH
+def,Stab Prevention,Challenge: 1-3,Challenge Completion,Provides a chance to block incoming damage from assassins regardless of their elemental type.,REACTIVE BLOCK ASSASSIN
+def,Steel Foundation,Experiment: Earth,"6,000 kg/m³","A solid foundation that provides less hitpoints than stone foundation, but adds resistance to Neutral, Fire, Earth and Air damage.",HEALTH RESISTANCE
+def,Stone Foundation,Base mod,Unlocked from start,A very basic foundation for the tower which increases its hitpoints.,HEALTH
+def,Strike Back,Arcade: Lucky Wheel,,Chance to gain an attackspeed buff when health below 60%.,REACTIVE ATTACKSPEED BUFF
+def,Temporal Barrier,Experiment: Universal,<= -1.75,Engulfs the tower with a temporary barrier that limits incoming damage to 3% of its maximum hitpoints per damage instance.,ACTIVE INSTANT REACTIVE BLOCK BUFF
+def,Tideshift,Era Experiment: Water,,Sets the whole map under water. Slows the movement- and attackspeed of all enemies by 50%. The buff lasts as long as the total duration of the ocean so affected units remain slowed for a while after it disappears.,ACTIVE INSTANT SLOW DEBUFF
+def,Titanium Hull,Experiment: Earth,"125,000 kg/m³",Temporarily increases the towers generic resistance by 99% and its generic armor by a variable amount. Lasts up to 60 seconds.,ACTIVE INSTANT ARMOR RESISTANCE BUFF
+def,Transformator,Experiment: Electricity,150A,Provides a 12% chance to restore a part of your shield whenever killing an Electricity type enemy.,SHIELD
+def,Unholy Aura,Experiment: Darkness,50 Particles,"Reduces the base resistance of nearby enemies against Darkness, Fire, Earth and Nature damage. Negative base resistance amplifies damage of the according element type.",AURA DEBUFF
+def,Universal Exchange,R11: Neutral,1%,Divides incoming Universal damage by a certain amount while at the same time multiplying incoming Neutral damage.,RESISTANCE
+def,Water Armor,R05: Volcano,5%,Reduces incoming Water damage by a fixed amount.,ARMOR
+def,Water Barrier,R07: Jungle,1%,Damages attackers by an amount (based on your max. shield points) of damage type Water as long as your current shield points are greater than 0.,REACTIVE DAMAGE
+def,Water Block,R14: Universe,1%,Provides a chance to fully block incoming Water damage.,BLOCK CHANCE
+def,Water Exchange,R09: Beach,1%,Divides incoming Water damage by a certain amount while at the same time multiplying incoming Fire damage.,RESISTANCE
+def,Water Protection,R13: Heaven,1%,Increases your Water armor (abs. resistance) by an amount that is based on the maximum shield value of the tower. Bonus is only active when the shield is active.,ARMOR
+def,Water Resistance,R03: Winter,5%,Reduces incoming Water damage by a percent based amount.,RESISTANCE
+def,Water Shell,R07: Jungle,1%,Increases resistance against Water damage everytime the tower takes damage of the specified type. Stacks up to 100 times (multiplicatively) and lasts up to 4 seconds. Taking damage of the same type again refreshes the duration.,RESISTANCE BUFF
+utl,Awareness,Mine: Second Floor,1%,"Temporarily increases the experience points gained from destroyed enemies. (Refers to ingame XP, not town XP.)",ACTIVE INSTANT XP BUFF
+utl,Condense,Infinity grid: 16,1 Oc (1e27),Provides a small change to receive an exotic gem from destroying a Boss enemy.,CHANCE EXOTICS BOSS
+utl,Defensive Pack,R04: Underground,2%,Provides a chance to upgrade a random defensive module at the beginning of a new wave for free.,WAVE CHANCE MODULE
+utl,Energy,R02: Desert,Wave 1,Provides the tower with Energy which can be used to activate active skills.,ENERGY
+utl,Energy Flow,Challenge: 2-2,Challenge Completion,Reduces the cooldown of active modules.,REGENERATION
+utl,Energy Recycling,Arcade: Lucky Wheel,,Reduces the energy cost of all modules that require energy.,ENERGY COST
+utl,Energy Regeneration,R02: Desert,Wave 1,Provides the tower the ability to passively regenerate energy.,ENERGY REGENERATION
+utl,Moon Energy,R03: Winter,5%,Increases the energy regeneration of the tower based on how close the current energy is to 0%. Provides no bonus if the current energy is above 50%.,ENERGY REGENERATION
+utl,Neutral Response,Arcade: Jumble,,Turns all non-neutral enemies on the map into neutral type enemies.,ACTIVE INSTANT
+utl,Offensive Pack,R04: Underground,2%,Provides a chance to upgrade a random offensive module at the beginning of a new wave for free.,WAVE CHANCE MODULE
+utl,Pressurize,Era Experiment: Neutral,,Provides a chance to turn destroyed enemies into some gems.,GEMS CHANCE
+utl,Recharge,Experiment: Light,6.25M LM,Instantly refills the towers energy to 100%.,ACTIVE INSTANT ENERGY
+utl,Refresh,Era Experiment: Light,,Resets the cooldown of all other modules when used.,ACTIVE INSTANT COOLDOWN
+utl,Sun Energy,R09: Beach,5%,Increases the energy regeneration of the tower based on how close the current energy is to 100%. Provides no bonus if the current energy is below 50%.,ENERGY REGENERATION
+utl,Transmute,R04: Underground,0.5%,Provides a chance to convert dead enemies into additional town resources by using the power of alchemy.,RESOURCES CHANCE
+utl,Wave Resources,R01: Forest,Wave 50,Produces a fixed amount of Town Resources at the beginning of a new wave.,RESOURCES WAVE
+utl,XP Bonus,Era Experiment: Neutral,,Increases the amount of experience gained for destroying enemies.,XP
+ult,Avalanche,Experiment: Earth,2.5M kg/m³,Provides a chance to multiply your outgoing projectile Earth damage by an exponential part of your Earth armor. The current multiplier is x^0.12 where x represents your current Earth armor. The multiplier cannot be lower than 1.,DAMAGE
+ult,Bulwark,Era Experiment: Neutral,,Increases the towers damage the closer its hitpoints are to 50%. Passively multiplies the towers maximum hitpoints and all absolute resistances by 1000.,DAMAGE ARMOR
+ult,Conductor,Era Experiment: Electricity,,Converts a part of the incoming damage to shield points.,REACTIVE SHIELD
+ult,Dice of fate,Artifact: Dice of Fate,,Use the power of this artifact to get random buff every few seconds. Has a chance to apply a negative buff.,BUFF DAMAGE ATTACKSPEED BLOCK RANGE HEALTH SHIELD REGENERATION REACTIVE STUN
+ult,Division Shield,Experiment: Exotic,1 Fabric of reality,Divides incoming damage by a fixed amount. Affects all damage types.,REACTIVE BLOCK
+ult,Eternal Wall,Infinity grid: 4,1 No (1e30),Tremendously increases the hitpoints of the tower by raising them to a specific power.,HEALTH
+ult,Focused Multishot,Era Experiment: Universal,,Provides a chance to attack all units around the primary target.,AREA
+ult,Gravitational Impact,Era Experiment: Universal,,Provides a chance to deal a huge amount of damage to all enemies close to the primary target whenever attacking a universal type enemy. Splash damage type is universal.,DAMAGE
+ult,Growth,Era Experiment: Nature,,Increases the maximum hitpoints over time.,HEALTH
+ult,Hurricane,Era Experiment: Air,,"Increases the attack speed by 40%, all air damage dealt by 5000% and attackrange of the tower by 20%.",ACTIVE INSTANT RANGE DAMAGE ATTACKSPEED BUFF
+ult,Immortality Shield,Era Experiment: Light,,Completely nullifies any incoming damage for a certain amount of time.,ACTIVE INSTANT BLOCK BUFF
+ult,Infinity Range,Infinity grid: 6,10 Oc (1e28),Permanently increases the towers attack range by a fixed multiplier. Stacks with other range bonuses multiplicatively.,RANGE
+ult,Lucky Shot,Experiment: Gems,1 Stack,Provides a small chance to multiply your damage by an amount on an attack.,DAMAGE
+ult,Neutral Amplifier,Era Experiment: Neutral,,Multiplies outgoing Neutral damage as well as the damage dealt against Neutral enemies.,
+ult,Photosynthesis,Era Experiment: Nature,,"Increases the towers Nature damage for every Light enemy killed (multiplicative with other bonuses, additive to itself). The bonuse damage stays until the end of a round.",
+ult,Power of the Cat,Arcade: Jumble,,Provides the tower with up to 9 layers that block incoming lethal attacks. Drains 1 layer per blocked attack. Layers slowly regenerate over time and are displayed in the form of a buff/status effect.,REACTIVE BLOCK
+ult,Radar,Mine: Second Floor,0.5%,Doubles the tower's attack range for a certain amount of time.,ACTIVE INSTANT RANGE BUFF
+ult,Rejuvenate,Experiment: Nature,16 Plants,Increases the towers hp regeneration for each kill until the end of the current round. Works multiplicatively but additive to itself. Does not affect %-based regeneration.,HEALTH REGENERATION
+ult,Serious Missile,Infinity grid: 21,1 No (1e30),An incredibly refined module that provides a small chance to instantly destroy a non-Boss unit.,DAMAGE ARCHER WIZARD ASSASSIN NORMAL TANK
+ult,Snap of Destiny,Infinity grid: 24,1 De (1e33),Erases half of all enemies from the map.,ACTIVE INSTANT AREA INFINITY DAMAGE
+ult,Stoneskin,Era Experiment: Earth,,Hardens the towers walls and provides a chance to stun attackers for a certain amount of time. Works against ranged attackers as well.,REACTIVE STUN
+ult,Stream of Life,Era Experiment: Nature,,Multiplies the damage bonus of Nature damage by x^0.1 where x is the current health regeneration of the tower at the moment of using this module. Disables health regeneration of the tower for the duration of the buff.,ACTIVE INSTANT DAMAGE BUFF
+ult,Super Tower,R15: Chaos,Wave 100,"Boosts the tower attack speed by 50%, multiplies the max. health and health regeneration by 3 and decreases incoming damage by 50%.",ACTIVE INSTANT BUFF HEALTH REGENERATION RESISTANCE ATTACKSPEED
+ult,Super Tower 2,Era Experiment: Universal,,Massively boosts the tower attack speed (+400%) and multiplies it's energy regeneration by 4.,ACTIVE INSTANT ATTACKSPEED ENERGY REGENERATION BUFF
+ult,Super Tower 3,Infinity grid: 1,1 De (1e33),Multiplies the towers outgoing projectile damage by 1000000 and maximum shield by 100.,ACTIVE INSTANT INFINITY DAMAGE SHIELD BUFF
+ult,Unfolding,Era Experiment: Universal,,Increases the maximum shieldpoints over time.,SHIELD
+ult,Universal Shield,Experiment: Universal,<= -0.5,Blocks the first 2 hits from a single enemy. Afterwards there is a small chance that one more hit will be blocked.,REACTIVE BLOCK
+ult,Void,Arcade: Jumble,,Creates a dark void in the targeted area that immediately destroys neutral and universal enemies that enter it.,ACTIVE AREA
+spc,Absolute Zero,Experiment: Water,100L (-273°C),Freezes time itself. Equipping your tower with this module slows the passage of time itself by 50%.,TIME
+spc,Infinity Foundation,Infinity grid: 13,10 Sp (1e25),"Allows the tower to survive attacks from infinity enemies. In exchange the maximum hitpoints, shield and hitpoint regeneration are reduced to x^0.5.",INFINITY HEALTH
+spc,Infinity Shield,Infinity grid: 12,100 Sp (1e26),Partially reverts the shield debuff from infinity foundation. Shield is increased by x^1.5. Only works if infinity foundation is equipped.,INFINITY SHIELD
+spc,Rak's Curse,Arcade,Secret,"On activation there is a 0.1% chance to permanently buff the tower's Max Health, Energy Regeneration and Spell Cooldown. 99.8% chance that nothing happens. 0.1% chance to meltdown and destroy the tower. Rak created this curse with the power of lost savegames.Note: The buff lasts until the round ends.",COMMUNITY ACTIVE INSTANT CHANCE BUFF HEALTH REGENERATION
+spc,Reboot,Arcade: Jumble,,Sets the current hitpoints of the tower to EXACTLY 1,ACTIVE INSTANT HEALTH
+spc,Universal,Challenge: 1-5,Challenge Completion,Changes the base type of the tower from Neutral to Universal and therefore applies all default strengths and weaknesses of Universal to it.,ELEMENT ARMOR

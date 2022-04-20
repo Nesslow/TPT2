@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TPT2 Blueprint Tool</title>
+
+    <!-- import scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"></script>
+
+    <!-- import styles -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="box-wrap">
+            <div class="box-header">
+                <!-- search bar -->
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="Search...">
+                    <label for="show-details">Details</label>
+                    <input type="checkbox" id="show-details">
+                </div>
+                <!-- add 4 filter toggle button -->
+                <div class="filter-toggle-btn-wrap">
+                    <button class="filter-toggle-btn" id="filter-toggle-btn-1">
+                        <span class="filter-toggle-btn-text">Attack</span>
+                    </button>
+                    <button class="filter-toggle-btn" id="filter-toggle-btn-2">
+                        <span class="filter-toggle-btn-text">Defense</span>
+                    </button>
+                    <button class="filter-toggle-btn" id="filter-toggle-btn-3">
+                        <span class="filter-toggle-btn-text">Utility</span>
+                    </button>
+                    <button class="filter-toggle-btn" id="filter-toggle-btn-4">
+                        <span class="filter-toggle-btn-text">Ultimate</span>
+                    </button>
+                    <button class="filter-toggle-btn" id="filter-toggle-btn-5">
+                        <span class="filter-toggle-btn-text">Special</span>
+                    </button>
+                </div>
+            </div>
+            <div id="mod-list" class="box-content"></div>
+        </div>
+        <div class="box-wrap">
+            <div id="bp-list" class="box-content"></div>
+        </div>
+    </div>
+
+<script src="js/main.js" type="text/javascript"></script>
+</body>
+</html>
