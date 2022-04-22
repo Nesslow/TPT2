@@ -20,16 +20,17 @@
 <body>
 
     <div class="container">
-        <div class="box-wrap">
+        <div class="box-wrap left">
             <div class="box-header">
                 <!-- search bar -->
                 <div class="search-bar">
-                    <input type="text" id="search-input" placeholder="Search...">
-                    <label for="show-details">Details</label>
-                    <input type="checkbox" id="show-details">
+                    <input type="text" id="search-input" class="search-input" placeholder="Search...">
                 </div>
                 <!-- add 4 filter toggle button -->
                 <div class="filter-toggle-btn-wrap">
+                    <button class="filter-toggle-btn filter-toggle-btn-active" id="filter-toggle-btn-0">
+                        <span class="filter-toggle-btn-text">All</span>
+                    </button>
                     <button class="filter-toggle-btn" id="filter-toggle-btn-1">
                         <span class="filter-toggle-btn-text">Attack</span>
                     </button>
@@ -49,8 +50,14 @@
             </div>
             <div id="mod-list" class="box-content"></div>
         </div>
-        <div class="box-wrap">
+        <div class="box-wrap middle">
             <div id="bp-list" class="box-content"></div>
+        </div>
+        <div class="box-wrap right">
+            <div id="port-area" class="box-content">
+                <textarea id="import" class="port-area" placeholder="import..."></textarea>
+                <textarea id="export" class="port-area" placeholder="export..."></textarea>
+            </div>
         </div>
     </div>
 
