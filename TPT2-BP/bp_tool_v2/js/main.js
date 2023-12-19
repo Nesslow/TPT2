@@ -4,7 +4,7 @@
 $(document).ready(function() {
     // get the data from imports/*.csv and create object array
     $.ajax({
-        url: "imports/modules_data.csv",
+        url: "imports/modules_data_v2.csv",
         dataType: "text",
         success: function(data) {
             let lines = data.split("\n");
