@@ -21,7 +21,7 @@ body {
     width: 600px;
     margin: 150px auto;
 }
-.stat, .input {
+.input {
     font-size: 16px;
     font-size: max(16px, 1em);
     font-family: inherit;
@@ -42,8 +42,34 @@ body {
     width:100%;
     height:250px;
 }
+#resultTable {
+    border-spacing: 0;
+    border-top: 1px solid #363636;
+    width:100%;
+    margin-top:20px;
+}
+#resultTable th, #resultTable td {
+    padding: 10px;
+    border-left: 1px solid #363636;
+    border-right: 1px solid #363636;
+    border-bottom: 1px solid #363636;
+    text-align: left;
+}
+#resultTable tr:hover {
+    background-color: #222;
+}
+.clickable {
+    cursor: pointer;
+    text-decoration: none;
+}
+.clickable:hover {
+    text-decoration: underline;
+}
 .top {
     margin-bottom: 50px;
+}
+.bottom {
+    margin-top: 20px;
 }
 .help_icon {
     color: #fff;
@@ -91,7 +117,17 @@ body {
     margin-top: 30px;
     color:#777;
 }
-
+@media screen and (max-width: 600px) {
+    .container {
+        width: 100%;
+        margin: 50px auto;
+    }
+    #resultTable {
+        width: 100%;
+        display: block;
+        overflow-x: auto;
+    }
+}
 
 </style>
 </head>
@@ -105,48 +141,94 @@ body {
             <div class="input_wrap">
                 <label for="label_amount">Booster type:</label>
                 <select id="type">
-                    <option value="prod">Production Booster</option>
-                    <option value="accel">Acceleration Booster</option>
-                    <option value="res">Resource Drops Booster</option>
+                    <option value="t3_prod">Tier 3 - Production Booster</option>
+                    <option value="t3_accel">Tier 3 - Acceleration Booster</option>
+                    <option value="t3_res">Tier 3 - Resource Drops Booster</option>
+                    <option value="t2_prod">Tier 2 - Production Booster</option>
+                    <option value="t2_accel">Tier 2 - Acceleration Booster</option>
+                    <option value="t2_res">Tier 2 - Resource Drops Booster</option>
+                    <option value="t1_prod">Tier 1 - Production Booster</option>
+                    <option value="t1_accel">Tier 1 - Acceleration Booster</option>
+                    <option value="t1_res">Tier 1 - Resource Drops Booster</option>
                 </select>
             </div>
         </div>
+        <div class="input_wrap">
+            <label for="label_amount">Void Essence needed:</label>
+            <input id="void" type="number" class="stat input" readonly value="">
+        </div>
         <div class="bottom">
             <div class="input_wrap">
-                <label for="result">Fabricator shopping list:</label>
-                <textarea id="result" class="input_area"></textarea>
+                <span>Fabricator shopping list:</span>
+                <table id="resultTable">
+                    <tbody>
+                        <div class="line"></div>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </body>
 <script>
 
-let accel_booster = [
+let accel_booster_t3 = [
+    { name: "Void Essence", amount: 4 },
     { name: "T10 Dense Block", amount: 12 },
     { name: "Quantum Chip", amount: 6 },
-    { name: "Rainbow Dust", amount: 6 },
     { name: "T8 Circuit Wires", amount: 8 },
     { name: "Hi-Tech Chip", amount: 4 },
     { name: "T4 Circuit Wires", amount: 4 },
     { name: "T4 Plate", amount: 4 },
     { name: "Advanced Chip", amount: 1 },
-    { name: "Void Essence", amount: 4 }
+    { name: "Rainbow Dust", amount: 6 }
 ];
 
-let res_booster = [
+let accel_booster_t2 = [
+    { name: "T8 Circuit Wires", amount: 8 },
+    { name: "Hi-Tech Chip", amount: 4 },
+    { name: "T4 Circuit Wires", amount: 4 },
+    { name: "T4 Plate", amount: 4 },
+    { name: "Advanced Chip", amount: 1 },
+    { name: "Rainbow Dust", amount: 2 }
+];
+
+let accel_booster_t1 = [
+    { name: "T4 Circuit Wires", amount: 4 },
+    { name: "T4 Plate", amount: 4 },
+    { name: "Advanced Chip", amount: 1 },
+    { name: "Rainbow Dust", amount: 2 }
+];
+
+let res_booster_t3 = [
+    { name: "Void Essence", amount: 1 },
     { name: "T10 Dense Block", amount: 4 },
     { name: "Nano Chip", amount: 6 },
-    { name: "Rainbow Dust", amount: 2 },
     { name: "T8 Circuit Wires", amount: 2 },
     { name: "Hi-Tech Chip", amount: 2 },
     { name: "T7 Dense Block", amount: 4 },
     { name: "T3 Plate", amount: 6 },
     { name: "Chip", amount: 2 },
     { name: "T3 Circuit Wires", amount: 1 },
-    { name: "Void Essence", amount: 1 }
+    { name: "Rainbow Dust", amount: 2 }
 ];
 
-let prod_booster = [
+let res_booster_t2 = [
+    { name: "T8 Circuit Wires", amount: 2 },
+    { name: "Hi-Tech Chip", amount: 2 },
+    { name: "T7 Dense Block", amount: 4 },
+    { name: "T3 Plate", amount: 6 },
+    { name: "Chip", amount: 2 },
+    { name: "T3 Circuit Wires", amount: 1 }
+];
+
+let res_booster_t1 = [
+    { name: "T3 Plate", amount: 6 },
+    { name: "Chip", amount: 2 },
+    { name: "T3 Circuit Wires", amount: 1 }
+];
+
+let prod_booster_t3 = [
+    { name: "Void Essence", amount: 4 },
     { name: "T10 Dense Block", amount: 12 },
     { name: "T10 Circuit wires", amount: 4 },
     { name: "T7 Plate", amount: 6 },
@@ -154,29 +236,66 @@ let prod_booster = [
     { name: "Hi-Tech Chip", amount: 4 },
     { name: "Chip", amount: 4 },
     { name: "T2 Plate", amount: 4 },
-    { name: "T2 Circuit Wires", amount: 1 },
-    { name: "Void Essence", amount: 4 }
+    { name: "T2 Circuit Wires", amount: 1 }
+];
+
+let prod_booster_t2 = [
+    { name: "T7 Plate", amount: 6 },
+    { name: "T7 Circuit Wires", amount: 4 },
+    { name: "Hi-Tech Chip", amount: 4 },
+    { name: "Chip", amount: 4 },
+    { name: "T2 Plate", amount: 4 },
+    { name: "T2 Circuit Wires", amount: 1 }
+];
+
+let prod_booster_t1 = [
+    { name: "Chip", amount: 4 },
+    { name: "T2 Plate", amount: 4 },
+    { name: "T2 Circuit Wires", amount: 1 }
 ];
 
 document.addEventListener('DOMContentLoaded', function () {
     let amountInput = document.getElementById("amount");
     let typeSelect = document.getElementById("type");
-    let resultTextarea = document.getElementById("result");
+    let voidOutput = document.getElementById("void");
+    let resultTableBody = document.getElementById("resultTable");
 
     function updateResult() {
+
+        voidOutput.value = "";
+        resultTableBody.innerHTML = "";
+
         let multiplier = parseInt(amountInput.value) || 0;
         let selectedBooster = typeSelect.value;
         let boosterArray;
 
         switch (selectedBooster) {
-            case 'accel':
-                boosterArray = accel_booster;
+            case 't3_accel':
+                boosterArray = accel_booster_t3;
                 break;
-            case 'res':
-                boosterArray = res_booster;
+            case 't3_res':
+                boosterArray = res_booster_t3;
                 break;
-            case 'prod':
-                boosterArray = prod_booster;
+            case 't3_prod':
+                boosterArray = prod_booster_t3;
+                break;
+            case 't2_accel':
+                boosterArray = accel_booster_t2;
+                break;
+            case 't2_res':
+                boosterArray = res_booster_t2;
+                break;
+            case 't2_prod':
+                boosterArray = prod_booster_t2;
+                break;
+            case 't1_accel':
+                boosterArray = accel_booster_t1;
+                break;
+            case 't1_res':
+                boosterArray = res_booster_t1;
+                break;
+            case 't1_prod':
+                boosterArray = prod_booster_t1;
                 break;
             default:
                 boosterArray = [];
@@ -186,7 +305,30 @@ document.addEventListener('DOMContentLoaded', function () {
             return { name: item.name, amount: item.amount * multiplier };
         });
 
-        resultTextarea.value = updatedBooster.map(item => `${item.name}: ${item.amount}`).join('\n');
+        if (updatedBooster[0].name == "Void Essence") {
+            let voidAmount = updatedBooster[0].amount;
+            if(voidAmount > 10000) {
+                voidOutput.value = voidAmount.toExponential();
+            } else {
+                voidOutput.value = voidAmount;
+            }
+        }
+
+        updatedBooster.slice(1).forEach(item => {
+            let row = resultTableBody.insertRow();
+            let nameCell = row.insertCell(0);
+            let amountCell = row.insertCell(1);
+
+            nameCell.textContent = item.name;
+            amountCell.textContent = item.amount;
+            amountCell.classList.add('clickable');
+
+            amountCell.onclick = function() {
+                navigator.clipboard.writeText(item.amount.toString())
+                    .catch(err => console.error('Error copying amount'));
+            };
+        });
+
     }
 
     amountInput.oninput = updateResult;
