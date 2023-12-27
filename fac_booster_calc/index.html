@@ -312,13 +312,11 @@ document.addEventListener('DOMContentLoaded', function () {
             return { name: item.name, amount: item.amount * multiplier };
         });
 
-        if (updatedBooster[0].name == "Void Essence") {
-            let voidAmount = updatedBooster[0].amount;
-            if(voidAmount > 10000) {
-                voidOutput.value = voidAmount.toExponential();
-            } else {
-                voidOutput.value = voidAmount;
-            }
+        let voidAmount = updatedBooster[0].amount;
+        if(voidAmount > 10000) {
+            voidOutput.value = voidAmount.toExponential();
+        } else {
+            voidOutput.value = voidAmount;
         }
 
         updatedBooster.slice(1).forEach(item => {
