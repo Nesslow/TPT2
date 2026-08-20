@@ -281,9 +281,18 @@
     return level;
   }
 
-  function optimalBuyOrder(cfg) {
+  /**
+   * timeOf defaults to the exact per-charge model. Callers can inject an
+   * alternative (e.g. one that accounts for the per-frame batching effect on
+   * a 1-tick stone) to rank purchases by real-world time instead - the
+   * greedy search itself doesn't care what "time" means, only that lower is
+   * better, so this is a pure injection point with no change to the
+   * algorithm or to default behavior when omitted.
+   */
+  function optimalBuyOrder(cfg, timeOf) {
+    timeOf = timeOf || function (c) { return simulateCharge(c).timeSeconds; };
     var workingUpgrades = assign({}, clampLevels(cfg.upgrades));
-    var startTime = simulateCharge(assign({}, cfg, { upgrades: workingUpgrades })).timeSeconds;
+    var startTime = timeOf(assign({}, cfg, { upgrades: workingUpgrades }));
     var currentTime = startTime;
     var totalGems = 0;
     var order = [];
@@ -302,7 +311,7 @@
         var nextLevel = curLevel + 1;
         var testUpgrades = assign({}, workingUpgrades);
         testUpgrades[key] = nextLevel;
-        var t = simulateCharge(assign({}, cfg, { upgrades: testUpgrades })).timeSeconds;
+        var t = timeOf(assign({}, cfg, { upgrades: testUpgrades }));
 
         var secondsSaved = currentTime - t;
         var gemCost = upgradeCost(key, nextLevel);
@@ -329,7 +338,7 @@
           var bundleCost = cumulativeUpgradeCost(key2, curLevel2, reachLevel);
           var bundleUpgrades = assign({}, workingUpgrades);
           bundleUpgrades[key2] = reachLevel;
-          var bt = simulateCharge(assign({}, cfg, { upgrades: bundleUpgrades })).timeSeconds;
+          var bt = timeOf(assign({}, cfg, { upgrades: bundleUpgrades }));
           var bundleSecondsSaved = currentTime - bt;
           var bundleValue = bundleCost > 0 ? bundleSecondsSaved / bundleCost : (bundleSecondsSaved > 0 ? Infinity : -Infinity);
 

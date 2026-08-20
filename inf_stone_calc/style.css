@@ -377,32 +377,6 @@ tr.buy-row:hover .apply-hint { opacity: 1; }
 }
 .panel-foot a:hover, .panel-foot button.linklike:hover { text-decoration: underline; }
 
-/* ---------- one-tick callout ---------- */
-.onetick {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 14px 16px;
-}
-.onetick .icon {
-  width: 34px; height: 34px;
-  flex: none;
-  border: 1px solid var(--positive);
-  color: var(--positive);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--mono);
-  font-size: 15px;
-  border-radius: 2px;
-}
-.onetick.bad .icon { border-color: var(--negative); color: var(--negative); }
-.onetick .body { flex: 1; }
-.onetick .headline { font-size: 13.5px; color: var(--text-1); margin-bottom: 3px; }
-.onetick .headline b { color: var(--positive); font-family: var(--mono); font-variant-numeric: tabular-nums; }
-.onetick.bad .headline b { color: var(--negative); }
-.onetick .sub { font-size: 12px; color: var(--text-3); font-family: var(--mono); }
-
 /* ---------- info tooltip ---------- */
 .info-tip {
   position: relative;
@@ -578,6 +552,18 @@ tr.linked { cursor: pointer; }
   color: var(--text-3);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+.tag-warn {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--negative);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--negative);
+  border-radius: 2px;
+  padding: 2px 5px;
+  vertical-align: middle;
+  margin-left: 6px;
 }
 
 /* ---------- toast ---------- */

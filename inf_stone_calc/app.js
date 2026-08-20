@@ -256,19 +256,6 @@ function hexToRgba(hex, alpha) {
   return "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
 }
 
-function chargesPerSecTooltip() {
-  return '<span class="info-tip"><span class="q">?</span><span class="bubble">Assumes ideal, continuous time. ' +
-    "Real in-game throughput depends on your FPS and can land either higher or lower than this once you're at " +
-    "many charges/sec. Treat it as a theoretical reference, not an exact prediction.</span></span>";
-}
-
-function oneTickTooltip() {
-  return '<span class="info-tip"><span class="q">?</span><span class="bubble">To reach 1-tick you only need two ' +
-    "upgrades: <b>Charge required</b> and <b>Extraction % / infPower</b> - plus a relatively small " +
-    "amount of extraction infs. Amount only matters before '1-tick' and does nothing afterwards. " +
-    "Speed can still shave real time off an already-1-tick charge, but " +
-    "only if your Speed region ticks faster than your Extraction region.</span></span>";
-}
 
 /* Per-upgrade "Effect" column text -- reuses deriveStats' own fields so it
  * can never drift from what the engine actually computed. */
@@ -328,6 +315,49 @@ function updatePerkSwitch() {
   document.getElementById("perk-switch").classList.toggle("on", PERK);
 }
 
+/* Charges/sec. */
+var BATCH = { crossTerm: 0.122 / 10000, speedLin: 0.06 / 100, amountLin: 1.525 / 100, exponent: 0.3 };
+
+function batchEffectiveInf(bonusPerTick, tickDuration, maxBonusPerTick) {
+  if (!isFinite(tickDuration) || tickDuration <= 0) return 0;
+  return (bonusPerTick / maxBonusPerTick) * (100 / tickDuration);
+}
+
+/* FPS selector. */
+var BATCH_REFERENCE_FPS = 240;
+
+function batchChargesPerSecond(cfg) {
+  var stats = StoneCalc.deriveStats(cfg);
+  var result = StoneCalc.simulateCharge(cfg);
+  if (result.extractionTicks !== 1) return result.chargesPerSecond;
+
+  var leading = (1 / stats.extractionTickDuration) * (1 + stats.u7Bonus) / stats.chargeRequired;
+  var effSpd = batchEffectiveInf(stats.speedBonusPerTick, stats.speedTickDuration, 0.11);
+  var effAmt = batchEffectiveInf(stats.amountBonusPerTick, stats.amountTickDuration, 3.05);
+
+  var frameSeconds = 1 / BATCH_REFERENCE_FPS;
+  var bracket = BATCH.crossTerm * effSpd * effAmt * frameSeconds * frameSeconds +
+    (BATCH.speedLin * effSpd + BATCH.amountLin * effAmt) * frameSeconds + 1;
+  var energyPerFrame = leading * bracket * frameSeconds;
+
+  var rate = Math.pow(energyPerFrame, BATCH.exponent) / frameSeconds;
+  // Safety net only.
+  return Math.min(rate, result.chargesPerSecond * 100);
+}
+
+function batchTimeSeconds(cfg) {
+  var r = batchChargesPerSecond(cfg);
+  return r > 0 ? 1 / r : Infinity;
+}
+
+function chargesPerSecTooltip() {
+  return '<span class="info-tip"><span class="q">?</span><span class="bubble">Below 1-tick this is exact. Once a ' +
+    "stone is 1-tick, this is an <b>estimate</b> - FPS has a drastic effect on real throughput, and at high " +
+    "speeds the actual number can land above or below what's shown. I am refining this with more testing. " +
+    "Either way, a change that moves this number up or down has the same effect in game, just by a slightly " +
+    "different amount.</span></span>";
+}
+
 /* ===========================================================================
  * OVERVIEW
  * ======================================================================== */
@@ -340,17 +370,17 @@ function renderOverview() {
   html += '<div class="panel"><div class="panel-body flush"><table><thead><tr>' +
     '<th class="num" style="width:32px">#</th><th>Stone</th><th class="num">Time / charge</th>' +
     '<th class="num">Charges / sec' + chargesPerSecTooltip() + "</th>" +
-    '<th class="num">Charges / hr</th><th class="num">Extraction ticks</th></tr></thead><tbody>';
+    '<th class="num">Charges / hr</th></tr></thead><tbody>';
 
   rows.forEach(function (r, i) {
     var stone = STONES[r.id];
+    var cps = batchChargesPerSecond(r.cfg);
     html += '<tr class="stone-row linked" onclick="showView(\'' + r.id + '\')">' +
       '<td class="num dim">' + (i + 1) + "</td>" +
       '<td class="name"><span class="dot" style="background:' + stone.color + '"></span>' + stone.name + "</td>" +
       '<td class="num">' + fmtTimeUI(r.timeSeconds) + "</td>" +
-      '<td class="num">' + fmtRate(r.result.chargesPerSecond) + "</td>" +
-      '<td class="num">' + fmtRate(r.chargesPerHour) + "</td>" +
-      '<td class="num dim">' + r.extractionTicks.toLocaleString() + "</td></tr>";
+      '<td class="num">' + fmtRate(cps) + "</td>" +
+      '<td class="num">' + fmtRate(cps * 3600) + "</td></tr>";
   });
 
   html += "</tbody></table></div></div>";
@@ -520,7 +550,7 @@ function updateUpgradeLevel(stoneId, key, rawValue) {
 
 function applyBuyOrderThrough(stoneId, index) {
   var cfg = StoneCalc.resolveStoneConfig(STONES[stoneId], allRegions());
-  var buyOrder = StoneCalc.optimalBuyOrder(cfg);
+  var buyOrder = StoneCalc.optimalBuyOrder(cfg, batchTimeSeconds);
   buyOrder.order.slice(0, index + 1).forEach(function (step) {
     STONES[stoneId].upgrades[step.upgrade] = step.level;
   });
@@ -552,22 +582,6 @@ function renderBuyRow(stoneId, step, index) {
     '<td class="num pos">' + fmtTimeUI(step.secondsSaved) + "</td>" +
     '<td class="num">' + step.timeSavedPerGem.toFixed(6) + "</td>" +
     '<td class="num dim">' + fmtGems(step.cumulativeGems) + "</td></tr>";
-}
-
-function renderOneTick(result) {
-  if (result.feasible === true) {
-    return '<div class="onetick"><div class="icon">&check;</div><div class="body">' +
-      '<div class="headline">Reachable for <b>' + fmtGems(result.gemCost) + " gems</b> &mdash; charge required lvl " +
-      result.upgrades.u1_chargeRequired + ", extraction % lvl " + result.upgrades.u7_extractionPerInf + "</div>" +
-      '<div class="sub">u1 &amp; u7 only, all other levels held at current &middot; validated against simulator</div>' +
-      "</div></div>";
-  }
-  var reason = result.feasible === false
-    ? "Not reachable with these infs, even with u1 and u7 both maxed."
-    : result.reason;
-  return '<div class="onetick bad"><div class="icon">&times;</div><div class="body">' +
-    '<div class="headline">Not reachable right now</div>' +
-    '<div class="sub">' + reason + "</div></div></div>";
 }
 
 /* ---------- Testing stone's private regions ---------- */
@@ -669,7 +683,7 @@ function farmSensitivityTooltip() {
 function regionFarmSensitivity(stoneId) {
   var stoneDef = STONES[stoneId];
   var regions = allRegions();
-  var baseline = StoneCalc.simulateCharge(StoneCalc.resolveStoneConfig(stoneDef, regions)).timeSeconds;
+  var baseline = batchTimeSeconds(StoneCalc.resolveStoneConfig(stoneDef, regions));
   var roles = ["extraction", "speed", "amount"];
   var rows = [];
 
@@ -680,6 +694,8 @@ function regionFarmSensitivity(stoneId) {
 
     DIFFS.forEach(function (diff) {
       var current = region.infs[diff] || 0;
+      if (current >= MAX_INFS) return; // nothing left to farm here
+
       var started = current > 0;
       var testValue = Math.min(MAX_INFS, started ? Math.round(current * 1.10) : 1000);
 
@@ -688,7 +704,7 @@ function regionFarmSensitivity(stoneId) {
       var testRegions = Object.assign({}, regions);
       testRegions[regionId] = Object.assign({}, region, { infs: testInfs });
 
-      var testTime = StoneCalc.simulateCharge(StoneCalc.resolveStoneConfig(stoneDef, testRegions)).timeSeconds;
+      var testTime = batchTimeSeconds(StoneCalc.resolveStoneConfig(stoneDef, testRegions));
       var secondsSaved = baseline - testTime;
       var pctFaster = baseline > 0 ? (secondsSaved / baseline) * 100 : 0;
 
@@ -717,10 +733,14 @@ function renderFarmRow(r) {
 function renderFarmPanel(stoneId, stoneDef, regions) {
   var result = regionFarmSensitivity(stoneId);
   return '<div class="panel"><div class="panel-head"><h2>Where to farm next' + farmSensitivityTooltip() + "</h2>" +
-    '<span class="meta">+10% per difficulty</span></div><div class="panel-body flush"><table><thead><tr>' +
-    "<th>Region &middot; difficulty</th><th class=\"num\">Current</th><th class=\"num\">Test</th>" +
-    '<th class="num">Time saved</th><th class="num">% faster</th></tr></thead><tbody>' +
-    result.rows.map(renderFarmRow).join("") + "</tbody></table></div></div>";
+    '<span class="meta">+10% per difficulty</span></div><div class="panel-body' +
+    (result.rows.length ? " flush" : "") + '">' +
+    (result.rows.length
+      ? '<table><thead><tr><th>Region &middot; difficulty</th><th class="num">Current</th><th class="num">Test</th>' +
+        '<th class="num">Time saved</th><th class="num">% faster</th></tr></thead><tbody>' +
+        result.rows.map(renderFarmRow).join("") + "</tbody></table>"
+      : '<p style="padding:14px 0;color:var(--text-3);font-size:13px;">All difficulties on all regions are already maxed.</p>') +
+    "</div></div>";
 }
 
 function renderStone(id) {
@@ -729,8 +749,8 @@ function renderStone(id) {
   var cfg = StoneCalc.resolveStoneConfig(stoneDef, regions);
   var stats = StoneCalc.deriveStats(cfg);
   var result = StoneCalc.simulateCharge(cfg);
-  var buyOrder = StoneCalc.optimalBuyOrder(cfg);
-  var oneTick = StoneCalc.minCostForOneTick(cfg);
+  var buyOrder = StoneCalc.optimalBuyOrder(cfg, batchTimeSeconds);
+  var cps = batchChargesPerSecond(cfg);
 
   var html = '<div class="hero"><div class="hero-title">' +
     '<div class="swatch" style="background:' + stoneDef.color + "; box-shadow:0 0 10px " +
@@ -740,8 +760,9 @@ function renderStone(id) {
 
   html += '<div class="stat-row">' +
     '<div class="stat"><div class="label">Extraction ticks</div><div class="value">' + result.extractionTicks.toLocaleString() + "</div></div>" +
-    '<div class="stat"><div class="label">Charges / sec' + chargesPerSecTooltip() + '</div><div class="value">' + fmtRate(result.chargesPerSecond) + "</div></div>" +
-    '<div class="stat"><div class="label">Charges / hour</div><div class="value">' + fmtRate(result.chargesPerHour) + "</div></div>" +
+    '<div class="stat"><div class="label">Charges / sec' + chargesPerSecTooltip() +
+      '</div><div class="value">' + fmtRate(cps) + "</div></div>" +
+    '<div class="stat"><div class="label">Charges / hour</div><div class="value">' + fmtRate(cps * 3600) + "</div></div>" +
     '<div class="stat primary"><div class="label">Time per charge</div><div class="value">' + fmtTimeUI(result.timeSeconds) + "</div></div>" +
     "</div></div>";
 
@@ -772,9 +793,6 @@ function renderStone(id) {
       : "") +
     "</div>";
 
-  html += '<div class="panel"><div class="panel-head"><h2>Cost to a 1-tick stone' + oneTickTooltip() + "</h2></div>" +
-    renderOneTick(oneTick) + "</div>";
-
   html += renderFarmPanel(id, stoneDef, regions);
 
   document.getElementById("view-container").innerHTML = html;
@@ -791,17 +809,17 @@ function renderGuide() {
   html += '<div class="panel"><div class="panel-head"><h2>Quick start</h2></div><div class="panel-body flush">' +
     "<table><tbody>" +
     '<tr><td class="num dim" style="width:26px">1</td><td>Fastest start: open ' +
-    '<a href="#" onclick="showView(\'data\'); return false;">Import / export</a>, copy the in-game script into ' +
+    '<a href="#" onclick="showView(\'data\'); return false;">Import / export</a>, copy the script into ' +
     'TPT2, press <b style="color:var(--text-1)">K</b>, then paste your worker names back here. That fills in all ' +
     "90 inf counts in one go.</td></tr>" +
     '<tr><td class="num dim">2</td><td>Or by hand: open a stone from the sidebar and enter its three ' +
-    'regions\' infs right there in the panel or edit from the ' +
+    'regions\' infs in the panel or edit from the ' +
     '<a href="#" onclick="openRegions(); return false;">Regions</a> page, if you want to see all 15 at once.' +
     "</td></tr>" +
     '<tr><td class="num dim">3</td><td>Set upgrade levels directly, or click a row in <b style="color:var(--text-1)">' +
     "Optimal buy order</b> to buy through that step instantly.</td></tr>" +
     '<tr><td class="num dim">4</td><td>Use <b style="color:var(--text-1)">Where to farm next</b> as inspiration for ' +
-    "which region and difficulty is worth farming at that specific state.</td></tr>" +
+    "which region and difficulty is worth farming at that specific state of the infinity stone.</td></tr>" +
     '<tr><td class="num dim">5</td><td>Toggle off <b style="color:var(--text-1)">Twin Singularity</b> at the top-right ' +
     "if you haven't unlocked the perk yet.</td></tr>" +
     '<tr><td class="num dim">6</td><td>Use the ' +
@@ -812,32 +830,28 @@ function renderGuide() {
   html += '<div class="panel"><div class="panel-head"><h2>Key concepts</h2></div><div class="panel-body flush">' +
     '<table class="guide-table"><tbody>' +
     '<tr><td class="name">Importing from the game</td><td>The ' +
-    '<a href="#" onclick="showView(\'data\'); return false;">Import / export</a> page carries a small script you ' +
-    "paste into TPT2's own AI scripting system. Pressing <b style=\"color:var(--text-1)\">K</b> in game reads every " +
-    "region and difficulty's inf count and packs them into your workers names, 32 characters at a time. " +
-    "Copy those names in order, paste them back here, and check the preview before applying." +
+    '<a href="#" onclick="showView(\'data\'); return false;">Import / export</a> page has a small script you ' +
+    "paste into TPT2. Pressing <b style=\"color:var(--text-1)\">K</b> in game reads every " +
+    "region and difficulty's inf count and packs them into your workers names. " +
+    "Copy those names in order, paste them back here. " +
     '<b style="color:var(--text-1)"> It will overwrite your workers names</b>.</td></tr>' +
     '<tr><td class="name">Back up your data</td><td>Everything lives in this browser\'s local storage, so clearing ' +
     "site data wipes it. The Import / export page dumps the lot to a JSON file and reads it back again. " +
     "</td></tr>" +
-    '<tr><td class="name">Regions are shared</td><td>Editing a region updates every stone that references it, ' +
-    'whether you edit it from that stone\'s own page or from the Regions page. Check the <b style="color:var(--text-1)">' +
-    'Also feeds</b> / <b style="color:var(--text-1)">Feeds</b> list first - click a stone\'s name there to ' +
-    "filter the Regions page down to just its three regions.</td></tr>" +
     '<tr><td class="name">Detailed vs. Simple</td><td>The Regions page can show either all six ' +
     "difficulties per region, or a single editable infPower number. Simple mode lets you type an infPower value " +
     "directly. It spreads that evenly across all six difficulties, replacing whatever was there before.</td></tr>" +
-    '<tr><td class="name">Buy order vs. 1-tick cost</td><td><b style="color:var(--text-1)">Optimal buy order</b> ' +
+    '<tr><td class="name">Optimal buy order</td><td><b style="color:var(--text-1)">Optimal buy order</b> ' +
     'answers "what should I buy next, in general" - it re-checks every option after each purchase, and also ' +
-    "checks whether several cheaper levels of one upgrade beat a single pricier level elsewhere. " +
-    '<b style="color:var(--text-1)">Cost to a 1-tick stone</b> answers one narrower ' +
-    "question and only ever looks at Charge Required and Extraction % / infPower, because those are the only two " +
-    "upgrades that matter if the goal is simply to reach a 1-tick charging stone.</td></tr>" +
+    "checks whether several cheaper levels of one upgrade beats a single pricier level.</td></tr>" +
     '<tr><td class="name">Where to farm next</td><td>Ranks every (region, difficulty) that feeds a stone by what ' +
     "roughly +10% more infs there would do.</td></tr>" +
-    '<tr><td class="name">Charges/sec is a reference</td><td>All figures assume ideal continuous ' +
-    "time. Once a stone is doing multiple charges/sec, your real in-game rate depends on FPS and can land on " +
-    "either side of the calculated number.</td></tr>" +
+    '<tr><td class="name">Charges/sec is an estimate</td><td>Below 1-tick this figure is exact. Once a stone ' +
+    "reaches 1-tick, your FPS has a drastic effect on real in-game throughput, and i'm getting close to get the " +
+    "displayed number - but at high speeds the real number can land either above or below what's shown. " +
+    "I will keep tightening this with more testing. In the meantime, a change that increases or decreases " +
+    "Charges/sec has the same effect in game either way, just by a slightly different amount than " +
+    "shown.</td></tr>" +
     "</tbody></table></div></div>";
 
   document.getElementById("view-container").innerHTML = html;

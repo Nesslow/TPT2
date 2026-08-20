@@ -18,9 +18,7 @@ function renderData() {
   html += '<div class="panel"><div class="panel-head"><h2>2 &middot; Import from game</h2>' +
     '<span class="meta">base31 payload</span></div><div class="panel-body">' +
     '<p class="hint-block">Run <b>StoneConsole:export</b> in game, then copy each worker\'s name ' +
-    "in order and paste them here end to end (no spaces). The  global variable: <b>chars</b> is optional " +
-    "but recommended - it catches a skipped or duplicated chunk, which would otherwise decode into " +
-    "plausible-looking but wrong numbers.</p>" +
+    "in order and paste them here end to end (no spaces).</p>" +
     '<textarea id="import-text" class="paste-box" rows="4" spellcheck="false" ' +
     'placeholder="Paste the worker-name chunks here, in order"></textarea>' +
     '<div class="import-row">' +
