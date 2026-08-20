@@ -1,0 +1,432 @@
+/* Blueprint Console — visual language shared with the Stone Console tool. */
+
+:root {
+  --bg-0: #0B0C0F;
+  --bg-1: #16181C;
+  --bg-2: #1F2226;
+  --bg-3: #262A2F;
+  --border: #2B2E33;
+  --border-strong: #3A3E44;
+  --text-1: #ECE9E3;
+  --text-2: #A6A39C;
+  --text-3: #6E6B65;
+  --accent: #C9974A;
+  --accent-bright: #E3BD74;
+  --accent-dim: #6B5730;
+  --positive: #6FA96A;
+  --negative: #C1614A;
+  --caution: #C9A227;
+
+  --scroll-thumb: #3A3E44;
+  --scroll-thumb-hover: #4E545C;
+
+  /* module categories */
+  --t-offensive: #ec6a49;
+  --t-defensive: #55a3e2;
+  --t-ultimate: #A76FC0;
+  --t-utility: #ffef16;
+  --t-special: #7e7e7e;
+  --t-legendary: #ffae35;
+
+  --mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+  --sans: -apple-system, "Segoe UI", Roboto, system-ui, sans-serif;
+}
+
+/* ---------- scrollbars ----------
+ * Tells the browser this is a dark UI. On its own this already turns the
+ * scrollbars, the search field's clear button and native select popups dark,
+ * and it is the only part that works in every engine. */
+:root { color-scheme: dark; }
+
+/* Firefox, and Chromium 121+. When `scrollbar-color` is supported the
+ * ::-webkit-scrollbar rules below are ignored, which is fine — both paths are
+ * tuned to the same colours, so the result matches either way. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-thumb) transparent;
+}
+
+/* Older Chromium and Safari. The transparent border plus background-clip keeps
+ * the thumb visually inset instead of butting against the panel edge. */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-thumb);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover { background-color: var(--scroll-thumb-hover); }
+::-webkit-scrollbar-corner { background: transparent; }
+
+*, *::before, *::after { box-sizing: border-box; }
+body, h1, h2, p, figure { margin: 0; }
+
+body {
+  background: var(--bg-0);
+  color: var(--text-1);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.5;
+  display: flex;
+  min-height: 100vh;
+}
+::selection { background: var(--accent-dim); color: var(--text-1); }
+
+/* ---------- rail ---------- */
+.rail {
+  width: 220px;
+  flex: none;
+  background: var(--bg-1);
+  border-right: 1px solid var(--border);
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+.rail-mark { padding: 0 20px 18px; margin-bottom: 6px; border-bottom: 1px solid var(--border); }
+.rail-mark .name { font-weight: 700; font-size: 14px; letter-spacing: 0.04em; }
+.rail-mark .tag { display: block; margin-top: 3px; font-size: 11px; color: var(--text-3); }
+
+.rail-group-label {
+  padding: 18px 20px 6px;
+  font-size: 10.5px; font-weight: 600; letter-spacing: 0.09em;
+  text-transform: uppercase; color: var(--text-3);
+}
+.rail-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 20px; width: 100%; text-align: left;
+  color: var(--text-2); font-size: 13px; font-family: var(--sans);
+  background: none; border: none; border-left: 2px solid transparent;
+  cursor: pointer;
+}
+.rail-link:hover { color: var(--text-1); background: var(--bg-2); }
+.rail-link.active {
+  color: var(--text-1); background: var(--bg-2);
+  border-left-color: var(--accent); font-weight: 600;
+}
+.rail-link .glyph { width: 10px; text-align: center; color: var(--text-3); flex: none; }
+
+.rail-current { padding: 0 20px; }
+.rail-current-name {
+  font-size: 13px; color: var(--text-1); font-weight: 600;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.rail-current-meta { font-size: 11.5px; color: var(--text-3); font-family: var(--mono); }
+
+/* ---------- main ---------- */
+.main { flex: 1; min-width: 0; padding: 20px 24px 40px; }
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; margin-bottom: 16px; min-height: 26px;
+}
+.crumb { font-size: 12.5px; color: var(--text-3); }
+
+/* ---------- columns ----------
+ * The three columns fill the viewport and scroll internally. Without this the
+ * tallest panel pushes the page taller than the window, so you get a page
+ * scrollbar AND a panel scrollbar, and the panel headers scroll out of reach. */
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr) minmax(280px, 0.85fr);
+  gap: 16px;
+  align-items: stretch;
+  /* topbar (62) + .main bottom padding (40) */
+  height: calc(100vh - 106px);
+}
+.columns > .panel { height: 100%; overflow: hidden; }
+
+/* Below three columns the contracts panel moves to the top, full width, rather
+ * than below the fold: the module and blueprint lists scroll internally, so a
+ * panel underneath them is hard to reach with the wheel — you would scroll 399
+ * module rows before the page itself moved. */
+@media (max-width: 1300px) {
+  .columns { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); height: auto; }
+  .columns > .panel { height: auto; }
+  .col-contracts { grid-column: 1 / -1; order: -1; }
+  .col-contracts .panel-body.scroll { max-height: 34vh; }
+  /* full width across the top: lay the contracts out in columns rather than
+     one narrow list that needs scrolling to see eleven short rows */
+  .col-contracts .panel-body.scroll {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    align-content: start;
+  }
+  .col-contracts .contract { border-bottom: none; border-right: 1px solid var(--border); }
+  .col-browser .panel-body.scroll,
+  .col-bp .panel-body.scroll { max-height: 70vh; }
+}
+@media (max-width: 900px) {
+  body { flex-direction: column; }
+  .rail { width: auto; height: auto; position: static; }
+  .columns { grid-template-columns: 1fr; }
+}
+
+/* ---------- panel ---------- */
+.panel {
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.panel.wide { margin-bottom: 16px; }
+.panel-head {
+  flex: none;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 11px 14px; border-bottom: 1px solid var(--border);
+}
+.panel-head h2 {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.05em;
+  text-transform: uppercase; color: var(--text-2);
+}
+.panel-head .meta { font-size: 12px; color: var(--text-3); font-family: var(--mono); }
+.panel-head .meta.warn { color: var(--caution); }
+.panel-body { padding: 12px 14px; }
+.panel-body.flush { padding: 0; }
+.panel-body.scroll { flex: 1; min-height: 0; overflow-y: auto; }
+
+.panel-foot {
+  flex: none;
+  padding: 10px 14px; border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--text-3);
+}
+
+/* ---------- controls ---------- */
+.linklike {
+  color: var(--accent); background: none; border: none; padding: 0;
+  font-size: 12px; font-family: var(--sans); cursor: pointer;
+}
+.linklike:hover { text-decoration: underline; color: var(--accent-bright); }
+.linklike.strong { font-size: 13px; font-weight: 600; color: var(--text-1); }
+.linklike.strong:hover { color: var(--accent-bright); }
+.linklike.danger { color: var(--negative); }
+.linklike + .linklike { margin-left: 10px; }
+
+.btn {
+  background: var(--bg-2); color: var(--text-1);
+  border: 1px solid var(--border-strong); border-radius: 3px;
+  padding: 6px 12px; font-size: 12.5px; font-family: var(--sans); cursor: pointer;
+}
+.btn:hover { border-color: var(--accent-dim); color: var(--accent-bright); }
+.btn.primary { background: var(--accent-dim); border-color: var(--accent); color: var(--text-1); }
+.btn.primary:hover { background: var(--accent); color: var(--bg-0); }
+.btn.ghost { background: none; }
+.btn-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 10px 0; }
+
+.seg { display: flex; flex-wrap: wrap; border: 1px solid var(--border-strong); border-radius: 3px; overflow: hidden; }
+.seg-btn {
+  background: var(--bg-1); color: var(--text-2);
+  border: none; border-right: 1px solid var(--border);
+  padding: 5px 10px; font-size: 12px; font-family: var(--sans); cursor: pointer;
+}
+.seg-btn:last-child { border-right: none; }
+.seg-btn:hover { background: var(--bg-2); color: var(--text-1); }
+.seg-btn.on { background: var(--accent-dim); color: var(--text-1); font-weight: 600; }
+
+.search, .select, .bp-name, .code-area {
+  background: var(--bg-0); color: var(--text-1);
+  border: 1px solid var(--border-strong); border-radius: 3px;
+  padding: 6px 9px; font-size: 12.5px; font-family: var(--sans);
+}
+.search:focus, .select:focus, .bp-name:focus, .code-area:focus {
+  outline: 2px solid var(--accent-dim); outline-offset: 0; border-color: var(--accent);
+}
+.search { flex: 1; min-width: 140px; }
+.search.wide { display: block; width: 100%; margin-bottom: 8px; padding: 8px 11px; font-size: 13.5px; }
+.code-area { width: 100%; font-family: var(--mono); font-size: 11.5px; resize: vertical; word-break: break-all; }
+
+.check { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-2); cursor: pointer; white-space: nowrap; }
+.check input { accent-color: var(--accent); margin: 0; }
+
+/* ---------- filters ---------- */
+.filters {
+  padding: 10px 14px; border-bottom: 1px solid var(--border); background: var(--bg-1);
+  flex: none; max-height: 45vh; overflow-y: auto;
+}
+.filter-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 8px; }
+.filter-row:last-child { margin-bottom: 0; }
+.filter-row.wrap { gap: 10px; }
+
+.tag-group { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.tag-group-label {
+  font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase;
+  color: var(--text-3); margin-right: 2px;
+}
+.chip-btn {
+  background: none; color: var(--text-3);
+  border: 1px solid var(--border); border-radius: 2px;
+  padding: 2px 6px; font-size: 10.5px; font-family: var(--mono); cursor: pointer;
+}
+.chip-btn:hover { border-color: var(--accent-dim); color: var(--text-1); }
+.chip-btn.on { background: var(--accent-dim); border-color: var(--accent); color: var(--text-1); }
+.chip-btn.toggle { font-family: var(--sans); color: var(--text-2); border-color: var(--border-strong); }
+.chip-btn.toggle.on { color: var(--text-1); }
+
+
+/* ---------- module card ----------
+ * Category is carried by a coloured left edge and a tinted name, echoing the
+ * game's colour-per-category module grid. The dot is gone — the edge says the
+ * same thing louder and costs no horizontal space.
+ *
+ * Names are mixed toward the text colour rather than using the raw category
+ * colour: Special is mid-grey and Utility is near-yellow, and both are unreadable
+ * as body text on this background at full saturation. */
+.mod {
+  padding: 9px 14px 9px 11px;
+  border-bottom: 1px solid var(--border);
+  border-left: 3px solid var(--type-color, transparent);
+  cursor: pointer;
+}
+.mod:last-child { border-bottom: none; }
+.mod:hover { background: color-mix(in srgb, var(--type-color, #fff) 9%, var(--bg-2)); }
+
+.mod.type-offensive { --type-color: var(--t-offensive); }
+.mod.type-defensive { --type-color: var(--t-defensive); }
+.mod.type-utility   { --type-color: var(--t-utility); }
+.mod.type-ultimate  { --type-color: var(--t-ultimate); }
+.mod.type-special   { --type-color: var(--t-special); }
+.mod.type-legendary { --type-color: var(--t-legendary); }
+.mod:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.mod.in-bp:hover { background: color-mix(in srgb, var(--negative) 12%, var(--bg-2)); }
+
+/* Already in the blueprint: dimmed in place, never removed from the list, so
+   positions stay stable while you build. */
+.mod.added { opacity: 0.42; --type-color: var(--text-3); }
+.mod.added .mod-name { color: var(--text-2); }
+.mod.added:hover { opacity: 0.7; background: var(--bg-2); }
+
+/* drag to reorder inside the blueprint */
+.mod.in-bp { cursor: grab; }
+.mod.in-bp:active { cursor: grabbing; }
+.mod.dragging { opacity: 0.4; }
+/* Inset the marker so it reads as a gap between rows rather than a row border. */
+.mod.drop-before { box-shadow: inset 0 2px 0 0 var(--accent); }
+.mod.drop-after  { box-shadow: inset 0 -2px 0 0 var(--accent); }
+
+.mod-top { display: flex; align-items: center; gap: 7px; }
+.mod-name {
+  font-size: 13px; font-weight: 600;
+  color: color-mix(in srgb, var(--type-color, var(--text-1)) 80%, var(--text-1));
+}
+.mod-phase { margin-left: auto; font-size: 10px; font-family: var(--mono); color: var(--text-3); }
+.flag {
+  font-size: 9px; letter-spacing: 0.06em; font-family: var(--mono);
+  color: var(--text-2); border: 1px solid var(--text-2);
+  border-radius: 2px; padding: 0 3px;
+}
+.dot {
+  width: 8px; height: 8px; border-radius: 50%; flex: none;
+  border: 1px solid rgba(255,255,255,0.14); display: inline-block;
+}
+.t-offensive { background: var(--t-offensive); }
+.t-defensive { background: var(--t-defensive); }
+.t-ultimate  { background: var(--t-ultimate); }
+.t-utility   { background: var(--t-utility); }
+.t-special   { background: var(--t-special); }
+.t-legendary { background: var(--t-legendary); }
+
+.mod-where {
+  margin-left: auto; flex: none;
+  font-size: 10.5px; color: var(--text-3); white-space: nowrap;
+}
+.mod-where .sep::before { content: "·"; margin: 0 4px; }
+
+/* Always on while browsing — you are reading to choose. Never in the blueprint,
+ * where you are managing 51 rows you already picked. Fixed either way, so nothing
+ * reflows under the cursor. */
+.mod-desc {
+  display: none;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-2);
+}
+.col-browser .mod-desc { display: block; }
+.mod-loc { color: var(--text-3); }
+.mod-loc::after { content: " — "; }
+
+.mod-tags { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 4px; }
+.tag {
+  font-size: 9.5px; font-family: var(--mono); color: var(--text-3);
+  border: 1px solid var(--border); border-radius: 2px; padding: 0 4px;
+  cursor: pointer;
+}
+.tag:hover { border-color: var(--accent-dim); color: var(--text-1); }
+.tag.on { background: var(--accent-dim); border-color: var(--accent); color: var(--text-1); }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.chip {
+  font-size: 10px; font-family: var(--mono);
+  border-radius: 2px; padding: 1px 5px; border: 1px solid;
+}
+.chip.gain { color: var(--positive); border-color: rgba(111,169,106,0.5); background: rgba(111,169,106,0.08); }
+.chip.lose { color: var(--negative); border-color: rgba(193,97,74,0.5); background: rgba(193,97,74,0.08); }
+
+/* blueprint rows are for managing, not reading — drop the description */
+.col-bp .mod { padding: 7px 14px; }
+.col-bp .mod-tags { margin-top: 3px; }
+
+/* ---------- blueprint ---------- */
+.bp-name-row {
+  flex: none;
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px 8px; border-bottom: 1px solid var(--border);
+}
+.bp-name { flex: 1; min-width: 0; font-size: 13px; font-weight: 600; }
+.bp-breakdown {
+  flex: none;
+  display: flex; flex-wrap: wrap; gap: 10px;
+  padding: 8px 14px; border-bottom: 1px solid var(--border);
+  font-size: 11.5px; color: var(--text-3);
+}
+.bp-breakdown .count { display: flex; align-items: center; gap: 4px; }
+.bp-breakdown b { color: var(--text-1); font-family: var(--mono); font-weight: 600; }
+
+/* ---------- contracts ---------- */
+.contract { padding: 9px 14px; border-bottom: 1px solid var(--border); }
+.contract:last-child { border-bottom: none; }
+.contract-top { display: flex; align-items: center; gap: 7px; }
+.contract .mark { color: var(--text-3); font-size: 12px; width: 12px; }
+.contract.met .mark { color: var(--positive); }
+.contract-name { font-size: 13px; font-weight: 600; color: var(--text-2); }
+.contract.met .contract-name { color: var(--text-1); }
+.contract-rule { font-size: 11.5px; color: var(--text-3); margin-left: 19px; }
+
+/* ---------- tables ---------- */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th {
+  text-align: left; font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--text-3);
+  padding: 8px 14px; border-bottom: 1px solid var(--border); white-space: nowrap;
+}
+thead th.num, td.num { text-align: right; font-family: var(--mono); }
+tbody td { padding: 9px 14px; border-bottom: 1px solid var(--border); color: var(--text-2); vertical-align: top; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--bg-2); }
+tbody tr.on td { background: rgba(201,151,74,0.06); }
+td.name .cap { display: block; font-size: 10.5px; color: var(--accent); margin-top: 1px; }
+td.actions { text-align: right; white-space: nowrap; }
+
+/* ---------- notices ---------- */
+.notice {
+  font-size: 12.5px; border-radius: 3px; padding: 7px 11px;
+  border: 1px solid; background: var(--bg-2);
+}
+.notice.small { font-size: 11.5px; padding: 5px 8px; margin-top: 5px; }
+.notice.error { color: var(--negative); border-color: rgba(193,97,74,0.5); }
+.notice.warn { color: var(--caution); border-color: rgba(201,162,39,0.45); }
+.notice.info { color: var(--positive); border-color: rgba(111,169,106,0.5); }
+.notice .sub { color: var(--text-3); font-size: 11px; margin-top: 3px; }
+
+.import-list { margin-top: 12px; }
+.import-item { padding: 9px 0; border-top: 1px solid var(--border); }
+.import-item .check { align-items: baseline; }
+
+.empty { padding: 24px 14px; font-size: 12.5px; color: var(--text-3); text-align: center; }
+.hint { font-size: 12px; color: var(--text-3); margin-bottom: 8px; }
+.dim { color: var(--text-3); }
+
+/* readable text export reads as prose, not as a code blob */
+.code-area.prose { word-break: normal; white-space: pre; font-size: 12px; line-height: 1.55; }
