@@ -21,7 +21,7 @@ Aids in the fabrication of items for boosters. It calculates the required materi
 - Select the booster type you want.
 - The calculator will provide a list of required items.
 
-## Infinity Stone Calculator (Retired)
+## Infinity Stone Calculator v2
 [**Infinity Stone Calculator**](https://nesslow-tpt2.netlify.app/inf_stone_calc/)
 
-This is a retired project. Previously, it was used to calculate charge speed for Infinity Stones before the introduction of an exotic gem cap in TPT2.
+Used to calculate charge speed for Infinity Stones in TPT2.
