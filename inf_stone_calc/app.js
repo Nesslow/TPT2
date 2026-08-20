@@ -43,7 +43,6 @@ function realStones() {
  * PERSISTENCE
  * ======================================================================== */
 
-/* Read each key independently so one corrupt entry costs only that entry. */
 function readJSON(key) {
   try {
     return JSON.parse(localStorage.getItem(key) || "null");
@@ -62,8 +61,6 @@ function readFlag(key, fallback) {
   }
 }
 
-/* Merge saved values onto a complete default and re-clamp, so a partial or
- * tampered save can't leave undefined in a field or exceed a cap. */
 function mergeInfs(saved) {
   var out = {};
   DIFFS.forEach(function (d) {
@@ -108,8 +105,6 @@ function loadPersisted() {
   DETAILED_REGIONS = readFlag("stoneConsole.detailedRegions", DETAILED_REGIONS);
 }
 
-/* localStorage throws on a full quota and in some private-browsing modes.
- * Guarded so a failed write can't abort the caller's re-render. */
 function persist(key, value) {
   try {
     localStorage.setItem(key, value);
@@ -170,7 +165,6 @@ function escapeForRegex(s) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-/** Strips `sep` only where it's acting as a thousands separator. */
 function stripGroupSeparator(s, sep) {
   if (!sep) return s;
   return s.replace(new RegExp(escapeForRegex(sep) + "(?=\\d{3}(?!\\d))", "g"), "");
@@ -183,7 +177,6 @@ function parseNumberInput(raw) {
   if (!s) return null;
 
   s = stripGroupSeparator(s, LOCALE_SEPARATORS.group);
-  // Spaces group numbers in several locales and survive copy/paste as NBSP.
   s = s.replace(/[\s  ]/g, "");
   if (LOCALE_SEPARATORS.decimal !== ".") {
     s = s.split(LOCALE_SEPARATORS.decimal).join(".");
@@ -193,14 +186,11 @@ function parseNumberInput(raw) {
   return isFinite(n) ? n : null;   // rejects NaN and Infinity alike
 }
 
-/** parseNumberInput + clamp to a whole count in [0, max]. null stays null. */
 function parseCount(raw, max) {
   var n = parseNumberInput(raw);
   return n === null ? null : Math.max(0, Math.min(max, Math.floor(n)));
 }
 
-/* Re-rendering snaps the field back to the stored value, so this toast is
- * the only signal that the edit was rejected. */
 function rejectEdit(rawValue, keptValue) {
   toast('"' + String(rawValue).trim() + '" isn\'t a number — kept ' +
     (typeof keptValue === "number" ? keptValue.toLocaleString() : keptValue) + ".");
@@ -246,7 +236,6 @@ function fmtGems(n) {
   return Math.round(n).toLocaleString();
 }
 
-/* Guards against undefined reaching an input value. */
 function inputValue(n) {
   return (typeof n === "number" && isFinite(n)) ? n : 0;
 }
@@ -257,8 +246,7 @@ function hexToRgba(hex, alpha) {
 }
 
 
-/* Per-upgrade "Effect" column text -- reuses deriveStats' own fields so it
- * can never drift from what the engine actually computed. */
+/* Per-upgrade "Effect" column text. */
 function upgradeEffectText(key, stats) {
   switch (key) {
     case "u1_chargeRequired":   return fmtGems(stats.chargeRequired) + " charge";
