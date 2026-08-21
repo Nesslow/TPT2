@@ -1,345 +1,722 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Factory Booster Calc</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Factory Booster Calc</title>
 <style>
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+:root {
+  --bg-0: #0B0C0F;
+  --bg-1: #16181C;
+  --bg-2: #1F2226;
+  --bg-3: #262A2F;
+  --border: #2B2E33;
+  --border-strong: #3A3E44;
+  --text-1: #ECE9E3;
+  --text-2: #A6A39C;
+  --text-3: #6E6B65;
+  --accent: #C9974A;
+  --accent-bright: #E3BD74;
+  --accent-dim: #6B5730;
+  --positive: #6FA96A;
+  --negative: #C1614A;
+
+  --mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+  --sans: -apple-system, "Segoe UI", Roboto, system-ui, sans-serif;
 }
+
+* { box-sizing: border-box; }
+
 body {
-    background-color: #151515;
-	color: #f5f5f5;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
+  margin: 0;
+  background: var(--bg-0);
+  color: var(--text-1);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.5;
 }
-.container {
-    width: 600px;
-    margin: 100px auto;
-}
-.input {
-    font-size: 16px;
-    font-size: max(16px, 1em);
-    font-family: inherit;
-    padding: 0.25rem 0.5rem;
-    margin: 0.15rem 0;
-    background-color: #fff;
-    border: 2px solid var(--input-border);
-    border-radius: 2px;
-    width: 100%;
-}
-.input {
-    margin-bottom:10px;
-    background: #222;
-	color:#f5f5f5;
-	border: 1px solid #333;
-}
-.input_area {
-    width:100%;
-    height:250px;
-}
-#resultTable {
-    border-spacing: 0;
-    border-top: 1px solid #363636;
-    width:100%;
-    margin-top:20px;
-}
-#resultTable th, #resultTable td {
-    padding: 10px;
-    border-left: 1px solid #363636;
-    border-right: 1px solid #363636;
-    border-bottom: 1px solid #363636;
-    text-align: left;
-}
-#resultTable tr:hover {
-    background-color: #222;
-}
-.clickable {
-    cursor: pointer;
-    text-decoration: none;
-}
-.clickable:hover {
-    text-decoration: underline;
-}
-.top {
-    margin-top:50px;
-    margin-bottom: 50px;
-}
-.bottom {
-    margin-top: 20px;
-}
-.help_icon {
-    color: #fff;
-    width: 16px;
-    height: 16px;
-    position: relative;
-    display: inline-block;
-    border: 1px solid #fff;
-    border-radius: 100%;
-    font-size: 12px;
-    text-align: center;
-    text-decoration: none;
-}
-.help_icon .help_text {
-    visibility: hidden;
-    width: 320px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    border-radius: 5px;
 
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -160px;
+::selection { background: var(--accent-dim); color: var(--text-1); }
 
-    opacity: 0;
-    transition: opacity 0.3s;
+.topbar {
+  padding: 16px 32px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-1);
 }
-.help_text::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
+.topbar .name {
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.04em;
 }
-.help_icon:hover .help_text {
-    visibility: visible;
-    opacity: 1;
+.topbar .tag {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: 0.03em;
 }
-.dev_note {
-    display:inline-block;
-    margin-top: 30px;
-    color:#777;
+
+.main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 32px 60px;
 }
+
+.page-head { margin-bottom: 18px; }
+.page-head h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.page-head .sub {
+  font-size: 12.5px;
+  color: var(--text-3);
+  margin-top: 4px;
+  max-width: 560px;
+}
+
+/* ---------- panels ---------- */
+.panel {
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  margin-bottom: 18px;
+}
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.panel-head h2 {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+.panel-body { padding: 16px; }
+.panel-body.flush { padding: 0; }
+.panel-foot {
+  padding: 10px 16px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-inline { text-align: right; }
+.stat-inline .label {
+  font-size: 10.5px;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 2px;
+}
+.stat-inline .value {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--accent-bright);
+}
+.stat-inline .value.zero { color: var(--text-3); font-weight: 400; }
+
+/* ---------- fields ---------- */
+.field-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+.field-row:last-child { margin-bottom: 0; }
+.field-row.align-end { align-items: flex-end; }
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field label {
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-3);
+}
+
+.select, .num-input {
+  background: var(--bg-2);
+  border: 1px solid var(--border-strong);
+  color: var(--text-1);
+  padding: 6px 9px;
+  border-radius: 2px;
+  font-family: var(--sans);
+  font-size: 13px;
+}
+.select { min-width: 220px; }
+.num-input {
+  width: 130px;
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.select:focus, .num-input:focus {
+  outline: 2px solid var(--accent-dim);
+  outline-offset: 0;
+  border-color: var(--accent);
+}
+
+.quick-actions { display: flex; align-items: center; gap: 8px; }
+.chip-btn {
+  background: none;
+  border: 1px solid var(--border-strong);
+  color: var(--text-2);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  padding: 6px 10px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: var(--sans);
+}
+.chip-btn:hover:not(:disabled) { color: var(--accent-bright); border-color: var(--accent-dim); }
+.chip-btn:disabled { opacity: 0.35; cursor: default; }
+
+.switch-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid var(--border-strong);
+  border-radius: 2px;
+  color: var(--text-2);
+  font-size: 12px;
+  font-family: var(--sans);
+  padding: 5px 10px 5px 8px;
+  cursor: pointer;
+}
+.switch-btn:hover { border-color: var(--accent-dim); color: var(--text-1); }
+.switch-btn.on { color: var(--text-1); border-color: var(--accent-dim); }
+.switch {
+  width: 30px;
+  height: 17px;
+  border-radius: 9px;
+  background: var(--bg-2);
+  position: relative;
+  border: 1px solid var(--border-strong);
+  flex: none;
+  transition: background 120ms ease;
+}
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: var(--text-3);
+  transition: left 120ms ease, background 120ms ease;
+}
+.switch-btn.on .switch { background: var(--accent-dim); }
+.switch-btn.on .switch::after { left: 15px; background: var(--accent-bright); }
+
+.mode-hint {
+  font-size: 12px;
+  color: var(--text-3);
+  margin-top: 12px;
+}
+.mode-hint b { color: var(--text-1); font-family: var(--mono); font-weight: 600; }
+
+.essence-readout {
+  font-size: 12.5px;
+  color: var(--text-2);
+  padding-bottom: 8px;
+}
+.essence-readout b { color: var(--accent-bright); font-family: var(--mono); }
+.essence-readout.muted { color: var(--text-3); }
+.apply-number {
+  color: var(--accent-bright);
+  font-family: var(--mono);
+  font-weight: 600;
+  cursor: pointer;
+  text-underline-offset: 2px;
+}
+.apply-number:hover { text-decoration: underline; }
+
+/* ---------- table ---------- */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th {
+  text-align: left;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--border);
+}
+thead th.num { text-align: right; }
+tbody td {
+  padding: 9px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-2);
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--bg-2); }
+td.name { color: var(--text-1); font-weight: 500; }
+td.amount {
+  text-align: right;
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-1);
+}
+.copyable { cursor: pointer; }
+.copyable:hover { color: var(--accent-bright); text-decoration: underline; text-underline-offset: 2px; }
+.empty-row td { color: var(--text-3); text-align: center; padding: 24px 16px; }
+
+.panel-foot button.linklike {
+  color: var(--accent);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: var(--sans);
+  padding: 0;
+}
+.panel-foot button.linklike:hover { text-decoration: underline; }
+
+/* ---------- toast ---------- */
+#toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translate(-50%, 12px);
+  max-width: min(520px, calc(100vw - 32px));
+  background: var(--bg-3);
+  border: 1px solid var(--accent-dim);
+  border-radius: 3px;
+  padding: 10px 15px;
+  font-size: 12.5px;
+  color: var(--text-1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 140ms ease, transform 140ms ease, visibility 140ms;
+  z-index: 100;
+}
+#toast.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+
 @media screen and (max-width: 600px) {
-    .container {
-        width: 100%;
-        margin: 50px auto;
-    }
-    #resultTable {
-        width: 100%;
-        display: block;
-        overflow-x: auto;
-    }
+  .main { padding: 20px 16px 48px; }
+  .select { min-width: 0; width: 100%; }
+  .field-row { flex-direction: column; align-items: stretch !important; }
 }
 
 </style>
 </head>
 <body>
-    <div class="container">
-        <p class="help_text">This tool provides a list of items for you to take directly to the good ol' fabricator. Input your desired amount and select what type of booster you want to craft.<br><br>*Note: click number to copy.</p>
-        <div class="top">
-            <div class="input_wrap">
-                <label for="label_amount">Amount to craft:</label>
-                <input id="amount" type="number" class="stat input" value="">
-            </div>
-            <div class="input_wrap">
-                <label for="label_amount">Booster type:</label>
-                <select id="type">
-                    <option value="t3_prod">Tier 3 - Production Booster</option>
-                    <option value="t3_accel">Tier 3 - Acceleration Booster</option>
-                    <option value="t3_res">Tier 3 - Resource Drops Booster</option>
-                    <option value="t2_prod">Tier 2 - Production Booster</option>
-                    <option value="t2_accel">Tier 2 - Acceleration Booster</option>
-                    <option value="t2_res">Tier 2 - Resource Drops Booster</option>
-                    <option value="t1_prod">Tier 1 - Production Booster</option>
-                    <option value="t1_accel">Tier 1 - Acceleration Booster</option>
-                    <option value="t1_res">Tier 1 - Resource Drops Booster</option>
-                </select>
-            </div>
+
+<div class="topbar">
+  <span class="name">FACTORY BOOSTER CALC</span>
+  <span class="tag">Fabricator Shopping List</span>
+</div>
+
+<div class="main">
+  <div class="page-head">
+    <h1>Booster Calculator</h1>
+    <div class="sub">Pick a booster and tier, set how many you want to craft, and get the flattened raw-material shopping list — lower-tier boosters folded straight into base parts. Click any number to copy it.</div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><h2>Craft Order</h2></div>
+    <div class="panel-body">
+      <div class="field-row">
+        <div class="field">
+          <label for="type">Booster</label>
+          <select id="type" class="select"></select>
         </div>
-        <div class="input_wrap">
-            <label for="label_amount">Void Essence needed:</label>
-            <input id="void" type="number" class="stat input" readonly value="">
+        <div class="field">
+          <label for="tier">Tier</label>
+          <select id="tier" class="select">
+            <option value="t1">Tier 1</option>
+            <option value="t2">Tier 2</option>
+            <option value="t3">Tier 3</option>
+          </select>
         </div>
-        <div class="bottom">
-            <div class="input_wrap">
-                <span>Fabricator shopping list:</span>
-                <table id="resultTable">
-                    <tbody>
-                        <div class="line"></div>
-                    </tbody>
-                </table>
-            </div>
+      </div>
+
+      <div class="field-row align-end">
+        <div class="field">
+          <label for="amount">Amount to craft</label>
+          <input id="amount" type="number" min="0" step="1" class="num-input" value="1">
         </div>
+        <div class="quick-actions">
+          <button type="button" id="x16Toggle" class="switch-btn" title="Multiply the amount above by 16">
+            <span class="switch"></span> ×16
+          </button>
+          <button type="button" id="roundBtn" class="chip-btn" title="Round the crafted amount up to the next multiple of 16">Round up to ×16</button>
+        </div>
+      </div>
+
+      <div class="mode-hint" id="craftHint"></div>
     </div>
-</body>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><h2>Void Essence Budget</h2></div>
+    <div class="panel-body">
+      <div class="field-row align-end">
+        <div class="field">
+          <label for="essence">Void Essence available</label>
+          <input id="essence" type="number" min="0" step="1" class="num-input" placeholder="0">
+        </div>
+      </div>
+      <div class="essence-readout muted" id="essenceReadout">Enter how much Void Essence you have on hand to see how many boosters of the selected tier it covers — Void Essence is the only ingredient here that's time-gated.</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <h2>Shopping List</h2>
+      <div class="stat-inline">
+        <div class="label">Void Essence needed</div>
+        <div class="value" id="voidNeeded">0</div>
+      </div>
+    </div>
+    <div class="panel-body flush">
+      <table>
+        <thead><tr><th>Item</th><th class="num">Amount</th></tr></thead>
+        <tbody id="resultBody"></tbody>
+      </table>
+    </div>
+    <div class="panel-foot">
+      <span id="listSummary"></span>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
 <script>
 
-let accel_booster_t3 = [
-    { name: "Void Essence", amount: 4 },
-    { name: "T10 Dense Block", amount: 12 },
-    { name: "T8 Circuit Wires", amount: 16 },
-    { name: "T4 Circuit Wires", amount: 16 },
-    { name: "T4 Plate", amount: 16 },
-    { name: "Quantum Chip", amount: 6 },
-    { name: "Hi-Tech Chip", amount: 8 },
-    { name: "Advanced Chip", amount: 4 },
-    { name: "Rainbow Dust", amount: 8 }
-];
+// Each booster type has recipes for t1/t2/t3. A tier's recipe lists raw
+// materials plus, where applicable, a { self: <amount> } entry meaning
+// "<amount> of this same booster's next tier down". Flattening walks that
+// chain so the shopping list always bottoms out at raw materials.
+const boosterTypes = {
+    accel: {
+        label: "Acceleration Booster",
+        tiers: {
+            t1: [
+                { name: "Advanced Chip", amount: 1 },
+                { name: "T4 Plate", amount: 4 },
+                { name: "T4 Circuit Wires", amount: 4 }
+            ],
+            t2: [
+                { name: "Hi-Tech Chip", amount: 4 },
+                { name: "Rainbow Plate", amount: 2 },
+                { name: "T8 Circuit Wires", amount: 8 },
+                { self: 2 }
+            ],
+            t3: [
+                { name: "Quantum Chip", amount: 6 },
+                { name: "Rainbow Plate", amount: 4 },
+                { name: "T10 Dense Block", amount: 12 },
+                { name: "Void Essence", amount: 4 },
+                { self: 2 }
+            ]
+        }
+    },
+    machine: {
+        label: "Machine Booster",
+        tiers: {
+            t1: [
+                { name: "Advanced Chip", amount: 2 },
+                { name: "T4 Pipe", amount: 4 },
+                { name: "T4 Wire", amount: 2 },
+                { name: "T4 Circuit Wires", amount: 1 }
+            ],
+            t2: [
+                { name: "Hi-Tech Chip", amount: 2 },
+                { name: "T7 Pipe", amount: 4 },
+                { name: "T7 Dense Block", amount: 2 },
+                { name: "T8 Dense Plate", amount: 6 },
+                { self: 1 }
+            ],
+            t3: [
+                { name: "Quantum Chip", amount: 2 },
+                { name: "T10 Pipe", amount: 4 },
+                { name: "T10 Dense Block", amount: 2 },
+                { name: "Rainbow Plate", amount: 4 },
+                { name: "Void Essence", amount: 2 },
+                { self: 1 }
+            ]
+        }
+    },
+    prod: {
+        label: "Production Booster",
+        tiers: {
+            t1: [
+                { name: "Basic Chip", amount: 4 },
+                { name: "T2 Plate", amount: 4 },
+                { name: "T2 Circuit Wires", amount: 1 }
+            ],
+            t2: [
+                { name: "Hi-Tech Chip", amount: 4 },
+                { name: "T7 Plate", amount: 6 },
+                { name: "T7 Circuit Wires", amount: 4 },
+                { self: 1 }
+            ],
+            t3: [
+                { name: "T10 Circuit Wires", amount: 4 },
+                { name: "T10 Dense Block", amount: 12 },
+                { name: "Void Essence", amount: 4 },
+                { self: 4 }
+            ]
+        }
+    },
+    res: {
+        label: "Resource Drops Booster",
+        tiers: {
+            t1: [
+                { name: "Basic Chip", amount: 2 },
+                { name: "T3 Plate", amount: 6 },
+                { name: "T4 Circuit Wires", amount: 1 }
+            ],
+            t2: [
+                { name: "Hi-Tech Chip", amount: 2 },
+                { name: "T7 Block", amount: 4 },
+                { name: "T8 Circuit Wires", amount: 2 },
+                { self: 1 }
+            ],
+            t3: [
+                { name: "Nano Chip", amount: 6 },
+                { name: "T10 Block", amount: 4 },
+                { name: "Rainbow Plate", amount: 2 },
+                { name: "Void Essence", amount: 1 },
+                { self: 2 }
+            ]
+        }
+    },
+    tree: {
+        label: "Tree Booster",
+        tiers: {
+            t1: [
+                { name: "Rubber Sapling", amount: 6 },
+                { name: "T5 Ring", amount: 2 },
+                { name: "Advanced Chip", amount: 1 },
+                { name: "T5 Screw", amount: 6 }
+            ],
+            t2: [
+                { name: "T7 Screw", amount: 2 },
+                { name: "T7 Pipe", amount: 2 },
+                { name: "T7 Plate", amount: 2 },
+                { name: "T7 Block", amount: 2 },
+                { self: 1 }
+            ],
+            t3: [
+                { name: "Void Sapling", amount: 6 },
+                { name: "Quantum Chip", amount: 2 },
+                { name: "Rainbow Plate", amount: 2 },
+                { name: "Void Essence", amount: 10 },
+                { self: 1 }
+            ]
+        }
+    }
+};
 
-let accel_booster_t2 = [
-    { name: "Void Essence", amount: 0 },
-    { name: "T8 Circuit Wires", amount: 8 },
-    { name: "T4 Circuit Wires", amount: 8 },
-    { name: "T4 Plate", amount: 8 },
-    { name: "Hi-Tech Chip", amount: 4 },
-    { name: "Advanced Chip", amount: 2 },
-    { name: "Rainbow Dust", amount: 2 }
-];
+const tierLabels = { t1: "Tier 1", t2: "Tier 2", t3: "Tier 3" };
+const tierOrder = ["t1", "t2", "t3"];
 
-let accel_booster_t1 = [
-    { name: "Void Essence", amount: 0 },
-    { name: "T4 Circuit Wires", amount: 4 },
-    { name: "T4 Plate", amount: 4 },
-    { name: "Advanced Chip", amount: 1 }
-];
+// Recursively expand a booster type/tier into a flat { materialName: totalAmount } map.
+function flattenBooster(typeKey, tier, multiplier, acc) {
+    acc = acc || {};
+    const recipe = boosterTypes[typeKey].tiers[tier];
+    const tierIndex = tierOrder.indexOf(tier);
 
-let res_booster_t3 = [
-    { name: "Void Essence", amount: 1 },
-    { name: "T10 Block", amount: 4 },
-    { name: "T8 Circuit Wires", amount: 4 },
-    { name: "T7 Block", amount: 8 },
-    { name: "T3 Plate", amount: 12 },
-    { name: "T4 Circuit Wires", amount: 2 },
-    { name: "Nano Chip", amount: 6 },
-    { name: "Hi-Tech Chip", amount: 4 },
-    { name: "Chip", amount: 4 },
-    { name: "Rainbow Dust", amount: 2 }
-];
+    recipe.forEach(item => {
+        if (item.self !== undefined) {
+            const prevTier = tierOrder[tierIndex - 1];
+            flattenBooster(typeKey, prevTier, item.self * multiplier, acc);
+        } else {
+            acc[item.name] = (acc[item.name] || 0) + item.amount * multiplier;
+        }
+    });
 
-let res_booster_t2 = [
-    { name: "Void Essence", amount: 0 },
-    { name: "T8 Circuit Wires", amount: 2 },
-    { name: "T7 Block", amount: 4 },
-    { name: "T3 Plate", amount: 6 },
-    { name: "T4 Circuit Wires", amount: 1 },
-    { name: "Hi-Tech Chip", amount: 2 },
-    { name: "Chip", amount: 2 }
-];
+    return acc;
+}
 
-let res_booster_t1 = [
-    { name: "Void Essence", amount: 0 },
-    { name: "T3 Plate", amount: 6 },
-    { name: "T4 Circuit Wires", amount: 1 },
-    { name: "Chip", amount: 2 }
-];
-
-let prod_booster_t3 = [
-    { name: "Void Essence", amount: 4 },
-    { name: "T10 Dense Block", amount: 12 },
-    { name: "T10 Circuit wires", amount: 4 },
-    { name: "T7 Plate", amount: 24 },
-    { name: "T7 Circuit Wires", amount: 16 },
-    { name: "T2 Plate", amount: 16 },
-    { name: "T2 Circuit Wires", amount: 4 },
-    { name: "Hi-Tech Chip", amount: 16 },
-    { name: "Chip", amount: 16 }
-];
-
-let prod_booster_t2 = [
-    { name: "Void Essence", amount: 0 },
-    { name: "T7 Plate", amount: 6 },
-    { name: "T7 Circuit Wires", amount: 4 },
-    { name: "T2 Plate", amount: 4 },
-    { name: "T2 Circuit Wires", amount: 1 },
-    { name: "Hi-Tech Chip", amount: 4 },
-    { name: "Chip", amount: 4 }
-];
-
-let prod_booster_t1 = [
-    { name: "Void Essence", amount: 0 },
-    { name: "T2 Plate", amount: 4 },
-    { name: "T2 Circuit Wires", amount: 1 },
-    { name: "Chip", amount: 4 }
-];
+function formatNumber(n) {
+    if (n > 100000) return n.toExponential(2);
+    return n.toLocaleString();
+}
 
 document.addEventListener('DOMContentLoaded', function () {
-    let amountInput = document.getElementById("amount");
-    let typeSelect = document.getElementById("type");
-    let voidOutput = document.getElementById("void");
-    let resultTableBody = document.getElementById("resultTable");
+    const typeSelect = document.getElementById("type");
+    const tierSelect = document.getElementById("tier");
+    const amountInput = document.getElementById("amount");
+    const x16Toggle = document.getElementById("x16Toggle");
+    const roundBtn = document.getElementById("roundBtn");
+    const craftHint = document.getElementById("craftHint");
+    const essenceInput = document.getElementById("essence");
+    const essenceReadout = document.getElementById("essenceReadout");
+    const voidNeededEl = document.getElementById("voidNeeded");
+    const resultBody = document.getElementById("resultBody");
+    const listSummary = document.getElementById("listSummary");
+    const toast = document.getElementById("toast");
 
-    function updateResult() {
+    let x16 = false;
+    let toastTimer = null;
 
-        voidOutput.value = "";
-        resultTableBody.innerHTML = "";
+    // Populate the booster dropdown from boosterTypes so adding a new
+    // booster type later is just a matter of adding it to that object.
+    Object.keys(boosterTypes).forEach(typeKey => {
+        let option = document.createElement("option");
+        option.value = typeKey;
+        option.textContent = boosterTypes[typeKey].label;
+        typeSelect.appendChild(option);
+    });
+    typeSelect.value = "res";
+    tierSelect.value = "t3";
 
-        let multiplier = parseInt(amountInput.value) || 0;
-        let selectedBooster = typeSelect.value;
-        let boosterArray;
-
-        switch (selectedBooster) {
-            case 't3_accel':
-                boosterArray = accel_booster_t3;
-                break;
-            case 't3_res':
-                boosterArray = res_booster_t3;
-                break;
-            case 't3_prod':
-                boosterArray = prod_booster_t3;
-                break;
-            case 't2_accel':
-                boosterArray = accel_booster_t2;
-                break;
-            case 't2_res':
-                boosterArray = res_booster_t2;
-                break;
-            case 't2_prod':
-                boosterArray = prod_booster_t2;
-                break;
-            case 't1_accel':
-                boosterArray = accel_booster_t1;
-                break;
-            case 't1_res':
-                boosterArray = res_booster_t1;
-                break;
-            case 't1_prod':
-                boosterArray = prod_booster_t1;
-                break;
-            default:
-                boosterArray = [];
-        }
-
-        let updatedBooster = boosterArray.map(item => {
-            return { name: item.name, amount: item.amount * multiplier };
-        });
-
-        let voidAmount = updatedBooster[0].amount;
-        if(voidAmount > 10000) {
-            voidOutput.value = voidAmount.toExponential();
-        } else {
-            voidOutput.value = voidAmount;
-        }
-
-        updatedBooster.slice(1).forEach(item => {
-            let row = resultTableBody.insertRow();
-            let nameCell = row.insertCell(0);
-            let amountCell = row.insertCell(1);
-
-            nameCell.textContent = item.name;
-            amountCell.textContent = item.amount;
-            amountCell.classList.add('clickable');
-
-            amountCell.onclick = function() {
-                navigator.clipboard.writeText(item.amount.toString())
-                    .catch(err => console.error('Error copying amount'));
-            };
-        });
-
+    function showToast(msg) {
+        toast.textContent = msg;
+        toast.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove("show"), 1600);
     }
 
-    amountInput.oninput = updateResult;
-    typeSelect.onchange = updateResult;
+    function copyText(text, label) {
+        navigator.clipboard.writeText(text)
+            .then(() => showToast(`Copied ${label}`))
+            .catch(() => showToast("Couldn't copy — clipboard blocked"));
+    }
 
+    function baseAmount() {
+        return Math.max(0, parseInt(amountInput.value, 10) || 0);
+    }
+
+    function effectiveAmount() {
+        return baseAmount() * (x16 ? 16 : 1);
+    }
+
+    function voidPerUnit() {
+        return flattenBooster(typeSelect.value, tierSelect.value, 1, {})["Void Essence"] || 0;
+    }
+
+    function updateCraftHint() {
+        const base = baseAmount();
+        const eff = effectiveAmount();
+        if (x16) {
+            craftHint.innerHTML = `Crafting <b>${formatNumber(eff)}</b> boosters (${base} &times; 16).`;
+        } else {
+            craftHint.innerHTML = `Crafting <b>${formatNumber(eff)}</b> booster${eff === 1 ? "" : "s"}.`;
+        }
+        roundBtn.disabled = x16;
+    }
+
+    function applyCraftable(craftable) {
+        if (x16) {
+            x16 = false;
+            x16Toggle.classList.remove("on");
+        }
+        amountInput.value = craftable;
+        refresh();
+        showToast(`Amount to craft set to ${formatNumber(craftable)}`);
+    }
+
+    function updateEssencePanel() {
+        const perUnit = voidPerUnit();
+        const have = Math.max(0, parseInt(essenceInput.value, 10) || 0);
+
+        if (perUnit === 0) {
+            essenceReadout.classList.add("muted");
+            essenceReadout.innerHTML = `${tierLabels[tierSelect.value]} ${boosterTypes[typeSelect.value].label} doesn't consume Void Essence — craft as many as your other materials allow.`;
+            return;
+        }
+
+        if (!essenceInput.value) {
+            essenceReadout.classList.add("muted");
+            essenceReadout.textContent = `This tier costs ${perUnit} Void Essence per booster. Enter your available amount above to see how many you can craft.`;
+            return;
+        }
+
+        const craftable = Math.floor(have / perUnit);
+        essenceReadout.classList.remove("muted");
+        if (craftable > 0) {
+            essenceReadout.innerHTML = `That's enough for <span class="apply-number" id="craftableNumber" title="Click to set Amount to craft">${formatNumber(craftable)}</span> booster${craftable === 1 ? "" : "s"} (uses <b>${formatNumber(craftable * perUnit)}</b> of your ${formatNumber(have)} Void Essence, ${formatNumber(have - craftable * perUnit)} left over).`;
+            document.getElementById("craftableNumber").onclick = () => applyCraftable(craftable);
+        } else {
+            essenceReadout.innerHTML = `Not enough for a single booster yet (needs ${formatNumber(perUnit)}, have ${formatNumber(have)}).`;
+        }
+    }
+
+    function updateResult() {
+        const totals = flattenBooster(typeSelect.value, tierSelect.value, effectiveAmount(), {});
+
+        const voidAmount = totals["Void Essence"] || 0;
+        delete totals["Void Essence"];
+
+        voidNeededEl.textContent = formatNumber(voidAmount);
+        voidNeededEl.classList.toggle("zero", voidAmount === 0);
+
+        resultBody.innerHTML = "";
+        const names = Object.keys(totals);
+
+        if (names.length === 0) {
+            const row = resultBody.insertRow();
+            row.className = "empty-row";
+            const cell = row.insertCell(0);
+            cell.colSpan = 2;
+            cell.textContent = "Nothing to craft yet — set an amount above.";
+        } else {
+            names.forEach(name => {
+                const amount = totals[name];
+                const row = resultBody.insertRow();
+
+                const nameCell = row.insertCell(0);
+                nameCell.textContent = name;
+                nameCell.className = "name copyable";
+                nameCell.onclick = () => copyText(name, `"${name}"`);
+
+                const amountCell = row.insertCell(1);
+                amountCell.textContent = formatNumber(amount);
+                amountCell.className = "amount copyable";
+                amountCell.title = "Click to copy";
+                amountCell.onclick = () => copyText(amount.toString(), `${formatNumber(amount)} (${name})`);
+            });
+        }
+
+        listSummary.textContent = names.length ? `${names.length} material${names.length === 1 ? "" : "s"}` : "";
+        return { totals, voidAmount, names };
+    }
+
+    function refresh() {
+        updateCraftHint();
+        updateEssencePanel();
+        updateResult();
+    }
+
+    x16Toggle.addEventListener("click", () => {
+        x16 = !x16;
+        x16Toggle.classList.toggle("on", x16);
+        refresh();
+    });
+
+    roundBtn.addEventListener("click", () => {
+        const eff = effectiveAmount();
+        const rounded = eff === 0 ? 16 : Math.ceil(eff / 16) * 16;
+        amountInput.value = rounded;
+        refresh();
+    });
+
+    typeSelect.addEventListener("change", refresh);
+    tierSelect.addEventListener("change", refresh);
+    amountInput.addEventListener("input", refresh);
+    essenceInput.addEventListener("input", updateEssencePanel);
+
+    refresh();
 });
 
 </script>
+</body>
 </html>
