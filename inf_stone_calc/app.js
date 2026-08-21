@@ -20,7 +20,7 @@ var ROLE_LABEL = { extraction: "Extraction", speed: "Speed", amount: "Amount" };
 var DIFFS = ["easy", "medium", "hard", "insane", "nightmare", "impossible"];
 
 /* Per-difficulty cap. */
-var MAX_INFS = 99999999999;
+var MAX_INFS = 100000000000;
 
 /* Private to the Testing stone. */
 var TEST_REGIONS = {
